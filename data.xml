@@ -1,5 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<job_results>
-    <last_updated>2026-02-13 05:14:40</last_updated>
-    <status>No results found or IP blocked by Google</status>
-</job_results>
+<?xml version="1.0"?><job_results><status>Error: 'NoneType' object has no attribute 'find'</status></job_results>
