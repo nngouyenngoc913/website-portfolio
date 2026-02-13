@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR-Headhunt | XML Job Fetcher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap');
+        body { font-family: 'Lexend', sans-serif; background-color: #f0f4f8; }
+        .source-tag { font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight: bold; text-transform: uppercase; }
+        .xml-green { color: #10b981; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto">
+        <header class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+                <h1 class="text-3xl font-black text-indigo-900 tracking-tight">Friendly-Headhunt <span class="text-indigo-500">XML</span></h1>
+                <p class="text-slate-500 font-medium">Hệ thống quét dữ liệu từ các nguồn Job XML & Boolean Search</p>
+            </div>
+            <div class="flex gap-2">
+                <span class="source-tag bg-blue-100 text-blue-600">Indeed XML</span>
+                <span class="source-tag bg-orange-100 text-orange-600">Joblum</span>
+                <span class="source-tag bg-green-100 text-green-600">Careerjet Feed</span>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 gap-6">
+            <div class="bg-white rounded-3xl shadow-xl border border-slate-200 p-6 md:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2 underline decoration-indigo-300">Nguồn dữ liệu ưu tiên (XML focus)</label>
+                        <select id="Industry" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-indigo-400 transition-all">
+                            <option value="vn.joblum.com">vn.joblum.com (Dễ cào nhất)</option>
+                            <option value="indeed.com">Indeed.com (RSS/XML Support)</option>
+                            <option value="careerjet.vn">Careerjet (XML Feed)</option>
+                            <option value="jora.com">Jora (Clean HTML)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2 underline decoration-indigo-300">Từ khóa lọc nhanh</label>
+                        <input type="text" id="search_keyword" placeholder="Ví dụ: 'Operations' hoặc 'Staff'" 
+                               class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-indigo-400 transition-all">
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Boolean Search Query (Dành cho SEO/Scraping)</label>
+                    <div class="relative group">
+                        <textarea id="url_input" rows="2" 
+                                  class="w-full p-4 pl-12 bg-slate-50 border border-slate-300 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-400 font-mono text-sm text-indigo-800">site:vn.joblum.com "hiring" "operations" ("coordinator" OR "staff") "full-time" -freelance OR "Hire now"</textarea>
+                        <i class="fas fa-code absolute top-4 left-4 text-slate-400"></i>
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-2 italic px-2">* Cú pháp trên giúp loại bỏ tin "freelance" và tập trung vào tin "full-time" có từ khóa coordinator/staff.</p>
+                </div>
+
+                <button id="search_btn" class="w-full py-4 bg-slate-900 hover:bg-indigo-600 text-white font-black rounded-2xl shadow-lg transition-all flex items-center justify-center gap-3 tracking-widest uppercase">
+                    <i class="fas fa-project-diagram"></i> Start XML Parsing
+                </button>
+            </div>
+
+            <div class="bg-[#1e293b] rounded-3xl p-6 shadow-2xl relative">
+                <div class="flex items-center justify-between mb-4 px-2">
+                    <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest"><i class="fas fa-terminal mr-2"></i>Parsed Output</span>
+                    <button onclick="copyResults()" class="text-[10px] bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg font-bold transition-all uppercase">
+                        <i class="fas fa-copy mr-1"></i> Copy to Clipboard
+                    </button>
+                </div>
+                <textarea id="search_output" rows="12" readonly 
+                          class="w-full bg-transparent border-none text-emerald-400 font-mono text-sm leading-relaxed focus:ring-0 custom-scrollbar resize-none"
+                          placeholder="Nhấn nút để bắt đầu cào dữ liệu..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const searchBtn = document.getElementById('search_btn');
+        const searchOutput = document.getElementById('search_output');
+        const industrySelect = document.getElementById('Industry');
+        const keywordInput = document.getElementById('search_keyword');
+        const urlInput = document.getElementById('url_input');
+
+        searchBtn.addEventListener('click', () => {
+            const source = industrySelect.value;
+            const query = urlInput.value;
+
+            searchBtn.disabled = true;
+            searchBtn.innerHTML = `<i class="fas fa-sync fa-spin"></i> Parsing XML from ${source}...`;
+            searchOutput.value = `> [INFO] Initializing parser for: ${source}\n> [INFO] Applying Boolean Filter...\n> [XML_PATH]: /job_board/entry/content\n> ----------------------------------------------------`;
+
+            setTimeout(() => {
+                const results = `<?xml version="1.0" encoding="UTF-8"?>
+<job_results>
+    <source>${source}</source>
+    <status>200 OK</status>
+    
+    <job id="001">
+        <title>Operations Coordinator</title>
+        <type>Full-time</type>
+        <keyword_match>YES</keyword_match>
+        <description>Hiring for backend operations, reporting to Staff Manager...</description>
+        <link>https://${source}/j/12345</link>
+    </job>
+
+    <job id="002">
+        <title>Senior Operations Staff</title>
+        <type>Full-time</type>
+        <keyword_match>YES</keyword_match>
+        <description>Urgent hire now for finance operations role...</description>
+        <link>https://${source}/j/67890</link>
+    </job>
+
+    <job id="003">
+        <title>Administrative Coordinator</title>
+        <type>Full-time</type>
+        <keyword_match>YES (Partial)</keyword_match>
+        <description>Operations support and team coordination...</description>
+        <link>https://${source}/j/54321</link>
+    </job>
+</job_results>
+
+> [DONE] Found 3 matching entries without 'freelance' keyword.`;
+
+                searchOutput.value = results;
+                searchBtn.disabled = false;
+                searchBtn.innerHTML = `<i class="fas fa-project-diagram"></i> Start XML Parsing`;
+            }, 1500);
+        });
+
+        function copyResults() {
+            if (!searchOutput.value) return;
+            searchOutput.select();
+            document.execCommand('copy');
+            alert('Đã sao chép nội dung XML!');
+        }
+    </script>
+</body>
+</html>
