@@ -1,12 +1,15 @@
-name: Auto Job Scraper
+name: Careerjet Custom Scraper
 
 on:
-  schedule:
-    - cron: '0 0 * * *' # Chạy tự động vào 00:00 mỗi ngày
-  workflow_dispatch:      # Cho phép bạn bấm nút chạy thủ công bất cứ lúc nào
+  workflow_dispatch:
+    inputs:
+      search_keyword:
+        description: 'Nhập: Role + Seniority + Contract (VD: Operations Senior Full-time)'
+        required: true
+        default: 'Operations Senior Full-time'
 
 jobs:
-  build:
+  scrape_job:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -21,12 +24,14 @@ jobs:
         run: pip install requests beautifulsoup4
 
       - name: Run Scraper
+        env:
+          KEYWORD: ${{ github.event.inputs.search_keyword }}
         run: python scraper.py
 
       - name: Commit and Push
         run: |
-          git config --global user.name "GitHub Action"
-          git config --global user.email "action@github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data.xml
-          git commit -m "Auto-update job data" || exit 0
+          git commit -m "Scraped data for: ${{ github.event.inputs.search_keyword }}" || exit 0
           git push
