@@ -3,132 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HR-Headhunt | XML Job Fetcher</title>
+    <title>Nancy's Nguyen</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap');
-        body { font-family: 'Lexend', sans-serif; background-color: #f0f4f8; }
-        .source-tag { font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight: bold; text-transform: uppercase; }
-        /* Hiệu ứng hover cho thẻ Job */
-        .job-card { transition: all 0.3s ease; border: 1px solid transparent; }
-        .job-card:hover { transform: translateY(-5px); border-color: #6366f1; background-color: #ffffff; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fcfcfd; }
+        .card-content { max-height: 0; overflow: hidden; transition: all 0.3s ease-in-out; opacity: 0; }
+        .card.active .card-content { max-height: 300px; opacity: 1; margin-top: 1rem; }
+        .social-icon { width: 32px; height: 32px; transition: transform 0.2s; }
+        .social-icon:hover { transform: scale(1.2); }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="text-gray-900 pb-20">
 
-    <div class="max-w-5xl mx-auto">
-        <header class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div>
-                <h1 class="text-3xl font-black text-indigo-900 tracking-tight">Friendly-Headhunt <span class="text-indigo-500">XML</span></h1>
-                <p class="text-slate-500 font-medium">Hệ thống quét dữ liệu từ DuckDuckGo & Boolean Search</p>
-            </div>
-            <div class="flex gap-2">
-                <span class="source-tag bg-blue-100 text-blue-600">DuckDuckGo</span>
-                <span class="source-tag bg-orange-100 text-orange-600">Careerjet Source</span>
-                <span class="source-tag bg-green-100 text-green-600">Live XML</span>
-            </div>
-        </header>
-
-        <div class="grid grid-cols-1 gap-6">
-            <div class="bg-white rounded-3xl shadow-xl border border-slate-200 p-6 md:p-8">
-                <div class="mb-6">
-                    <label class="block text-sm font-bold text-slate-700 mb-2 underline decoration-indigo-300">Nhập từ khóa tìm kiếm (Sử dụng Boolean nếu cần)</label>
-                    <input type="text" id="custom_keyword" placeholder="Ví dụ: Accountant Junior Part-time" 
-                           class="w-full p-4 bg-slate-50 border-2 border-indigo-50 rounded-2xl outline-none focus:border-indigo-500 transition-all font-semibold text-indigo-900 shadow-inner">
-                    <p class="text-[10px] text-slate-400 mt-2 italic px-2">* Lưu ý: Nhấn Start để đọc dữ liệu từ lần cào gần nhất của GitHub Actions.</p>
-                </div>
-
-                <button id="search_btn" class="w-full py-4 bg-slate-900 hover:bg-indigo-600 text-white font-black rounded-2xl shadow-lg transition-all flex items-center justify-center gap-3 tracking-widest uppercase">
-                    <i class="fas fa-project-diagram"></i> Start XML Parsing
-                </button>
-            </div>
-
-            <div class="bg-[#1e293b] rounded-3xl p-6 shadow-2xl relative">
-                <div class="flex items-center justify-between mb-6 px-2">
-                    <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest"><i class="fas fa-terminal mr-2"></i>Live Job Cards</span>
-                    <button onclick="copyRawXML()" class="text-[10px] bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg font-bold transition-all uppercase">
-                        <i class="fas fa-code mr-1"></i> Copy Raw XML
-                    </button>
-                </div>
-                
-                <div id="job_container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <p class="text-slate-500 font-mono text-sm col-span-full text-center py-10">Chưa có dữ liệu. Nhấn nút phía trên để bắt đầu...</p>
-                </div>
-
-                <textarea id="raw_xml_output" class="hidden"></textarea>
-            </div>
+   <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="font-bold text-blue-600 text-lg italic">Portfolio.</a>
+        <div class="space-x-6 text-sm font-medium text-gray-600">
+            <a href="#" class="hover:text-blue-600 transition">Trang chủ</a>
+            <a href="#about" class="hover:text-blue-600 transition">Về tôi</a>
+            <a href="#services" class="hover:text-blue-600 transition">Dịch vụ</a>
         </div>
     </div>
+</nav>
+
+    <section class="pt-16 pb-12 px-6 text-center bg-white">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">How I work to create your <span class="text-blue-600">"results"</span>?</h1>
+            <p class="text-gray-600 text-lg mb-8">Professional workflows and AI-driven business solutions.</p>
+            <a href="https://gamma.app/docs/HR-zkxlgnmy8j236g1?mode=doc" target="_blank" 
+               class="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold shadow-lg hover:bg-blue-700 transition-all inline-block">
+                View Gamma Showcase
+            </a>
+        </div>
+    </section>
+    
+    <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold text-gray-900">How to use this Portfolio</h2>
+            <p class="text-gray-600 mt-2">Watch this short guide to understand my workflow and services.</p>
+        </div>
+        
+        <div class="relative w-full pb-[56.25%] rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
+            <iframe 
+                class="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/VIDEO_ID_HERE" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</section>
+
+    <section class="max-w-md mx-auto p-6 bg-blue-50 rounded-3xl mb-12 border border-blue-100">
+        <h3 class="font-bold mb-4 text-blue-800">Add Media to Page</h3>
+        <div class="space-y-4">
+            <div class="edit-field">
+                <label class="block text-sm font-bold text-blue-900 mb-1">Select Social Platform:</label>
+                <select id="platform-select" class="w-full p-3 rounded-xl border-none shadow-sm outline-none">
+                    <option value="">Select Platform</option>
+                    <option value="youtube">YouTube</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="twitter">Twitter/X</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="linkedin">LinkedIn</option>
+                    <option value="tiktok">TikTok</option>
+                    <option value="github">GitHub</option>
+                </select>
+            </div>
+            <input type="text" id="social-url" placeholder="Paste link here (https://...)" class="w-full p-3 rounded-xl border-none shadow-sm">
+            <button onclick="addSocialIcon()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-xl">Add to Profile</button>
+        </div>
+    </section>
+
+    <section id="about" class="py-10 px-6 max-w-4xl mx-auto mb-10">
+        <div class="flex flex-col md:flex-row items-center gap-10 bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+            <div class="w-32 h-32 rounded-full bg-blue-100 overflow-hidden shrink-0">
+                <img src="https://github.com/favicon.ico" class="w-full h-full p-6 opacity-20">
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold mb-2">About My Work</h2>
+                <p class="text-gray-600 mb-4">Bridging the gap between HR Strategy and AI Product building.</p>
+                <a href="https://gamma.app/docs/Home-dd97gheylf6z3zn?mode=doc" target="_blank" class="text-blue-600 font-bold hover:underline italic">Full Story on Gamma →</a>
+            </div>
+        </div>
+    </section>
 
     <script>
-        const searchBtn = document.getElementById('search_btn');
-        const jobContainer = document.getElementById('job_container');
-        const rawXmlOutput = document.getElementById('raw_xml_output');
+        const defaultIcons = {
+            youtube: 'https://www.youtube.com/favicon.ico',
+            facebook: 'https://www.facebook.com/favicon.ico',
+            twitter: 'https://twitter.com/favicon.ico',
+            instagram: 'https://www.instagram.com/favicon.ico',
+            linkedin: 'https://www.linkedin.com/favicon.ico',
+            tiktok: 'https://www.tiktok.com/favicon.ico',
+            github: 'https://github.com/favicon.ico'
+        };
 
-        searchBtn.addEventListener('click', () => {
-            searchBtn.disabled = true;
-            searchBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Parsing XML...`;
+        function addSocialIcon() {
+            const platform = document.getElementById('platform-select').value;
+            const url = document.getElementById('social-url').value;
+            const display = document.getElementById('social-display');
 
-            fetch('data.xml')
-                .then(res => {
-                    if (!res.ok) throw new Error("File XML chưa tồn tại");
-                    return res.text();
-                })
-                .then(xmlString => {
-                    rawXmlOutput.value = xmlString; // Lưu trữ XML thô để copy
-                    const parser = new DOMParser();
-                    const xmlDoc = parser.parseFromString(xmlString, "text/xml");
-                    
-                    const jobs = xmlDoc.getElementsByTagName("job");
-                    const status = xmlDoc.getElementsByTagName("status")[0]?.textContent;
-
-                    jobContainer.innerHTML = ''; // Xóa nội dung cũ
-
-                    if (status === "Success" || jobs.length > 0) {
-                        Array.from(jobs).forEach(job => {
-                            const title = job.getElementsByTagName("title")[0]?.textContent || "N/A";
-                            const company = job.getElementsByTagName("company")[0]?.textContent || "N/A";
-                            const location = job.getElementsByTagName("location")[0]?.textContent || "N/A";
-                            const link = job.getElementsByTagName("link")[0]?.textContent || "#";
-
-                            jobContainer.innerHTML += `
-                                <div class="job-card bg-slate-800/50 p-5 rounded-2xl border border-slate-700">
-                                    <h3 class="text-emerald-400 font-bold text-lg mb-2 line-clamp-1">${title}</h3>
-                                    <div class="text-slate-300 text-sm space-y-1 mb-4">
-                                        <p><i class="fas fa-building text-indigo-400 mr-2"></i>${company}</p>
-                                        <p><i class="fas fa-map-marker-alt text-rose-400 mr-2"></i>${location}</p>
-                                    </div>
-                                    <a href="${link}" target="_blank" class="inline-block w-full text-center py-2 bg-indigo-500/10 hover:bg-indigo-500 text-indigo-400 hover:text-white rounded-xl font-bold text-xs transition-all uppercase tracking-tighter">
-                                        View Details <i class="fas fa-external-link-alt ml-1"></i>
-                                    </a>
-                                </div>
-                            `;
-                        });
-                    } else {
-                        jobContainer.innerHTML = `<p class="text-rose-400 font-mono text-sm col-span-full">Status: ${status || 'No jobs found'}</p>`;
-                    }
-                    resetButton();
-                })
-                .catch(err => {
-                    jobContainer.innerHTML = `<p class="text-rose-400 font-mono text-sm col-span-full">Lỗi: ${err.message}</p>`;
-                    resetButton();
-                });
-        });
-
-        function resetButton() {
-            searchBtn.disabled = false;
-            searchBtn.innerHTML = `<i class="fas fa-project-diagram"></i> Start XML Parsing`;
-        }
-
-        function copyRawXML() {
-            if (!rawXmlOutput.value) {
-                alert('Chưa có dữ liệu XML!');
+            if (!platform || !url) {
+                alert("Please select a platform and enter a URL");
                 return;
             }
-            rawXmlOutput.select();
-            document.execCommand('copy');
-            alert('Đã sao chép nội dung XML thô!');
+
+            // Create the link element
+            const anchor = document.createElement('a');
+            anchor.href = url;
+            anchor.target = "_blank";
+            
+            // Create the icon image
+            const img = document.createElement('img');
+            img.src = defaultIcons[platform];
+            img.className = "social-icon";
+            img.alt = platform;
+
+            anchor.appendChild(img);
+            display.appendChild(anchor);
+
+            // Reset inputs
+            document.getElementById('social-url').value = '';
         }
     </script>
 </body>
