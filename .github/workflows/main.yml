@@ -1,29 +1,37 @@
-name: Careerjet Custom Scraper
+name: DuckDuckGo Job Scraper
 
 on:
   workflow_dispatch:
     inputs:
       search_keyword:
-        description: 'Nhập: Role + Seniority + Contract (VD: Operations Senior Full-time)'
+        description: 'Nhập từ khóa tìm kiếm (Ví dụ: Accountant Junior Part-time)'
         required: true
         default: 'Operations Senior Full-time'
 
 jobs:
   scrape_job:
     runs-on: ubuntu-latest
+    
+    # Cấp quyền ghi nội dung để máy ảo có thể cập nhật data.xml
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # Cập nhật lên v4 mới nhất
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.10' # Sử dụng bản ổn định
 
       - name: Install dependencies
-        run: pip install requests beautifulsoup4
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4
 
       - name: Run Scraper
+        # Truyền từ khóa từ ô nhập vào biến môi trường KEYWORD
         env:
           KEYWORD: ${{ github.event.inputs.search_keyword }}
         run: python scraper.py
@@ -32,6 +40,12 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Kiểm tra xem file có thay đổi không trước khi commit để tránh lỗi
           git add data.xml
-          git commit -m "Scraped data for: ${{ github.event.inputs.search_keyword }}" || exit 0
-          git push
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update XML data for: ${{ github.event.inputs.search_keyword }}"
+            git push
+          fi
