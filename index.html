@@ -46,7 +46,7 @@
         <div class="relative w-full pb-[56.25%] rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
             <iframe 
                 class="absolute top-0 left-0 w-full h-full"
-                src="https://www.youtube.com/embed/VIDEO_ID_HERE" 
+                src="https://www.youtube.com/embed/pwqt5Z0boII"
                 title="YouTube video player" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -58,21 +58,14 @@
 
     <section class="max-w-md mx-auto p-6 bg-blue-50 rounded-3xl mb-12 border border-blue-100">
         <h3 class="font-bold mb-4 text-blue-800">Add Media to Page</h3>
-        <div class="space-y-4">
-            <div class="edit-field">
-                <label class="block text-sm font-bold text-blue-900 mb-1">Select Social Platform:</label>
+        <div class="edit-field">
+                <label class="block text-sm font-bold text-blue-900 mb-1">Social Platform:</label>
                 <select id="platform-select" class="w-full p-3 rounded-xl border-none shadow-sm outline-none">
-                    <option value="">Select Platform</option>
-                    <option value="youtube">YouTube</option>
-                    <option value="facebook">Facebook</option>
-                    <option value="twitter">Twitter/X</option>
-                    <option value="instagram">Instagram</option>
-                    <option value="linkedin">LinkedIn</option>
-                    <option value="tiktok">TikTok</option>
-                    <option value="github">GitHub</option>
-                </select>
+                    <input type ="text" id = "linkedin-url" placeholder = "https://www.linkedin.com/in/nguyen-ngo-uyen-ngoc-/"
+                    <input type ="text" id = "tiktok-url" placeholder = "https://www.tiktok.com/@nguyenngouyenngoc"
+                </input>
             </div>
-            <input type="text" id="social-url" placeholder="Paste link here (https://...)" class="w-full p-3 rounded-xl border-none shadow-sm">
+            
             <button onclick="addSocialIcon()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-xl">Add to Profile</button>
         </div>
     </section>
