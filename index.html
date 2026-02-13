@@ -53,8 +53,8 @@
     <section id="content-page" class="py-20 px-6">
         <div class="max-w-6xl mx-auto">
             <div class="mb-12 text-center text-gray-900">
-                <h2 class="text-3xl font-bold mb-4">Kiến thức hữu ích</h2>
-                <p class="text-gray-600">Tổng hợp các bài viết hướng dẫn về tài chính và công nghệ.</p>
+                <h2 class="text-3xl font-bold mb-4">Guideline - Framework (Knowledge Instruction/Manual)</h2>
+                <p class="text-gray-600">Tổng hợp các dự án đã và đang cập nhật</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="card-grid"></div>
         </div>
@@ -81,28 +81,6 @@
     </div>
 </section>
 
-    <section class="max-w-md mx-auto p-8 bg-blue-50 rounded-[2.5rem] mb-12 border border-blue-100 shadow-sm">
-        <h3 class="font-bold mb-6 text-blue-900 text-xl text-center">Add Media to Page</h3>
-        <div class="space-y-4">
-            <div>
-                <label class="block text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">Social Platform:</label>
-                <select id="platform-select" class="w-full p-4 rounded-2xl border-none shadow-inner outline-none bg-white text-gray-700">
-                    <option value="">Choose Platform</option>
-                    <option value="linkedin">LinkedIn</option>
-                    <option value="tiktok">TikTok</option>
-                    <option value="youtube">YouTube</option>
-                    <option value="facebook">Facebook</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">Profile URL:</label>
-                <input type="text" id="social-url" placeholder="https://..." class="w-full p-4 rounded-2xl border-none shadow-inner outline-none bg-white">
-            </div>
-            <button onclick="addSocialIcon()" class="w-full bg-blue-600 text-white font-extrabold py-4 rounded-2xl shadow-lg hover:bg-blue-700 transition-all active:scale-95 mt-4">
-                Add to Profile
-            </button>
-        </div>
-    </section>
 
     <section id="about" class="py-10 px-6 max-w-4xl mx-auto">
         <div class="flex flex-col md:flex-row items-center gap-12 bg-white p-10 rounded-[3rem] border border-gray-100 shadow-sm">
@@ -111,7 +89,6 @@
             </div>
             <div>
                 <h2 class="text-3xl font-bold mb-4 text-gray-900">About My Work</h2>
-                <p class="text-gray-600 text-lg mb-6 leading-relaxed">I bridge the gap between HR Strategy and AI Product building to deliver high-impact business results.</p>
                 <a href="https://gamma.app/docs/Home-dd97gheylf6z3zn?mode=doc" target="_blank" class="bg-gray-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-black transition-colors">
                     Full Story on Gamma →
                 </a>
@@ -122,9 +99,35 @@
     <script>
         // Content Card Data
         const cardData = [
-            { id: 1, title: "Thuế VAT là gì?", description: "Giải thích dễ hiểu về thuế giá trị gia tăng cho người mới bắt đầu.", link: "https://gamma.app/docs/Home-dd97gheylf6z3zn?mode=doc", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=400" },
-            { id: 2, title: "Kế toán cho Startup", description: "Cách tối ưu hóa dòng tiền và quản lý sổ sách hiệu quả.", link: "https://gamma.app/docs/Home-dd97gheylf6z3zn?mode=doc", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400" }
-        ];
+    { 
+        id: 1, 
+        title: "Financial analysis", 
+        description: "A short and concise powerpoint slide about a listed-stock for industry", 
+        link: "https://www.canva.com/design/DAG8Mbhewnk/YojBocWi21N47JHFLcC1HQ/edit?utm_content=DAG8Mbhewnk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton", 
+        image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=400" 
+    },
+    { 
+        id: 2, 
+        title: "Double-entry project", 
+        description: "Accounting Workflow-Double entry", 
+        link: "https://www.canva.com/design/DAG9Upfoaqg/_ATzgDn7K2mqGLUafspJ8g/edit?utm_content=DAG9Upfoaqg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton", 
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400" 
+    },
+    { 
+        id: 4, 
+        title: "IFRS Framework", 
+        description: "A framework for IFRS (Total)", 
+        link: "https://nngouyenngoc913.github.io/ifrs-hierachy/",
+        image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=400" 
+    },
+    { 
+        id: 5, 
+        title: "Accounting knowledge", 
+        description: "Accounting Note - Obsidian", 
+        link: "https://golden-fudge-87a154.netlify.app/", 
+        image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=400" 
+    }
+];
 
         function renderContentCards() {
             const grid = document.getElementById('card-grid');
