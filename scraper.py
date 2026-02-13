@@ -5,7 +5,7 @@ import os
 
 def scrape_careerjet():
     # Lấy từ khóa từ ô nhập của GitHub Actions
-    query = os.getenv('KEYWORD', 'Operations Senior Full-time')
+    query = os.getenv('KEYWORD', 'Tuyển dụng mới nhất')
     search_url = f"https://www.careerjet.vn/tim-viec-lam?q={query.replace(' ', '+')}"
     
     headers = {
