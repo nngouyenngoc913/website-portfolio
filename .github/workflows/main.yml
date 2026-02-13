@@ -1,1 +1,32 @@
+name: Auto Job Scraper
 
+on:
+  schedule:
+    - cron: '0 0 * * *' # Chạy tự động vào 00:00 mỗi ngày
+  workflow_dispatch:      # Cho phép bạn bấm nút chạy thủ công bất cứ lúc nào
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Run Scraper
+        run: python scraper.py
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add data.xml
+          git commit -m "Auto-update job data" || exit 0
+          git push
