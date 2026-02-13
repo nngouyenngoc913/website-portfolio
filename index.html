@@ -10,7 +10,6 @@
         @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap');
         body { font-family: 'Lexend', sans-serif; background-color: #f0f4f8; }
         .source-tag { font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight: bold; text-transform: uppercase; }
-        .xml-green { color: #10b981; }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -35,12 +34,10 @@
                         <label class="block text-sm font-bold text-slate-700 mb-2 underline decoration-indigo-300">Nguồn dữ liệu ưu tiên (XML focus)</label>
                         <select id="Industry" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-indigo-400 transition-all">
                             <option value="vn.joblum.com">vn.joblum.com (Dễ cào nhất)</option>
-                            <option value="indeed.com">Indeed.com (RSS/XML Support)</option>
+                            <option value="indeed.com">Indeed.com</option>
                             <option value="careerjet.vn">Careerjet (XML Feed)</option>
-                            <option value="jora.com">Jora (Clean HTML)</option>
                         </select>
                     </div>
-
                     <div>
                         <label class="block text-sm font-bold text-slate-700 mb-2 underline decoration-indigo-300">Từ khóa lọc nhanh</label>
                         <input type="text" id="search_keyword" placeholder="Ví dụ: 'Operations' hoặc 'Staff'" 
@@ -49,13 +46,8 @@
                 </div>
 
                 <div class="mb-6">
-                    <label class="block text-sm font-bold text-slate-700 mb-2">Boolean Search Query (Dành cho SEO/Scraping)</label>
-                    <div class="relative group">
-                        <textarea id="url_input" rows="2" 
-                                  class="w-full p-4 pl-12 bg-slate-50 border border-slate-300 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-400 font-mono text-sm text-indigo-800">site:vn.joblum.com "hiring" "operations" ("coordinator" OR "staff") "full-time" -freelance OR "Hire now"</textarea>
-                        <i class="fas fa-code absolute top-4 left-4 text-slate-400"></i>
-                    </div>
-                    <p class="text-[10px] text-slate-400 mt-2 italic px-2">* Cú pháp trên giúp loại bỏ tin "freelance" và tập trung vào tin "full-time" có từ khóa coordinator/staff.</p>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Boolean Search Query</label>
+                    <textarea id="url_input" rows="2" class="w-full p-4 bg-slate-50 border border-slate-300 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-400 font-mono text-sm text-indigo-800 tracking-tighter italic">site:vn.joblum.com "hiring" "operations" ("coordinator" OR "staff") "full-time" -freelance OR "Hire now"</textarea>
                 </div>
 
                 <button id="search_btn" class="w-full py-4 bg-slate-900 hover:bg-indigo-600 text-white font-black rounded-2xl shadow-lg transition-all flex items-center justify-center gap-3 tracking-widest uppercase">
@@ -70,9 +62,7 @@
                         <i class="fas fa-copy mr-1"></i> Copy to Clipboard
                     </button>
                 </div>
-                <textarea id="search_output" rows="12" readonly 
-                          class="w-full bg-transparent border-none text-emerald-400 font-mono text-sm leading-relaxed focus:ring-0 custom-scrollbar resize-none"
-                          placeholder="Nhấn nút để bắt đầu cào dữ liệu..."></textarea>
+                <textarea id="search_output" rows="12" readonly class="w-full bg-transparent border-none text-emerald-400 font-mono text-sm leading-relaxed focus:ring-0 resize-none" placeholder="Nhấn nút để bắt đầu cào dữ liệu..."></textarea>
             </div>
         </div>
     </div>
@@ -81,55 +71,36 @@
         const searchBtn = document.getElementById('search_btn');
         const searchOutput = document.getElementById('search_output');
         const industrySelect = document.getElementById('Industry');
-        const keywordInput = document.getElementById('search_keyword');
-        const urlInput = document.getElementById('url_input');
 
         searchBtn.addEventListener('click', () => {
             const source = industrySelect.value;
-            const query = urlInput.value;
-
             searchBtn.disabled = true;
-            searchBtn.innerHTML = `<i class="fas fa-sync fa-spin"></i> Parsing XML from ${source}...`;
-            searchOutput.value = `> [INFO] Initializing parser for: ${source}\n> [INFO] Applying Boolean Filter...\n> [XML_PATH]: /job_board/entry/content\n> ----------------------------------------------------`;
+            searchBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Loading Data...`;
 
-            setTimeout(() => {
-                const results = `<?xml version="1.0" encoding="UTF-8"?>
-<job_results>
-    <source>${source}</source>
-    <status>200 OK</status>
-    
-    <job id="001">
-        <title>Operations Coordinator</title>
-        <type>Full-time</type>
-        <keyword_match>YES</keyword_match>
-        <description>Hiring for backend operations, reporting to Staff Manager...</description>
-        <link>https://${source}/j/12345</link>
-    </job>
-
-    <job id="002">
-        <title>Senior Operations Staff</title>
-        <type>Full-time</type>
-        <keyword_match>YES</keyword_match>
-        <description>Urgent hire now for finance operations role...</description>
-        <link>https://${source}/j/67890</link>
-    </job>
-
-    <job id="003">
-        <title>Administrative Coordinator</title>
-        <type>Full-time</type>
-        <keyword_match>YES (Partial)</keyword_match>
-        <description>Operations support and team coordination...</description>
-        <link>https://${source}/j/54321</link>
-    </job>
-</job_results>
-
-> [DONE] Found 3 matching entries without 'freelance' keyword.`;
-
-                searchOutput.value = results;
-                searchBtn.disabled = false;
-                searchBtn.innerHTML = `<i class="fas fa-project-diagram"></i> Start XML Parsing`;
-            }, 1500);
+            // Ưu tiên đọc file thực tế từ Repo GitHub
+            fetch('data.xml')
+                .then(res => {
+                    if (!res.ok) throw new Error("File not found");
+                    return res.text();
+                })
+                .then(xml => {
+                    searchOutput.value = xml;
+                    resetButton();
+                })
+                .catch(err => {
+                    console.log("Sử dụng dữ liệu giả lập vì:", err.message);
+                    // Dữ liệu giả lập (Backup)
+                    setTimeout(() => {
+                        searchOutput.value = `<?xml version="1.0" encoding="UTF-8"?>\n<job_results>\n  <source>${source}</source>\n  <status>MOCK_DATA_ONLY</status>\n  <message>Vui lòng đợi GitHub Actions cào dữ liệu thật hoặc kiểm tra file data.xml</message>\n  <job id="001">\n    <title>Operations Coordinator</title>\n    <link>https://${source}/j/example</link>\n  </job>\n</job_results>`;
+                        resetButton();
+                    }, 1000);
+                });
         });
+
+        function resetButton() {
+            searchBtn.disabled = false;
+            searchBtn.innerHTML = `<i class="fas fa-project-diagram"></i> Start XML Parsing`;
+        }
 
         function copyResults() {
             if (!searchOutput.value) return;
