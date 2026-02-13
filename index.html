@@ -8,8 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fcfcfd; scroll-behavior: smooth; }
-        .card-content { max-height: 0; overflow: hidden; transition: all 0.3s ease-in-out; opacity: 0; }
-        .card.active .card-content { max-height: 300px; opacity: 1; margin-top: 1rem; }
         .social-icon { width: 32px; height: 32px; transition: transform 0.2s; border-radius: 6px; }
         .social-icon:hover { transform: scale(1.2); }
     </style>
@@ -19,12 +17,20 @@
     <nav class="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
         <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="font-extrabold text-blue-600 text-xl tracking-tight">Nancy.</a>
+            
             <div id="social-display" class="flex gap-4">
-                </div>
+                <a href="https://www.linkedin.com/in/nguyen-ngo-uyen-ngoc-/" target="_blank" class="hover:scale-110 transition-transform">
+                    <img src="https://www.linkedin.com/favicon.ico" class="social-icon" alt="LinkedIn">
+                </a>
+                <a href="https://www.tiktok.com/@nguyenngouyenngoc" target="_blank" class="hover:scale-110 transition-transform">
+                    <img src="https://www.tiktok.com/favicon.ico" class="social-icon" alt="TikTok">
+                </a>
+            </div>
+
             <div class="hidden md:flex space-x-6 text-sm font-bold text-gray-600">
                 <a href="#" class="hover:text-blue-600 transition">Trang chủ</a>
                 <a href="#about" class="hover:text-blue-600 transition">Về tôi</a>
-                <a href="#content-page" class="hover:text-blue-600 transition">Dịch vụ</a>
+                <a href="#content-page" class="hover:text-blue-600 transition">Dự án</a>
             </div>
         </div>
     </nav>
@@ -53,8 +59,8 @@
     <section id="content-page" class="py-20 px-6">
         <div class="max-w-6xl mx-auto">
             <div class="mb-12 text-center text-gray-900">
-                <h2 class="text-3xl font-bold mb-4">Guideline - Framework (Knowledge Instruction/Manual)</h2>
-                <p class="text-gray-600">Tổng hợp các dự án đã và đang cập nhật</p>
+                <h2 class="text-3xl font-bold mb-4">Guideline - Framework</h2>
+                <p class="text-gray-600">Tổng hợp các dự án đã và đang cập nhật (Knowledge Instruction/Manual)</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="card-grid"></div>
         </div>
@@ -68,7 +74,8 @@
                 </div>
                 <div class="flex-1 text-center md:text-left">
                     <h4 class="text-2xl font-bold text-gray-900 mb-2">Legal Framework</h4>
-                    <a href="https://huggingface.co/spaces/ngocng19/legal" 
+                    <p class="text-gray-600 mb-6">Interactive legal assistant space powered by Hugging Face.</p>
+                    <a href="https://huggingface.co/spaces/ngocng19/legal" target="_blank" 
                        class="inline-flex items-center gap-2 bg-gray-900 text-white px-8 py-3 rounded-xl font-bold hover:bg-black transition-all">
                         Open Legal Space 🚀
                     </a>
@@ -77,19 +84,15 @@
         </div>
     </section>
 
-            </div>
-    </div>
-</section>
-
-
     <section id="about" class="py-10 px-6 max-w-4xl mx-auto">
         <div class="flex flex-col md:flex-row items-center gap-12 bg-white p-10 rounded-[3rem] border border-gray-100 shadow-sm">
-            <div class="w-40 h-40 rounded-3xl bg-blue-600 overflow-hidden shrink-0 shadow-xl rotate-3">
-                <img src="https://github.com/favicon.ico" class="w-full h-full p-8 invert opacity-80">
+            <div class="w-40 h-40 rounded-3xl bg-blue-600 overflow-hidden shrink-0 shadow-xl rotate-3 flex items-center justify-center">
+                <img src="https://github.com/favicon.ico" class="w-20 h-20 p-2 invert opacity-80" alt="GitHub">
             </div>
             <div>
                 <h2 class="text-3xl font-bold mb-4 text-gray-900">About My Work</h2>
-                <a href="https://gamma.app/docs/Home-dd97gheylf6z3zn?mode=doc" target="_blank" class="bg-gray-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-black transition-colors">
+                <p class="text-gray-600 mb-6 leading-relaxed text-lg">I bridge the gap between HR Strategy and AI Product building.</p>
+                <a href="https://gamma.app/docs/Home-dd97gheylf6z3zn?mode=doc" target="_blank" class="bg-gray-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-black transition-colors inline-block">
                     Full Story on Gamma →
                 </a>
             </div>
@@ -97,79 +100,29 @@
     </section>
 
     <script>
-        // Content Card Data
         const cardData = [
-    { 
-        id: 1, 
-        title: "Financial analysis", 
-        description: "A short and concise powerpoint slide about a listed-stock for industry", 
-        link: "https://www.canva.com/design/DAG8Mbhewnk/YojBocWi21N47JHFLcC1HQ/edit?utm_content=DAG8Mbhewnk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton", 
-        image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=400" 
-    },
-    { 
-        id: 2, 
-        title: "Double-entry project", 
-        description: "Accounting Workflow-Double entry", 
-        link: "https://www.canva.com/design/DAG9Upfoaqg/_ATzgDn7K2mqGLUafspJ8g/edit?utm_content=DAG9Upfoaqg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton", 
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400" 
-    },
-    { 
-        id: 4, 
-        title: "IFRS Framework", 
-        description: "A framework for IFRS (Total)", 
-        link: "https://nngouyenngoc913.github.io/ifrs-hierachy/",
-        image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=400" 
-    },
-    { 
-        id: 5, 
-        title: "Accounting knowledge", 
-        description: "Accounting Note - Obsidian", 
-        link: "https://golden-fudge-87a154.netlify.app/", 
-        image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=400" 
-    }
-];
+            { id: 1, title: "Financial analysis", description: "Concise powerpoint slide about a listed-stock for industry.", link: "https://www.canva.com/design/DAG8Mbhewnk/YojBocWi21N47JHFLcC1HQ/edit?utm_content=DAG8Mbhewnk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=400" },
+            { id: 2, title: "Double-entry project", description: "Accounting Workflow-Double entry visualization.", link: "https://www.canva.com/design/DAG9Upfoaqg/_ATzgDn7K2mqGLUafspJ8g/edit?utm_content=DAG9Upfoaqg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400" },
+            { id: 4, title: "IFRS Framework", description: "A comprehensive framework for IFRS hierarchy.", link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=400" },
+            { id: 5, title: "Accounting knowledge", description: "Accounting Note - Obsidian Publish.", link: "https://golden-fudge-87a154.netlify.app/", image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=400" }
+        ];
 
         function renderContentCards() {
             const grid = document.getElementById('card-grid');
             grid.innerHTML = cardData.map(card => `
-                <div class="group bg-white rounded-[2rem] overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col">
-                    <div class="h-56 overflow-hidden">
+                <div class="group bg-white rounded-[2rem] overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col h-full">
+                    <div class="h-56 overflow-hidden bg-gray-100">
                         <img src="${card.image}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     </div>
-                    <div class="p-8">
+                    <div class="p-8 flex flex-col flex-grow">
                         <h3 class="text-xl font-bold text-gray-900 mb-3">${card.title}</h3>
-                        <p class="text-gray-500 text-sm mb-6">${card.description}</p>
-                        <a href="${card.link}" target="_blank" class="text-blue-600 font-bold hover:text-blue-800 flex items-center gap-2">Đọc bài viết <span>→</span></a>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow">${card.description}</p>
+                        <a href="${card.link}" target="_blank" class="text-blue-600 font-bold hover:text-blue-800 flex items-center gap-2 mt-auto">
+                            Xem dự án <span>→</span>
+                        </a>
                     </div>
                 </div>
             `).join('');
-        }
-
-
-        function addSocialIcon() {
-            const platform = document.getElementById('platform-select').value;
-            const url = document.getElementById('social-url').value;
-            const display = document.getElementById('social-display');
-
-            if (!platform || !url) {
-                alert("Please select a platform and enter a URL");
-                return;
-            }
-
-            const anchor = document.createElement('a');
-            anchor.href = url;
-            anchor.target = "_blank";
-            anchor.className = "hover:scale-110 transition-transform";
-            
-            const img = document.createElement('img');
-            img.src = defaultIcons[platform];
-            img.className = "social-icon";
-            img.alt = platform;
-
-            anchor.appendChild(img);
-            display.appendChild(anchor);
-
-            document.getElementById('social-url').value = '';
         }
 
         // Initialize
