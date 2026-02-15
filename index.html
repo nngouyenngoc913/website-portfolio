@@ -45,29 +45,31 @@
             </p>
             <div class="flex flex-col md:flex-row items-center justify-center gap-4">
                 <a href="https://gamma.app/docs/Home-dd97gheylf6z3zn?mode=doc" target="_blank" 
-                   class="w-full md:w-auto bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:bg-blue-700 hover:scale-105 transition-all inline-block text-sm md:text-base">
+                   class="w-full md:w-auto bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:bg-blue-700 hover:scale-105 transition-all inline-block text-sm md:text-base text-center">
                     Programs' Affiliate - Community Better (AI/HR/Mental Health)
                 </a>
                 <a href="https://gamma.app/docs/HR-zkxlgnmy8j236g1?mode=doc" target="_blank" 
-                   class="w-full md:w-auto bg-gray-900 text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:bg-black hover:scale-105 transition-all inline-block text-sm md:text-base">
+                   class="w-full md:w-auto bg-gray-900 text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:bg-black hover:scale-105 transition-all inline-block text-sm md:text-base text-center">
                     Headhunting' Affiliate - Networking and Apply
                 </a>
             </div>
         </div>
     </section>
 
-    <section id="services" class="relative w-full min-h-[600px] overflow-hidden">
+    <section id="services" class="relative w-full h-[600px] md:h-[700px] overflow-hidden">
         <div class="absolute inset-0 z-0">
             <iframe 
                 loading="lazy" 
-                class="w-full h-full border-none pointer-events-none"
+                class="w-full h-full border-none pointer-events-none scale-105"
                 src="https://www.canva.com/design/DAHBWwlG3RE/view?embed" 
                 allowfullscreen="allowfullscreen" 
                 allow="fullscreen">
             </iframe>
         </div>
+        
         <div class="absolute inset-0 bg-black/50 z-10"></div>
-        <div class="relative z-20 max-w-4xl mx-auto px-6 py-32 flex flex-col items-center justify-center text-center h-full">
+
+        <div class="relative z-20 flex flex-col items-center justify-center text-center h-full px-6">
             <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6 drop-shadow-lg">Our Services</h2>
             <p class="text-white/90 text-lg md:text-xl mb-10 max-w-2xl">
                 Explore our specialized corporate training and visual facilitation journeys.
@@ -125,14 +127,15 @@
 
     <script>
         const cardData = [
-            { id: 1, title: "Financial analysis", description: "Concise powerpoint slide about a listed-stock for industry.", link: "https://www.canva.com/design/DAG8Mbhewnk/YojBocWi21N47JHFLcC1HQ/edit?utm_content=DAG8Mbhewnk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=400" },
-            { id: 2, title: "Double-entry project", description: "Accounting Workflow-Double entry visualization.", link: "https://www.canva.com/design/DAG9Upfoaqg/_ATzgDn7K2mqGLUafspJ8g/edit?utm_content=DAG9Upfoaqg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400" },
+            { id: 1, title: "Financial analysis", description: "Concise powerpoint slide about a listed-stock for industry.", link: "https://www.canva.com/design/DAG8Mbhewnk/YojBocWi21N47JHFLcC1HQ/edit", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=400" },
+            { id: 2, title: "Double-entry project", description: "Accounting Workflow-Double entry visualization.", link: "https://www.canva.com/design/DAG9Upfoaqg/_ATzgDn7K2mqGLUafspJ8g/edit", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400" },
             { id: 4, title: "IFRS Framework", description: "A comprehensive framework for IFRS hierarchy.", link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=400" },
             { id: 5, title: "Accounting knowledge", description: "Accounting Note - Obsidian Publish.", link: "https://golden-fudge-87a154.netlify.app/", image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=400" }
         ];
 
         function renderContentCards() {
             const grid = document.getElementById('card-grid');
+            if(!grid) return;
             grid.innerHTML = cardData.map(card => `
                 <div class="group bg-white rounded-[2rem] overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col h-full">
                     <div class="h-56 overflow-hidden bg-gray-100">
