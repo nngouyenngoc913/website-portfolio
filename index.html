@@ -67,4 +67,40 @@
     </section>
 
     <section id="legal" class="py-20 px-6">
-        <div class="max-
+        <div class="max-w-6xl mx-auto bg-white border border-gray-100 p-10 rounded-[2rem] shadow-sm">
+            <h4 class="text-2xl font-bold text-gray-900 mb-2">Frameworks in Legal</h4>
+            <p class="text-gray-600 mb-6">Interactive legal assistant space powered by Hugging Face.</p>
+            <a href="https://huggingface.co/spaces/ngocng19/legal" target="_blank" 
+               class="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg">
+                Open Legal Space 🚀
+            </a>
+        </div>
+    </section>
+
+    <script>
+        const cardData = [
+            { id: 1, title: "Financial analysis", description: "Concise powerpoint slide about a listed-stock.", link: "https://www.canva.com/design/DAG8Mbhewnk/YojBocWi21N47JHFLcC1HQ/edit", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=400" },
+            { id: 2, title: "Double-entry project", description: "Accounting Workflow-Double entry visualization.", link: "https://www.canva.com/design/DAG9Upfoaqg/_ATzgDn7K2mqGLUafspJ8g/edit", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400" },
+            { id: 4, title: "IFRS Framework", description: "A comprehensive framework for IFRS hierarchy.", link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=400" },
+            { id: 5, title: "Accounting knowledge", description: "Accounting Note - Obsidian Publish.", link: "https://golden-fudge-87a154.netlify.app/", image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=400" }
+        ];
+
+        function renderProjects() {
+            const grid = document.getElementById('card-grid');
+            if(!grid) return;
+            grid.innerHTML = cardData.map(card => `
+                <div class="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
+                    <img src="${card.image}" class="w-full h-40 object-cover" alt="${card.title}">
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg mb-2">${card.title}</h3>
+                        <p class="text-gray-500 text-xs mb-4">${card.description}</p>
+                        <a href="${card.link}" target="_blank" class="text-blue-600 font-bold text-sm flex items-center gap-1">View Project →</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        renderProjects();
+    </script>
+</body>
+</html>
