@@ -1,2 +1,1 @@
-# website-portfolio
-a prototype for web 
+# website-portfolio : Freelancing 
