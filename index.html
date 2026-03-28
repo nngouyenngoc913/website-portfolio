@@ -236,13 +236,25 @@ margin-top: 40px;
 </div>
 </section>
 
-<section style="background: #f9fafb;">
-<div class="container">
-<h2 class="section-title">E-commerce</h2>
-<p class="section-subtitle">Data & Analytics</p>
-<div class="project-grid" id="ecommerce-grid"></div>
-</div>
-</section>
+<div class="project-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                </div>
+                <div class="project-info">
+                    <h3>AI Campaign Strategy</h3>
+                    <p>Automated content generation for multi-platform distribution using LLMs.</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                </div>
+                <div class="project-info">
+                    <h3>Automated Video Editing</h3>
+                    <p>Using AI to splice and caption bulk video assets for social engagement.</p>
+                </div>
+            </div>
 
 <section class="cta">
 <div class="container">
@@ -290,45 +302,42 @@ description: "Comprehensive IFRS hierarchy.",
 link: "https://nngouyenngoc913.github.io/ifrs-hierachy/",
 image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=400"
 },
-{
-id: 4,
-title: "Data Ops",
-description: "Aging receivables & accounting books.",
-link: "https://drive.google.com/drive/u/1/folders/1UEIMgh0UKr9ymnZUDbJb8WvhjGzSD9_m",
-image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=400"
-}
+  
+// Data for the YouTube section
+const socialData = [
+    { title: "AI Campaign Strategy", description: "Automated content generation using AI.", videoId: "dQw4w9WgXcQ" },
+    { title: "Automated Video Editing", description: "Using AI to caption bulk video assets.", videoId: "dQw4w9WgXcQ" }
 ];
 
-function createCard(card) {
-const div = document.createElement('div');
-div.className = 'project-card';
-div.innerHTML = `
-<div class="project-image">
-<img src="${card.image}" alt="${card.title}">
-</div>
-<div class="project-content">
-<h3 class="project-title">${card.title}</h3>
-<p class="project-description">${card.description}</p>
-<a href="${card.link}" target="_blank" class="project-link">View Project</a>
-</div>
-`;
-return div;
+function createCard(item, isVideo = false) {
+    const div = document.createElement('div');
+    div.className = 'project-card';
+    
+    // Switch between Image or Video
+    const mediaHTML = isVideo 
+        ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe></div>`
+        : `<div class="project-image"><img src="${item.image}" alt="${item.title}"></div>`;
+
+    div.innerHTML = `
+        ${mediaHTML}
+        <div class="project-content">
+            <h3 class="project-title">${item.title}</h3>
+            <p class="project-description">${item.description}</p>
+            ${item.link && item.link !== "#" ? `<a href="${item.link}" target="_blank" class="project-link">View Project</a>` : ''}
+        </div>
+    `;
+    return div;
 }
 
 function renderProjects() {
-const projectGrid = document.getElementById('project-grid');
-const ecommerceGrid = document.getElementById('ecommerce-grid');
+    const projectGrid = document.getElementById('project-grid');
+    const socialGrid = document.getElementById('social-grid');
 
-projectData.forEach(card => {
-projectGrid.appendChild(createCard(card));
-});
-
-ecommerceData.forEach(card => {
-ecommerceGrid.appendChild(createCard(card));
-});
+    projectData.forEach(card => projectGrid.appendChild(createCard(card)));
+    socialData.forEach(card => socialGrid.appendChild(createCard(card, true)));
 }
 
 document.addEventListener('DOMContentLoaded', renderProjects);
 </script>
 </body>
-</html>
+</html>  
