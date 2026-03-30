@@ -55,19 +55,32 @@
         transition: box-shadow 0.3s;
         display: flex;
         flex-direction: column;
+        height: 100%;
     }
     .project-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
 
     /* Media Containers */
-    .project-image { height: 160px; background: #f5f5f5; overflow: hidden; }
+    .project-image { height: 180px; background: #f5f5f5; overflow: hidden; }
     .project-image img { width: 100%; height: 100%; object-fit: cover; }
     
-    .video-container { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .video-container { 
+        position: relative; 
+        width: 100%; 
+        aspect-ratio: 16 / 9; 
+        background: #000; 
+    }
+    .video-container iframe { 
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%; 
+        border: 0; 
+    }
 
-    .project-content { padding: 20px; flex-grow: 1; }
+    .project-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
     .project-title { font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
-    .project-description { color: #666; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5; }
+    .project-description { color: #666; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5; flex-grow: 1; }
     .project-link {
         display: block;
         background: #eff6ff;
@@ -78,7 +91,9 @@
         text-decoration: none;
         font-weight: 700;
         font-size: 0.85rem;
+        transition: background 0.2s;
     }
+    .project-link:hover { background: #dbeafe; }
 
     /* CTA Section */
     .cta { background: white; border-top: 1px solid #eee; padding: 40px 0; }
@@ -153,161 +168,6 @@
 
 <script>
 // Data for the first section
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nancy Nguyen | Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        background-color: #fcfcfd;
-        color: #333;
-        line-height: 1.6;
-    }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-    /* Navigation */
-    nav {
-        background: rgba(255,255,255,0.9);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid #eee;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        padding: 15px 0;
-    }
-    .nav-content { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-weight: 800; font-size: 1.5rem; color: #2563eb; text-decoration: none; }
-    .social-icons { display: flex; gap: 15px; }
-    .social-icon { width: 28px; height: 28px; border-radius: 4px; transition: transform 0.2s; }
-    .social-icon:hover { transform: scale(1.1); }
-
-    /* Header */
-    header { text-align: center; padding: 60px 20px 40px; background: white; }
-    .subtitle { font-size: 1.1rem; color: #666; font-weight: 500; max-width: 600px; margin: 0 auto; }
-
-    /* Sections */
-    section { padding: 40px 0; }
-    .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; }
-    .section-subtitle { color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px; }
-
-    /* Project Grid */
-    .project-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 25px;
-        margin-top: 20px;
-    }
-    .project-card {
-        background: white;
-        border-radius: 12px;
-        border: 1px solid #eee;
-        overflow: hidden;
-        transition: box-shadow 0.3s;
-        display: flex;
-        flex-direction: column;
-    }
-    .project-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-
-    /* Media Containers */
-    .project-image { height: 160px; background: #f5f5f5; overflow: hidden; }
-    .project-image img { width: 100%; height: 100%; object-fit: cover; }
-    
-    .video-container { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-
-    .project-content { padding: 20px; flex-grow: 1; }
-    .project-title { font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
-    .project-description { color: #666; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5; }
-    .project-link {
-        display: block;
-        background: #eff6ff;
-        color: #2563eb;
-        text-align: center;
-        padding: 10px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 0.85rem;
-    }
-
-    /* CTA Section */
-    .cta { background: white; border-top: 1px solid #eee; padding: 40px 0; }
-    .cta-card {
-        background: white; border: 1px solid #eee; border-radius: 16px; padding: 30px;
-        display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px;
-    }
-    @media (min-width: 768px) { .cta-card { flex-direction: row; justify-content: space-between; text-align: left; } }
-    .cta-button { background: #2563eb; color: white; padding: 12px 25px; border-radius: 10px; text-decoration: none; font-weight: 700; }
-
-    footer { text-align: center; padding: 30px 0; color: #888; font-size: 0.9rem; border-top: 1px solid #eee; margin-top: 40px; }
-</style>
-</head>
-<body>
-
-<nav>
-    <div class="container nav-content">
-        <a href="#" class="logo">Nancy.</a>
-        <div class="social-icons">
-            <a href="https://www.linkedin.com/in/nguyen-ngo-uyen-ngoc-/" target="_blank">
-                <img src="https://www.linkedin.com/favicon.ico" class="social-icon" alt="LinkedIn">
-            </a>
-            <a href="https://www.tiktok.com/@nguyenngouyenngoc" target="_blank">
-                <img src="https://www.tiktok.com/favicon.ico" class="social-icon" alt="TikTok">
-            </a>
-        </div>
-    </div>
-</nav>
-
-<header>
-    <div class="container">
-        <h1 class="subtitle">Workflows bridging Operations</h1>
-    </div>
-</header>
-
-<section id="projects">
-    <div class="container">
-        <h2 class="section-title">Done Projects</h2>
-        <p class="section-subtitle">Instruction & Manuals</p>
-        <div class="project-grid" id="project-grid"></div>
-    </div>
-</section>
-
-<section style="background: #f9fafb;">
-    <div class="container">
-        <h2 class="section-title">Social sourcing</h2>
-        <p class="section-subtitle">Social-Marketing using AI</p>
-        <div class="project-grid" id="social-grid"></div>
-    </div>
-</section>
-
-<section class="cta">
-    <div class="container">
-        <div class="cta-card">
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <div style="font-size: 2rem;">🚀</div>
-                <div>
-                    <h4>Interactive Spaces</h4>
-                    <p>LLM Assistants powered by Hugging Face</p>
-                </div>
-            </div>
-            <a href="https://huggingface.co/spaces/ngocng19/legal" target="_blank" class="cta-button">Legal Space ⚖️</a>
-        </div>
-    </div>
-</section>
-
-<footer>
-    <div class="container">
-        <p>© 2026 Nancy Nguyen. All rights reserved.</p>
-    </div>
-</footer>
-
-<script>
-// Section 1: Instructions & Manuals
 const projectData = [
     { 
         title: "Financial analysis", 
@@ -329,27 +189,30 @@ const projectData = [
     }
 ];
 
-// Section 2: Social Marketing / Videos
+// Data for the Social/Video section
 const socialData = [
-    {
-        title: "N8N Series - Part 1", 
+   {
+        title: "N8N Series", 
         description: "Using N8N for book-keeping automation.", 
-        embedCode: `<iframe src="https://www.capcut.com/player/7622911202535981077?workspaceId=7409178252733841425" allow="clipboard-write" frameborder="0" width="100%" height="100%" allowfullscreen></iframe>`
-    },
-    {
-        title: "N8N Series - Part 2", 
-        description: "Advanced automation workflows for finance.", 
-        embedCode: `<iframe src="https://www.capcut.com/player/7622915492998774800?workspaceId=7409178252733841425" allow="clipboard-write" frameborder="0" width="100%" height="100%" allowfullscreen></iframe>`
-    }
-]; // Added missing closing bracket
+        videoId: "7622911202535981077"
+   },
+   {
+        title: "Automation Workflows", 
+        description: "Developing agentic tools for finance.", 
+        videoId: "7622915492998774800"
+   }
+];
 
 function createCard(item, isVideo = false) {
     const div = document.createElement('div');
     div.className = 'project-card';
     
-    // Logic to handle images vs CapCut/Iframe embeds
+    // Switch between Image or CapCut Video
     const mediaHTML = isVideo 
-        ? `<div class="video-container">${item.embedCode}</div>` 
+        ? `<div class="video-container">
+            <iframe src="https://www.capcut.com/player/${item.videoId}?workspaceId=7409178252733841425" 
+            allow="clipboard-write" allowfullscreen></iframe>
+           </div>`
         : `<div class="project-image"><img src="${item.image}" alt="${item.title}"></div>`;
 
     div.innerHTML = `
@@ -367,9 +230,15 @@ function renderProjects() {
     const projectGrid = document.getElementById('project-grid');
     const socialGrid = document.getElementById('social-grid');
 
-    if(projectGrid) projectData.forEach(card => projectGrid.appendChild(createCard(card)));
-    if(socialGrid) socialData.forEach(card => socialGrid.appendChild(createCard(card, true)));
+    if (projectGrid) {
+        projectData.forEach(card => projectGrid.appendChild(createCard(card)));
+    }
+    if (socialGrid) {
+        socialData.forEach(card => socialGrid.appendChild(createCard(card, true)));
+    }
 }
 
 document.addEventListener('DOMContentLoaded', renderProjects);
 </script>
+</body>
+</html>
