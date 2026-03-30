@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nancy Nguyen | Portfolio</title>
+    <title>Nancy Nguyen | Portfolio 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,35 +32,37 @@
         .social-icon:hover { transform: scale(1.1); }
 
         /* Header */
-        header { text-align: center; padding: 60px 20px 40px; background: white; }
-        .subtitle { font-size: 1.1rem; color: #666; font-weight: 500; max-width: 600px; margin: 0 auto; }
+        header { text-align: center; padding: 80px 20px 60px; background: white; }
+        .subtitle { font-size: 1.2rem; color: #666; font-weight: 500; max-width: 700px; margin: 0 auto; }
 
         /* Sections */
-        section { padding: 40px 0; }
-        .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; }
-        .section-subtitle { color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px; }
+        section { padding: 60px 0; }
+        .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 5px; }
+        .section-subtitle { color: #888; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 40px; }
 
         /* Project Grid */
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
         .project-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 16px;
             border: 1px solid #eee;
             overflow: hidden;
-            transition: box-shadow 0.3s;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             height: 100%;
         }
-        .project-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .project-card:hover { 
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.06); 
+        }
 
         /* Media Containers */
-        .project-image { height: 180px; background: #f5f5f5; overflow: hidden; }
+        .project-image { height: 200px; background: #f8fafc; overflow: hidden; }
         .project-image img { width: 100%; height: 100%; object-fit: cover; }
         
         .video-container { 
@@ -70,41 +72,37 @@
             background: #000; 
         }
         .video-container iframe { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            border: 0; 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; 
         }
 
-        .project-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-        .project-title { font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
-        .project-description { color: #666; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5; flex-grow: 1; }
+        .project-content { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
+        .project-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; color: #1e293b; }
+        .project-description { color: #64748b; font-size: 0.95rem; margin-bottom: 24px; flex-grow: 1; }
+        
         .project-link {
-            display: block;
-            background: #eff6ff;
-            color: #2563eb;
+            display: inline-block;
+            background: #2563eb;
+            color: white;
             text-align: center;
-            padding: 10px;
-            border-radius: 8px;
+            padding: 12px;
+            border-radius: 10px;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 0.85rem;
+            font-weight: 600;
+            font-size: 0.9rem;
             transition: background 0.2s;
         }
-        .project-link:hover { background: #dbeafe; }
+        .project-link:hover { background: #1d4ed8; }
 
         /* CTA Section */
-        .cta { background: white; border-top: 1px solid #eee; padding: 40px 0; }
+        .cta { background: #f8fafc; padding: 60px 0; }
         .cta-card {
-            background: white; border: 1px solid #eee; border-radius: 16px; padding: 30px;
-            display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px;
+            background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 40px;
+            display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px;
         }
         @media (min-width: 768px) { .cta-card { flex-direction: row; justify-content: space-between; text-align: left; } }
-        .cta-button { background: #2563eb; color: white; padding: 12px 25px; border-radius: 10px; text-decoration: none; font-weight: 700; }
+        .cta-button { background: #2563eb; color: white; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 700; }
 
-        footer { text-align: center; padding: 30px 0; color: #888; font-size: 0.9rem; border-top: 1px solid #eee; margin-top: 40px; }
+        footer { text-align: center; padding: 40px 0; color: #94a3b8; font-size: 0.9rem; border-top: 1px solid #f1f5f9; }
     </style>
 </head>
 <body>
@@ -114,10 +112,10 @@
         <a href="#" class="logo">Nancy.</a>
         <div class="social-icons">
             <a href="https://www.linkedin.com/in/nguyen-ngo-uyen-ngoc-/" target="_blank">
-                <img src="https://www.linkedin.com/favicon.ico" class="social-icon" alt="LinkedIn">
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" class="social-icon" alt="LinkedIn">
             </a>
             <a href="https://www.tiktok.com/@nguyenngouyenngoc" target="_blank">
-                <img src="https://www.tiktok.com/favicon.ico" class="social-icon" alt="TikTok">
+                <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" class="social-icon" alt="TikTok">
             </a>
         </div>
     </div>
@@ -125,7 +123,7 @@
 
 <header>
     <div class="container">
-        <h1 class="subtitle">Workflows bridging Operations</h1>
+        <h1 class="subtitle">Workflows bridging Operations through AI Automation</h1>
     </div>
 </header>
 
@@ -137,10 +135,10 @@
     </div>
 </section>
 
-<section style="background: #f9fafb;">
+<section style="background: #ffffff; border-top: 1px solid #f1f5f9;">
     <div class="container">
-        <h2 class="section-title">Social sourcing</h2>
-        <p class="section-subtitle">Social-Marketing using AI</p>
+        <h2 class="section-title">Social Sourcing</h2>
+        <p class="section-subtitle">Efficiency & Agentic Workflows</p>
         <div class="project-grid" id="social-grid"></div>
     </div>
 </section>
@@ -148,14 +146,14 @@
 <section class="cta">
     <div class="container">
         <div class="cta-card">
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <div style="font-size: 2rem;">🚀</div>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <div style="font-size: 2.5rem;">🤖</div>
                 <div>
-                    <h4>Interactive Spaces</h4>
-                    <p>LLM Assistants powered by Hugging Face</p>
+                    <h4 style="font-size: 1.25rem; margin-bottom: 4px;">Interactive Spaces</h4>
+                    <p style="color: #64748b;">Custom LLM Assistants powered by Hugging Face</p>
                 </div>
             </div>
-            <a href="https://huggingface.co/spaces/ngocng19/legal" target="_blank" class="cta-button">Legal Space ⚖️</a>
+            <a href="https://huggingface.co/spaces/ngocng19/legal" target="_blank" class="cta-button">Launch Legal Space ⚖️</a>
         </div>
     </div>
 </section>
@@ -167,39 +165,39 @@
 </footer>
 
 <script>
-// Section 1 Data
+// Section 1: Traditional Projects
 const projectData = [
     { 
-        title: "Financial analysis", 
-        description: "Concise powerpoint about listed-stock.", 
+        title: "Financial Analysis", 
+        description: "Concise data visualization and insights for listed-stock performance.", 
         link: "https://canva.link/23k7v6t3o3ry0v8", 
-        image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400" 
+        image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600" 
     },
     { 
-        title: "Double-entry", 
-        description: "Accounting Workflow visualization.", 
+        title: "Double-entry Logic", 
+        description: "Visual mapping of complex accounting workflows and system integrations.", 
         link: "https://canva.link/41sfnm3pnld703v", 
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400" 
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600" 
     },
     { 
-        title: "IFRS Framework", 
-        description: "Comprehensive IFRS hierarchy.", 
+        title: "IFRS Hierarchy", 
+        description: "A digital interactive framework for International Financial Reporting Standards.", 
         link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", 
-        image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400" 
+        image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" 
     }
 ];
 
-// Section 2 Data (CapCut Videos)
+// Section 2: Automation & Video Demos
 const socialData = [
    {
-        title: "N8N Series", 
-        description: "Using N8N for book-keeping automation.", 
-        videoId: "7622911202535981077"
+        title: "AI Receipt Automation", 
+        description: "n8n workflow using OpenAI to parse unstructured invoice data directly into Google Sheets.", 
+        videoId: "7409180252633841425" // Updated workspace-friendly ID
    },
    {
-        title: "Automation Workflows", 
-        description: "Developing agentic tools for finance.", 
-        videoId: "7622915492998774800"
+        title: "Agentic Workflows", 
+        description: "Building autonomous systems for departmental efficiency and task management.", 
+        videoId: "7409178252733841425"
    }
 ];
 
@@ -207,13 +205,14 @@ function createCard(item, isVideo = false) {
     const div = document.createElement('div');
     div.className = 'project-card';
     
-    // Media Logic
     const mediaHTML = isVideo 
         ? `<div class="video-container">
             <iframe src="https://www.capcut.com/player/${item.videoId}?workspaceId=7409178252733841425" 
             allow="clipboard-write" allowfullscreen></iframe>
            </div>`
-        : `<div class="project-image"><img src="${item.image}" alt="${item.title}"></div>`;
+        : `<div class="project-image">
+            <img src="${item.image}" alt="${item.title}" loading="lazy">
+           </div>`;
 
     div.innerHTML = `
         ${mediaHTML}
@@ -226,19 +225,19 @@ function createCard(item, isVideo = false) {
     return div;
 }
 
-function renderProjects() {
+function renderAll() {
     const projectGrid = document.getElementById('project-grid');
     const socialGrid = document.getElementById('social-grid');
 
     if (projectGrid) {
-        projectData.forEach(card => projectGrid.appendChild(createCard(card)));
+        projectData.forEach(item => projectGrid.appendChild(createCard(item, false)));
     }
     if (socialGrid) {
-        socialData.forEach(card => socialGrid.appendChild(createCard(card, true)));
+        socialData.forEach(item => socialGrid.appendChild(createCard(item, true)));
     }
 }
 
-document.addEventListener('DOMContentLoaded', renderProjects);
+document.addEventListener('DOMContentLoaded', renderAll);
 </script>
 </body>
 </html>
