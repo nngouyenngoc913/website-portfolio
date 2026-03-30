@@ -307,25 +307,49 @@
 </footer>
 
 <script>
-// Data for the first section
+// Section 1: Instructions & Manuals
 const projectData = [
-    { title: "Financial analysis", description: "Concise powerpoint about listed-stock.", link: "https://canva.link/23k7v6t3o3ry0v8", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400" },
-    { title: "Double-entry", description: "Accounting Workflow visualization.", link: "https://canva.link/41sfnm3pnld703v", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400" },
-    { title: "IFRS Framework", description: "Comprehensive IFRS hierarchy.", link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400" }
+    { 
+        title: "Financial analysis", 
+        description: "Concise powerpoint about listed-stock.", 
+        link: "https://canva.link/23k7v6t3o3ry0v8", 
+        image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400" 
+    },
+    { 
+        title: "Double-entry", 
+        description: "Accounting Workflow visualization.", 
+        link: "https://canva.link/41sfnm3pnld703v", 
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400" 
+    },
+    { 
+        title: "IFRS Framework", 
+        description: "Comprehensive IFRS hierarchy.", 
+        link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", 
+        image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400" 
+    }
 ];
 
-// Data for the YouTube section
+// Section 2: Social Marketing / Videos
 const socialData = [
-   {title: "N8N Series", description: "Using N8N for book-keeper.", videoId: `<iframe src="https://www.capcut.com/player/7622911202535981077?workspaceId=7409178252733841425" allow="clipboard-write" frameborder="0" width="100%" height="100%" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`},
-   {title: "N8N Series", description: "Using N8N for book-keeper.", videoId: 
+    {
+        title: "N8N Series - Part 1", 
+        description: "Using N8N for book-keeping automation.", 
+        embedCode: `<iframe src="https://www.capcut.com/player/7622911202535981077?workspaceId=7409178252733841425" allow="clipboard-write" frameborder="0" width="100%" height="100%" allowfullscreen></iframe>`
+    },
+    {
+        title: "N8N Series - Part 2", 
+        description: "Advanced automation workflows for finance.", 
+        embedCode: `<iframe src="https://www.capcut.com/player/7622915492998774800?workspaceId=7409178252733841425" allow="clipboard-write" frameborder="0" width="100%" height="100%" allowfullscreen></iframe>`
+    }
+]; // Added missing closing bracket
 
 function createCard(item, isVideo = false) {
     const div = document.createElement('div');
     div.className = 'project-card';
     
-    // Switch between Image or Video
+    // Logic to handle images vs CapCut/Iframe embeds
     const mediaHTML = isVideo 
-        ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe></div>`
+        ? `<div class="video-container">${item.embedCode}</div>` 
         : `<div class="project-image"><img src="${item.image}" alt="${item.title}"></div>`;
 
     div.innerHTML = `
@@ -333,7 +357,7 @@ function createCard(item, isVideo = false) {
         <div class="project-content">
             <h3 class="project-title">${item.title}</h3>
             <p class="project-description">${item.description}</p>
-            ${item.link && item.link !== "#" ? `<a href="${item.link}" target="_blank" class="project-link">View Project</a>` : ''}
+            ${item.link ? `<a href="${item.link}" target="_blank" class="project-link">View Project</a>` : ''}
         </div>
     `;
     return div;
@@ -343,11 +367,9 @@ function renderProjects() {
     const projectGrid = document.getElementById('project-grid');
     const socialGrid = document.getElementById('social-grid');
 
-    projectData.forEach(card => projectGrid.appendChild(createCard(card)));
-    socialData.forEach(card => socialGrid.appendChild(createCard(card, true)));
+    if(projectGrid) projectData.forEach(card => projectGrid.appendChild(createCard(card)));
+    if(socialGrid) socialData.forEach(card => socialGrid.appendChild(createCard(card, true)));
 }
 
 document.addEventListener('DOMContentLoaded', renderProjects);
 </script>
-</body>
-</html>
