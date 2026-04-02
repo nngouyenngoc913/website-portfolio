@@ -3,24 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Systems Portfolio</title>
+    <title>Portfolio | Finance & Automation</title>
     <style>
+        /* CSS Variables for easy color management */
         :root {
-            --bg-color: #f8f9fa;
+            --bg: #f9fafb;
             --card-bg: #ffffff;
-            --primary-text: #1a1a1b;
-            --secondary-text: #4a4a4a;
+            --text-dark: #111827;
+            --text-muted: #4b5563;
             --accent: #2563eb;
             --border: #e5e7eb;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--primary-text);
-            line-height: 1.6;
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 2rem;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.5;
+            padding: 0 20px;
         }
 
         .container {
@@ -28,42 +34,59 @@
             margin: 0 auto;
         }
 
+        /* Header / Hero Section */
         header {
-            margin-bottom: 3rem;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 1rem;
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Section Headings */
+        section {
+            padding: 40px 0;
         }
 
         h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary-text);
+            font-size: 1.75rem;
+            margin-bottom: 24px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
         }
 
-        /* Grid Layout */
+        /* The Grid Layout */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
+            gap: 30px;
         }
 
-        /* Card Styling */
+        /* Project Card Styling */
         .project-card {
             background: var(--card-bg);
+            border: 1px solid var(--border);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-            border: 1px solid var(--border);
         }
 
         .project-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
-        /* Media Handling */
+        /* Media Containers */
         .project-image img {
             width: 100%;
             height: 200px;
@@ -87,38 +110,46 @@
             border: 0;
         }
 
-        /* Content Styling */
+        /* Content inside cards */
         .project-content {
-            padding: 1.5rem;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .project-title {
-            margin: 0 0 0.75rem 0;
             font-size: 1.25rem;
             font-weight: 700;
+            margin-bottom: 8px;
         }
 
         .project-description {
-            color: var(--secondary-text);
+            color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
         }
 
         .project-link {
-            display: inline-block;
-            color: var(--accent);
             text-decoration: none;
+            color: var(--accent);
             font-weight: 600;
             font-size: 0.9rem;
-            border: 1px solid var(--accent);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
         }
 
         .project-link:hover {
-            background: var(--accent);
-            color: white;
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-muted);
+            font-size: 0.875rem;
         }
     </style>
 </head>
@@ -126,111 +157,31 @@
 
     <div class="container">
         <header>
-            <h1>Portfolio</h1>
+            <h1>My Portfolio</h1>
+            <p>Finance Specialist | Workflow Automation | Data Insights</p>
         </header>
 
-        <section>
-            <h2>Strategic Projects</h2>
+        <section id="projects">
+            <h2>Financial Systems & Data</h2>
             <div id="project-grid" class="grid-container">
                 </div>
         </section>
 
-        <section>
+        <section id="demos">
             <h2>Automation & Video Demos</h2>
             <div id="social-grid" class="grid-container">
                 </div>
         </section>
+
+        <footer>
+            <p>&copy; 2026 Portfolio. Built with HTML, CSS, and Vanilla JS.</p>
+        </footer>
     </div>
 
     <script>
+        // --- Section 1: Project Data ---
         const projectData = [
             { 
                 title: "Company report - FMCG", 
                 description: "Concise data visualization and insights for listed-stock performance.", 
-                link: "https://vnmproject1.netlify.app/", 
-                image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600" 
-            },
-            { 
-                title: "Double-entry Logic", 
-                description: "Visual mapping of complex accounting workflows and system integrations.", 
-                link: "https://canva.link/41sfnm3pnld703v", 
-                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600" 
-            },
-            { 
-                title: "IFRS Hierarchy", 
-                description: "A digital interactive framework for International Financial Reporting Standards.", 
-                link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", 
-                image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" 
-            }
-        ];
-
-        const socialData = [
-            {
-                title: "Agentic Workflows", 
-                description: "Building autonomous systems for departmental efficiency and task management.", 
-                videoId: "RXbkd8viWtg", 
-            }
-                title: "Agentic Workflows", 
-                description: "Building autonomous systems for departmental efficiency and task management.", 
-                videoId: "JB9sCkvkQ"
-            {
-            }
-        ];
-
-        /**
-         * Creates a project card element.
-         */
-        function createCard(item) {
-            const div = document.createElement('div');
-            div.className = 'project-card';
-
-            // Switch between video and image
-            const mediaHTML = item.videoId 
-                ? `<div class="video-container">
-                    <iframe 
-                        src="https://www.youtube.com/embed/${item.videoId}" 
-                        title="${item.title}" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                   </div>`
-                : `<div class="project-image">
-                    <img src="${item.image}" alt="${item.title}" loading="lazy">
-                   </div>`;
-
-            // Note: Added rel="noopener" for security on external links
-            div.innerHTML = `
-                ${mediaHTML}
-                <div class="project-content">
-                    <h3 class="project-title">${item.title}</h3>
-                    <p class="project-description">${item.description}</p>
-                    ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="project-link">View Project</a>` : ''}
-                </div>
-            `;
-            
-            return div;
-        }
-
-        /**
-         * Renders all cards into their respective grids.
-         */
-        function renderAll() {
-            const projectGrid = document.getElementById('project-grid');
-            const socialGrid = document.getElementById('social-grid');
-
-            if (projectGrid) {
-                projectGrid.innerHTML = '';
-                projectData.forEach(item => projectGrid.appendChild(createCard(item)));
-            }
-            
-            if (socialGrid) {
-                socialGrid.innerHTML = '';
-                socialData.forEach(item => socialGrid.appendChild(createCard(item)));
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', renderAll);
-    </script>
-
-</body>
-</html>
+                link: "https://vnmproject1
