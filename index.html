@@ -3,185 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Finance & Automation</title>
+    <title>Strategic Portfolio</title>
     <style>
-        /* CSS Variables for easy color management */
         :root {
-            --bg: #f9fafb;
-            --card-bg: #ffffff;
-            --text-dark: #111827;
-            --text-muted: #4b5563;
+            --bg: #fdfdfd;
+            --text: #111;
             --accent: #2563eb;
-            --border: #e5e7eb;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+            --border: #ececec;
         }
 
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: -apple-system, system-ui, sans-serif;
             background-color: var(--bg);
-            color: var(--text-dark);
-            line-height: 1.5;
-            padding: 0 20px;
+            color: var(--text);
+            padding: 40px 20px;
+            margin: 0;
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        header { 
+            border-bottom: 1px solid var(--border); 
+            padding-bottom: 20px; 
+            margin-bottom: 40px; 
         }
 
-        /* Header / Hero Section */
-        header {
-            padding: 80px 0 40px;
-            text-align: center;
-        }
+        h2 { font-size: 1.2rem; margin: 40px 0 20px; font-weight: 500; }
 
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        /* Section Headings */
-        section {
-            padding: 40px 0;
-        }
-
-        h2 {
-            font-size: 1.75rem;
-            margin-bottom: 24px;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 10px;
-        }
-
-        /* The Grid Layout */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
 
-        /* Project Card Styling */
         .project-card {
-            background: var(--card-bg);
+            background: #fff;
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.2s;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
+        .project-card:hover { transform: translateY(-3px); }
 
-        /* Media Containers */
-        .project-image img {
+        .project-image img, .video-container {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
+            height: 180px;
+            background: #eee;
         }
 
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            background: #000;
-        }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* Content inside cards */
-        .project-content {
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .project-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .project-description {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-
-        .project-link {
-            text-decoration: none;
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .project-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 60px 0;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
+        .project-content { padding: 20px; }
+        .project-title { font-weight: 700; margin: 0 0 10px; }
+        .project-description { font-size: 0.9rem; color: #555; margin-bottom: 15px; }
+        .project-link { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.85rem; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>My Portfolio</h1>
-            <p>Finance Specialist | Workflow Automation | Data Insights</p>
-        </header>
+<div class="container">
+    <header><h1>Portfolio</h1></header>
 
-        <section id="projects">
-            <h2>Financial Systems & Data</h2>
-            <div id="project-grid" class="grid-container">
-                </div>
-        </section>
+    <section>
+        <h2>Strategic Projects</h2>
+        <div id="project-grid" class="grid-container"></div>
+    </section>
 
-        <section id="demos">
-            <h2>Automation & Video Demos</h2>
-            <div id="social-grid" class="grid-container">
-                </div>
-        </section>
+    <section>
+        <h2>Automation & Video Demos</h2>
+        <div id="social-grid" class="grid-container"></div>
+    </section>
+</div>
 
-        <footer>
-            <p>&copy; 2026 Portfolio. Built with HTML, CSS, and Vanilla JS.</p>
-        </footer>
-    </div>
+<script>
+    const projectData = [
+        { 
+            title: "Company report - FMCG", 
+            description: "Concise data visualization and insights for listed-stock performance.", 
+            link: "https://vnmproject1.netlify.app/", 
+            image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600" 
+        },
+        { 
+            title: "Double-entry Logic", 
+            description: "Visual mapping of complex accounting workflows and system integrations.", 
+            link: "https://canva.link/41sfnm3pnld703v", 
+            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600" 
+        },
+        { 
+            title: "IFRS Hierarchy", 
+            description: "A digital interactive framework for International Financial Reporting Standards.", 
+            link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", 
+            image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" 
+        }
+    ];
 
-    <script>
-        // --- Section 1: Project Data ---
-        const projectData = [
-            { 
-                title: "Company report - FMCG", 
-                description: "Concise data visualization and insights for listed-stock performance.", 
-                link: "https://vnmproject1
+    const socialData = [
+        {
+            title: "Agentic Workflows", 
+            description: "Building autonomous systems for departmental efficiency and task management.", 
+            videoId: "RXbkd8viWtg", 
+        }
+    ];
+
+    function createCard(item) {
+        const div = document.createElement('div');
+        div.className = 'project-card';
+        
+        const mediaHTML = item.videoId 
+            ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe></div>`
+            : `<div class="project-image"><img src="${item.image}" alt="${item.title}" loading="lazy"></div>`;
+
+        div.innerHTML = `
+            ${mediaHTML}
+            <div class="project-content">
+                <h3 class="project-title">${item.title}</h3>
+                <p class="project-description">${item.description}</p>
+                ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="project-link">View Project</a>` : ''}
+            </div>
+        `;
+        return div;
+    }
+
+    function renderAll() {
+        const pGrid = document.getElementById('project-grid');
+        const sGrid = document.getElementById('social-grid');
+
+        if (pGrid) {
+            pGrid.innerHTML = '';
+            projectData.forEach(item => pGrid.appendChild(createCard(item)));
+        }
+        if (sGrid) {
+            sGrid.innerHTML = '';
+            socialData.forEach(item => sGrid.appendChild(createCard(item)));
+        }
+    }
+
+    // Run the render function immediately if the DOM is already ready, 
+    // otherwise wait for the event.
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', renderAll);
+    } else {
+        renderAll();
+    }
+</script>
+
+</body>
+</html>
