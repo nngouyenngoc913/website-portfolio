@@ -200,48 +200,62 @@ const socialData = [
     }
 ];
 
+const socialData = [
+    {
+        title: "AI Receipt Automation", 
+        description: "n8n workflow using OpenAI to parse unstructured invoice data directly into Google Sheets.", 
+        videoId: "7409180252633841425" 
+    },
+    {
+        title: "Agentic Workflows", 
+        description: "Building autonomous systems for departmental efficiency and task management.", 
+        videoId: "RXbkd8viWtg", 
+    }
+];
+
 function createCard(item) {
     const div = document.createElement('div');
-    // Using your project-card class for the wrapper
-    div.className = 'project-card flex flex-col gap-4';
+    div.className = 'project-card';
 
-    // Construct the HTML string
-    div.innerHTML = `
-        <div class="aspect-video w-full overflow-hidden rounded-2xl bg-slate-50 border border-slate-100 shadow-sm transition-all hover:shadow-md">
+    // Logic: If videoId exists, render Iframe. Otherwise, render Image.
+    const mediaHTML = item.videoId 
+        ? `<div class="video-container">
             <iframe 
-                class="w-full h-full"
                 src="https://www.youtube.com/embed/${item.videoId}" 
                 title="${item.title}" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin" 
-                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen>
             </iframe>
-        </div>
+           </div>`
+        : `<div class="project-image">
+            <img src="${item.image}" alt="${item.title}" loading="lazy">
+           </div>`;
+
+    div.innerHTML = `
+        ${mediaHTML}
         <div class="project-content">
-            <h3 class="text-xl font-bold project-title">${item.title}</h3>
-            <p class="text-slate-600 project-description">${item.description}</p>
-            ${item.link ? `<a href="${item.link}" target="_blank" class="project-link text-blue-600 hover:underline">View Project</a>` : ''}
+            <h3 class="project-title">${item.title}</h3>
+            <p class="project-description">${item.description}</p>
+            ${item.link ? `<a href="${item.link}" target="_blank" class="project-link">View Project</a>` : ''}
         </div>
     `;
     
     return div;
 }
 
-// Example Usage:
-// const container = document.getElementById('video-grid');
-// socialData.forEach(item => container.appendChild(createCard(item)));
-
 function renderAll() {
     const projectGrid = document.getElementById('project-grid');
     const socialGrid = document.getElementById('social-grid');
 
+    // Clear grids first to prevent double-rendering
     if (projectGrid) {
-        projectData.forEach(item => projectGrid.appendChild(createCard(item, false)));
+        projectGrid.innerHTML = '';
+        projectData.forEach(item => projectGrid.appendChild(createCard(item)));
     }
+    
     if (socialGrid) {
-        socialData.forEach(item => socialGrid.appendChild(createCard(item, true)));
+        socialGrid.innerHTML = '';
+        socialData.forEach(item => socialGrid.appendChild(createCard(item)));
     }
 }
 
