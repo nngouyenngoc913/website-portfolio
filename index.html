@@ -197,7 +197,7 @@ const socialData = [
    {
         title: "Agentic Workflows", 
         description: "Building autonomous systems for departmental efficiency and task management.", 
-        videoId: "7409178252733841425"
+        videoId: "RXbkd8viWtg", 
    }
 ];
 
@@ -205,14 +205,20 @@ function createCard(item, isVideo = false) {
     const div = document.createElement('div');
     div.className = 'project-card';
     
-    const mediaHTML = isVideo 
-        ? `<div class="video-container">
-            <iframe src="https://www.capcut.com/player/${item.videoId}?workspaceId=7409178252733841425" 
-            allow="clipboard-write" allowfullscreen></iframe>
-           </div>`
-        : `<div class="project-image">
-            <img src="${item.image}" alt="${item.title}" loading="lazy">
-           </div>`;
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div class="flex flex-col gap-4">
+      <div class="aspect-video w-full overflow-hidden rounded-2xl bg-slate-50 border border-slate-100 shadow-sm transition-all hover:shadow-md">
+        <iframe 
+          class="w-full h-full"
+          src="https://www.youtube.com/embed/${item.videoId}" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          loading="lazy"
+          allowfullscreen>
+        </iframe>
+      </div>
 
     div.innerHTML = `
         ${mediaHTML}
