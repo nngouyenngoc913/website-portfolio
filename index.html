@@ -186,50 +186,52 @@ const projectData = [
         image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" 
     }
 ];
-
 // Section 2: Automation & Video Demos
 const socialData = [
-   {
+    {
         title: "AI Receipt Automation", 
         description: "n8n workflow using OpenAI to parse unstructured invoice data directly into Google Sheets.", 
-        videoId: "7409180252633841425" // Updated workspace-friendly ID
-   },
-   {
+        videoId: "7409180252633841425" // Note: Ensure this is a valid YT ID; 19 chars is unusual for YouTube
+    },
+    {
         title: "Agentic Workflows", 
         description: "Building autonomous systems for departmental efficiency and task management.", 
         videoId: "RXbkd8viWtg", 
-   }
+    }
 ];
 
-function createCard(item, isVideo = false) {
+function createCard(item) {
     const div = document.createElement('div');
-    div.className = 'project-card';
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-    <div class="flex flex-col gap-4">
-      <div class="aspect-video w-full overflow-hidden rounded-2xl bg-slate-50 border border-slate-100 shadow-sm transition-all hover:shadow-md">
-        <iframe 
-          class="w-full h-full"
-          src="https://www.youtube.com/embed/${item.videoId}" 
-          title="YouTube video player" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          referrerpolicy="strict-origin-when-cross-origin" 
-          loading="lazy"
-          allowfullscreen>
-        </iframe>
-      </div>
+    // Using your project-card class for the wrapper
+    div.className = 'project-card flex flex-col gap-4';
 
+    // Construct the HTML string
     div.innerHTML = `
-        ${mediaHTML}
+        <div class="aspect-video w-full overflow-hidden rounded-2xl bg-slate-50 border border-slate-100 shadow-sm transition-all hover:shadow-md">
+            <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/${item.videoId}" 
+                title="${item.title}" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                loading="lazy"
+                allowfullscreen>
+            </iframe>
+        </div>
         <div class="project-content">
-            <h3 class="project-title">${item.title}</h3>
-            <p class="project-description">${item.description}</p>
-            ${item.link ? `<a href="${item.link}" target="_blank" class="project-link">View Project</a>` : ''}
+            <h3 class="text-xl font-bold project-title">${item.title}</h3>
+            <p class="text-slate-600 project-description">${item.description}</p>
+            ${item.link ? `<a href="${item.link}" target="_blank" class="project-link text-blue-600 hover:underline">View Project</a>` : ''}
         </div>
     `;
+    
     return div;
 }
+
+// Example Usage:
+// const container = document.getElementById('video-grid');
+// socialData.forEach(item => container.appendChild(createCard(item)));
 
 function renderAll() {
     const projectGrid = document.getElementById('project-grid');
