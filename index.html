@@ -186,20 +186,8 @@ const projectData = [
         image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" 
     }
 ];
-// Section 2: Automation & Video Demos
-const socialData = [
-    {
-        title: "AI Receipt Automation", 
-        description: "n8n workflow using OpenAI to parse unstructured invoice data directly into Google Sheets.", 
-        videoId: "7409180252633841425" // Note: Ensure this is a valid YT ID; 19 chars is unusual for YouTube
-    },
-    {
-        title: "Agentic Workflows", 
-        description: "Building autonomous systems for departmental efficiency and task management.", 
-        videoId: "RXbkd8viWtg", 
-    }
-];
 
+// Section 2: Automation & Video Demos
 const socialData = [
     {
         title: "AI Receipt Automation", 
@@ -213,11 +201,15 @@ const socialData = [
     }
 ];
 
+/**
+ * Creates a project card element.
+ * Dynamically switches between an image or a YouTube iframe based on available data.
+ */
 function createCard(item) {
     const div = document.createElement('div');
     div.className = 'project-card';
 
-    // Logic: If videoId exists, render Iframe. Otherwise, render Image.
+    // If videoId exists, use the iframe container; otherwise use the image container.
     const mediaHTML = item.videoId 
         ? `<div class="video-container">
             <iframe 
@@ -243,11 +235,13 @@ function createCard(item) {
     return div;
 }
 
+/**
+ * Renders all cards into their respective grids.
+ */
 function renderAll() {
     const projectGrid = document.getElementById('project-grid');
     const socialGrid = document.getElementById('social-grid');
 
-    // Clear grids first to prevent double-rendering
     if (projectGrid) {
         projectGrid.innerHTML = '';
         projectData.forEach(item => projectGrid.appendChild(createCard(item)));
@@ -259,7 +253,9 @@ function renderAll() {
     }
 }
 
+// Ensure the DOM is fully loaded before rendering
 document.addEventListener('DOMContentLoaded', renderAll);
 </script>
+
 </body>
 </html>
