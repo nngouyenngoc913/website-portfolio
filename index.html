@@ -34,7 +34,7 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
 
@@ -53,14 +53,14 @@
 
         /* Comp Card Style */
         .comp-card {
-            padding: 24px;
+            padding: 20px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
-        .comp-icon { font-size: 1.5rem; }
-        .comp-title { font-weight: 700; font-size: 1.05rem; }
+        .comp-icon { font-size: 1.4rem; }
+        .comp-title { font-weight: 700; font-size: 0.95rem; }
 
         /* Project Card Style */
         .project-image img, .video-container {
@@ -106,13 +106,15 @@
 </div>
 
 <script>
-    // 1. Chỉ giữ 3 kỹ năng chính
+    // 1. Data cho 4 kỹ năng chính
     const competencies = [
         { title: "AR Reconciliation", icon: "⚖️" },
         { title: "Ledger and Reporting", icon: "📋" },
-        { title: "Automation", icon: "⚡" }
+        { title: "Automation", icon: "⚡" },
+        { title: "Visual Thinking", icon: "🖋️" }
     ];
 
+    // 2. Data cho các dự án (Đã sửa lỗi cú pháp dấu phẩy)
     const projectData = [
         { 
             title: "Company report - FMCG", 
@@ -134,27 +136,30 @@
         },
         { 
             title: "AR Reconciliation", 
-            description: "Reconciliation of Accounts Receivable for aging reports.", 
+            description: "Automated reconciliation for aging reports and ledger integrity.", 
             link: "https://docs.google.com/spreadsheets/d/17OgxxYglgd41K_cJvrMhETjvfBBB4Y50/edit?gid=595712505#gid=595712505", 
             image: "https://images.unsplash.com/photo-1454165847222-42955d400f6c?w=600" 
         }
     ];
 
+    // 3. Data cho Video
     const socialData = [
         {
             title: "Agentic Workflows", 
-            videoId: "RXbkd8viWtg", 
-            description: "Autonomous systems for departmental efficiency."
+            description: "Building autonomous systems for departmental efficiency.", 
+            videoId: "RXbkd8viWtg"
         },
         {
             title: "SEO Content Automation", 
-            videoId: "w-JB9sCkvkQ",
-            description: "n8n workflow using web scraping and OpenAI."
+            description: "An n8n workflow using web scraping and OpenAI.", 
+            videoId: "w-JB9sCkvkQ"
         }
     ];
 
+    // Hàm render Kỹ năng
     function renderCompetencies() {
         const grid = document.getElementById('comp-grid');
+        if (!grid) return;
         competencies.forEach(item => {
             const div = document.createElement('div');
             div.className = 'card comp-card';
@@ -163,15 +168,17 @@
         });
     }
 
-    function createProjectCard(item) {
+    // Hàm tạo Card Dự án/Video
+    function createCard(item) {
         const div = document.createElement('div');
         div.className = 'card';
-        const media = item.videoId 
-            ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe></div>`
-            : `<div class="project-image"><img src="${item.image}" alt="${item.title}" loading="lazy"></div>`;
         
+        const mediaHTML = item.videoId 
+            ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe></div>`
+            : `<div class="project-image"><img src="${item.image}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x400?text=Image+Not+Found'"></div>`;
+
         div.innerHTML = `
-            ${media}
+            ${mediaHTML}
             <div class="project-content">
                 <h3 class="project-title">${item.title}</h3>
                 <p class="project-description">${item.description}</p>
@@ -180,15 +187,18 @@
         return div;
     }
 
+    // Hàm tổng khởi chạy
     function renderAll() {
         renderCompetencies();
         const pGrid = document.getElementById('project-grid');
         const sGrid = document.getElementById('social-grid');
-        projectData.forEach(item => pGrid.appendChild(createProjectCard(item)));
-        socialData.forEach(item => sGrid.appendChild(createProjectCard(item)));
+
+        if (pGrid) projectData.forEach(item => pGrid.appendChild(createCard(item)));
+        if (sGrid) socialData.forEach(item => sGrid.appendChild(createCard(item)));
     }
 
-    document.addEventListener('DOMContentLoaded', renderAll);
+    // Chạy khi trang load xong
+    window.onload = renderAll;
 </script>
 
 </body>
