@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strategic Portfolio</title>
+    <title>Nancy Nguyen | Portfolio</title>
     <style>
         :root {
             --bg: #fdfdfd;
@@ -13,11 +13,12 @@
         }
 
         body {
-            font-family: -apple-system, system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg);
             color: var(--text);
             padding: 40px 20px;
             margin: 0;
+            line-height: 1.6;
         }
 
         .container { max-width: 1000px; margin: 0 auto; }
@@ -28,43 +29,70 @@
             margin-bottom: 40px; 
         }
 
-        h2 { font-size: 1.2rem; margin: 40px 0 20px; font-weight: 500; }
+        h1 { font-size: 1.6rem; font-weight: 800; margin: 0; letter-spacing: -0.5px; }
+        h2 { font-size: 1rem; margin: 40px 0 20px; font-weight: 600; text-transform: uppercase; color: #888; letter-spacing: 1.5px; }
 
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            gap: 20px;
         }
 
-        .project-card {
+        .card {
             background: #fff;
             border: 1px solid var(--border);
             border-radius: 8px;
             overflow: hidden;
-            transition: transform 0.2s;
+            transition: all 0.2s ease;
         }
 
-        .project-card:hover { transform: translateY(-3px); }
+        .card:hover { 
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
 
+        /* Comp Card Style */
+        .comp-card {
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .comp-icon { font-size: 1.5rem; }
+        .comp-title { font-weight: 700; font-size: 1.05rem; }
+
+        /* Project Card Style */
         .project-image img, .video-container {
             width: 100%;
             height: 180px;
+            object-fit: cover;
             background: #eee;
+            display: block;
         }
 
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
         .project-content { padding: 20px; }
-        .project-title { font-weight: 700; margin: 0 0 10px; }
+        .project-title { font-weight: 700; margin: 0 0 8px; font-size: 1.1rem; }
         .project-description { font-size: 0.9rem; color: #555; margin-bottom: 15px; }
         .project-link { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.85rem; }
+
+        @media (max-width: 600px) {
+            .grid-container { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header><h1>Portfolio</h1></header>
+
+    <section>
+        <h2>Core Competencies</h2>
+        <div id="comp-grid" class="grid-container"></div>
+    </section>
 
     <section>
         <h2>Strategic Projects</h2>
@@ -78,38 +106,13 @@
 </div>
 
 <script>
-    const coreCompetencies = [
-    {
-        category: "Accounting & Finance",
-        icon: "📊",
-        skills: [
-            "Vietnam Accounting Standards (VAS/TT200)",
-            "AR/AP Reconciliation & Aging Reports",
-            "Financial Reporting & Ledger Integrity"
-        ],
-        highlight: false
-    },
-    {
-        category: "Automation & Coding",
-        icon: "⚡",
-        skills: [
-            "Python (Gradio, Pandas) & n8n",
-            "Advanced Excel (Power Query, DAX)",
-            "Vibe Coding & Workflow Automation"
-        ],
-        highlight: true // Đánh dấu để làm nổi bật phần này
-    },
-    {
-        category: "Visual Thinking",
-        icon: "🖋️",
-        skills: [
-            "Minimalist Data Visualization",
-            "Technical Writing & Documentation",
-            "UI/UX for Internal Admin Tools"
-        ],
-        highlight: false
-    }
-];        
+    // 1. Chỉ giữ 3 kỹ năng chính
+    const competencies = [
+        { title: "AR Reconciliation", icon: "⚖️" },
+        { title: "Ledger and Reporting", icon: "📋" },
+        { title: "Automation", icon: "⚡" }
+    ];
+
     const projectData = [
         { 
             title: "Company report - FMCG", 
@@ -119,84 +122,73 @@
         },
         { 
             title: "Double-entry Logic", 
-            description: "Visual mapping of complex accounting workflows and system integrations.", 
+            description: "Visual mapping of complex accounting workflows.", 
             link: "https://canva.link/41sfnm3pnld703v", 
             image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600" 
         },
         { 
             title: "IFRS Hierarchy", 
-            description: "A digital interactive framework for International Financial Reporting Standards.", 
+            description: "Interactive framework for International Financial Reporting Standards.", 
             link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", 
             image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" 
-        }
+        },
         { 
-            title: "AR Reconcilation", 
-            description: "Reconcilation of AR (Account receivable) for aging report", 
+            title: "AR Reconciliation", 
+            description: "Reconciliation of Accounts Receivable for aging reports.", 
             link: "https://docs.google.com/spreadsheets/d/17OgxxYglgd41K_cJvrMhETjvfBBB4Y50/edit?gid=595712505#gid=595712505", 
-            image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" 
+            image: "https://images.unsplash.com/photo-1454165847222-42955d400f6c?w=600" 
         }
     ];
 
-    // Section 2: Automation & AI Demos
     const socialData = [
         {
             title: "Agentic Workflows", 
-            description: "Building autonomous systems for departmental efficiency and task management.", 
             videoId: "RXbkd8viWtg", 
+            description: "Autonomous systems for departmental efficiency."
         },
         {
             title: "SEO Content Automation", 
-            description: "An n8n workflow using web scraping and OpenAI to generate and distribute localized SEO content via Airtable and email.", 
-            videoId: "w-JB9sCkvkQ", // Added from your latest video
+            videoId: "w-JB9sCkvkQ",
+            description: "n8n workflow using web scraping and OpenAI."
         }
     ];
-    const Blog = [
-        {
-            title: "Blog for Accounting", 
-            description: "Blogger - Accounting news", 
-            link: "https://nngouyenngoc913.github.io/blogger_accounting/", 
-        }
-     ];   
-    function createCard(item) {
+
+    function renderCompetencies() {
+        const grid = document.getElementById('comp-grid');
+        competencies.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'card comp-card';
+            div.innerHTML = `<span class="comp-icon">${item.icon}</span><span class="comp-title">${item.title}</span>`;
+            grid.appendChild(div);
+        });
+    }
+
+    function createProjectCard(item) {
         const div = document.createElement('div');
-        div.className = 'project-card';
-        
-        const mediaHTML = item.videoId 
+        div.className = 'card';
+        const media = item.videoId 
             ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe></div>`
             : `<div class="project-image"><img src="${item.image}" alt="${item.title}" loading="lazy"></div>`;
-
+        
         div.innerHTML = `
-            ${mediaHTML}
+            ${media}
             <div class="project-content">
                 <h3 class="project-title">${item.title}</h3>
                 <p class="project-description">${item.description}</p>
-                ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="project-link">View Project</a>` : ''}
-            </div>
-        `;
+                ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="project-link">View Project →</a>` : ''}
+            </div>`;
         return div;
     }
 
     function renderAll() {
+        renderCompetencies();
         const pGrid = document.getElementById('project-grid');
         const sGrid = document.getElementById('social-grid');
-
-        if (pGrid) {
-            pGrid.innerHTML = '';
-            projectData.forEach(item => pGrid.appendChild(createCard(item)));
-        }
-        if (sGrid) {
-            sGrid.innerHTML = '';
-            socialData.forEach(item => sGrid.appendChild(createCard(item)));
-        }
+        projectData.forEach(item => pGrid.appendChild(createProjectCard(item)));
+        socialData.forEach(item => sGrid.appendChild(createProjectCard(item)));
     }
 
-    // Run the render function immediately if the DOM is already ready, 
-    // otherwise wait for the event.
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', renderAll);
-    } else {
-        renderAll();
-    }
+    document.addEventListener('DOMContentLoaded', renderAll);
 </script>
 
 </body>
