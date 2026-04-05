@@ -78,6 +78,42 @@
 </div>
 
 <script>
+    const coreCompetencies = [
+    {
+        category: "Accounting & Finance",
+        icon: "📊",
+        skills: [
+            "Vietnam Accounting Standards (VAS/TT200)",
+            "AR/AP Reconciliation & Aging Reports",
+            "Financial Reporting & Ledger Integrity"
+        ],
+        highlight: false
+    },
+    {
+        category: "Automation & Coding",
+        icon: "⚡",
+        skills: [
+            "Python (Gradio, Pandas) & n8n",
+            "Advanced Excel (Power Query, DAX)",
+            "Vibe Coding & Workflow Automation"
+        ],
+        highlight: true // Đánh dấu để làm nổi bật phần này
+    },
+    {
+        category: "Visual Thinking",
+        icon: "🖋️",
+        skills: [
+            "Minimalist Data Visualization",
+            "Technical Writing & Documentation",
+            "UI/UX for Internal Admin Tools"
+        ],
+        highlight: false
+    }
+];
+
+
+
+        
     const projectData = [
         { 
             title: "Company report - FMCG", 
@@ -97,6 +133,12 @@
             link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", 
             image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" 
         }
+        { 
+            title: "AR Reconcilation", 
+            description: "Reconcilation of AR (Account receivable) for aging report", 
+            link: "https://docs.google.com/spreadsheets/d/17OgxxYglgd41K_cJvrMhETjvfBBB4Y50/edit?gid=595712505#gid=595712505", 
+            image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" 
+        }
     ];
 
     // Section 2: Automation & AI Demos
@@ -112,7 +154,13 @@
             videoId: "w-JB9sCkvkQ", // Added from your latest video
         }
     ];
-
+    const Blog = [
+        {
+            title: "Blog for Accounting", 
+            description: "Blogger - Accounting news", 
+            link: "https://nngouyenngoc913.github.io/blogger_accounting/", 
+        }
+     ];   
     function createCard(item) {
         const div = document.createElement('div');
         div.className = 'project-card';
