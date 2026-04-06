@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nancy Nguyen | Portfolio</title>
+    <title>Strategic Portfolio | Finance & Automation</title>
     <style>
         :root {
             --bg: #fdfdfd;
             --text: #111;
             --accent: #2563eb;
             --border: #ececec;
+            --primary: #ff6719; /* Your blog accent color */
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, system-ui, sans-serif;
             background-color: var(--bg);
             color: var(--text);
             padding: 40px 20px;
             margin: 0;
-            line-height: 1.6;
         }
 
         .container { max-width: 1000px; margin: 0 auto; }
@@ -29,58 +29,105 @@
             margin-bottom: 40px; 
         }
 
-        h1 { font-size: 1.6rem; font-weight: 800; margin: 0; letter-spacing: -0.5px; }
-        h2 { font-size: 1rem; margin: 40px 0 20px; font-weight: 600; text-transform: uppercase; color: #888; letter-spacing: 1.5px; }
+        h2 { font-size: 1.2rem; margin: 40px 0 20px; font-weight: 500; }
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
         }
 
-        .card {
+        .project-card {
             background: #fff;
             border: 1px solid var(--border);
             border-radius: 8px;
             overflow: hidden;
-            transition: all 0.2s ease;
-        }
-
-        .card:hover { 
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        /* Comp Card Style */
-        .comp-card {
-            padding: 20px;
+            transition: transform 0.2s;
             display: flex;
-            align-items: center;
-            gap: 12px;
+            flex-direction: column;
+            position: relative; /* Needed for edit button */
         }
 
-        .comp-icon { font-size: 1.4rem; }
-        .comp-title { font-weight: 700; font-size: 0.95rem; }
+        .project-card:hover { transform: translateY(-3px); }
 
-        /* Project Card Style */
-        .project-image img, .video-container {
+        .project-image img {
             width: 100%;
-            height: 180px;
+            height: 200px;
             object-fit: cover;
-            background: #eee;
             display: block;
         }
 
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 ratio */
+            height: 0;
+            background: #000;
+        }
 
-        .project-content { padding: 20px; }
-        .project-title { font-weight: 700; margin: 0 0 8px; font-size: 1.1rem; }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .project-content { padding: 20px; flex-grow: 1; }
+        .project-title { font-weight: 700; margin: 0 0 10px; }
         .project-description { font-size: 0.9rem; color: #555; margin-bottom: 15px; }
         .project-link { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.85rem; }
 
-        @media (max-width: 600px) {
-            .grid-container { grid-template-columns: 1fr; }
+        /* CMS UI Styles */
+        .cms-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        .edit-overlay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 11px;
+            border: 1px solid #ccc;
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+        .modal.show { display: flex; }
+        .modal-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+        }
+        .modal-box input, .modal-box textarea {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -90,13 +137,16 @@
     <header><h1>Portfolio</h1></header>
 
     <section>
-        <h2>Core Competencies</h2>
-        <div id="comp-grid" class="grid-container"></div>
+        <h2>Strategic Projects</h2>
+        <div id="project-grid" class="grid-container"></div>
     </section>
 
     <section>
-        <h2>Strategic Projects</h2>
-        <div id="project-grid" class="grid-container"></div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>Accounting Blog & Insights</h2>
+            <button class="cms-btn" onclick="openModal()">+ New Post</button>
+        </div>
+        <div id="blog-grid" class="grid-container"></div>
     </section>
 
     <section>
@@ -105,104 +155,135 @@
     </section>
 </div>
 
+<div class="modal" id="cms-modal">
+    <div class="modal-box">
+        <h3 style="margin-top:0">Manage Blog Post</h3>
+        <input id="cms-title" placeholder="Title">
+        <input id="cms-link" placeholder="Substack URL">
+        <input id="cms-image" placeholder="Image URL">
+        <input id="cms-video" placeholder="YouTube Video ID (Optional)">
+        <textarea id="cms-desc" placeholder="Brief description..."></textarea>
+        
+        <div style="display:flex; gap:10px">
+            <button onclick="publishPost()" style="flex:2; background:#28a745; color:white; border:none; padding:10px; border-radius:5px; cursor:pointer;">Save to LocalStorage</button>
+            <button onclick="closeModal()" style="flex:1; background:#6c757d; color:white; border:none; padding:10px; border-radius:5px; cursor:pointer;">Cancel</button>
+        </div>
+        <p style="font-size:0.7rem; color:#888; margin-top:10px">Note: Changes are saved to your browser's local storage.</p>
+    </div>
+</div>
+
 <script>
-    // 1. Data cho 4 kỹ năng chính
-    const competencies = [
-        { title: "AR Reconciliation", icon: "⚖️" },
-        { title: "Ledger and Reporting", icon: "📋" },
-        { title: "Automation", icon: "⚡" }
-    ];
-
-    // 2. Data cho các dự án (Đã sửa lỗi cú pháp dấu phẩy)
+    // --- 1. DATA DEFINITIONS ---
     const projectData = [
-        { 
-            title: "Company report - FMCG", 
-            description: "Concise data visualization and insights for listed-stock performance.", 
-            link: "https://vnmproject1.netlify.app/", 
-            image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600" 
-        },
-        { 
-            title: "Double-entry Logic", 
-            description: "Visual mapping of complex accounting workflows.", 
-            link: "https://canva.link/41sfnm3pnld703v", 
-            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600" 
-        },
-        { 
-            title: "IFRS Hierarchy", 
-            description: "Interactive framework for International Financial Reporting Standards.", 
-            link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", 
-            image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" 
-        },
-        { 
-            title: "AR Reconciliation", 
-            description: "Automated reconciliation for aging reports and ledger integrity.", 
-            link: "https://docs.google.com/spreadsheets/d/17OgxxYglgd41K_cJvrMhETjvfBBB4Y50/edit?gid=595712505#gid=595712505", 
-            image: "https://images.unsplash.com/photo-1454165847222-42955d400f6c?w=600" 
-        }
+        { title: "Company report - FMCG", description: "Concise data visualization and insights for listed-stock performance.", link: "https://vnmproject1.netlify.app/", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600" },
+        { title: "Double-entry Logic", description: "Visual mapping of complex accounting workflows and system integrations.", link: "https://canva.link/41sfnm3pnld703v", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600" },
+        { title: "IFRS Hierarchy", description: "A digital interactive framework for International Financial Reporting Standards.", link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" }
     ];
 
-    // 3. Data cho Video
     const socialData = [
-        {
-            title: "Agentic Workflows", 
-            description: "Building autonomous systems for departmental efficiency.", 
-            videoId: "RXbkd8viWtg"
-        },
-        {
-            title: "SEO Content Automation", 
-            description: "An n8n workflow using web scraping and OpenAI.", 
-            videoId: "w-JB9sCkvkQ"
-        }, 
-        {
-            title: "Dept mailing", 
-            description: "An n8n workflow for documents submit to different depts with drafting mail, and multiple options", 
-            videoId: "xqm8ObbK3gs"
-        }, 
+        { title: "Agentic Workflows", description: "Building autonomous systems for departmental efficiency and task management.", videoId: "RXbkd8viWtg" },
+        { title: "SEO Content Automation", description: "An n8n workflow using web scraping and OpenAI to generate SEO content.", videoId: "w-JB9sCkvkQ" }
     ];
 
-    // Hàm render Kỹ năng
-    function renderCompetencies() {
-        const grid = document.getElementById('comp-grid');
-        if (!grid) return;
-        competencies.forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'card comp-card';
-            div.innerHTML = `<span class="comp-icon">${item.icon}</span><span class="comp-title">${item.title}</span>`;
-            grid.appendChild(div);
-        });
-    }
+    const defaultBlogPosts = [
+        { title: "KPMG Tax Case Study", link: "https://trangtaichinhketoan.substack.com/p/kpmg-tax-case-study", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600", description: "Phân tích tình huống thuế từ KPMG giúp nắm bắt xử lý nghiệp vụ phức tạp." },
+        { title: "Ledger Logic", link: "https://trangtaichinhketoan.substack.com/p/ledger-logic", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600", description: "Khám phá bản chất ghi chép kép và tư duy định khoản." }
+    ];
 
-    // Hàm tạo Card Dự án/Video
-    function createCard(item) {
+    let blogPosts = [];
+    let editingIndex = null;
+
+    // --- 2. THE CARD CREATOR (Universal) ---
+    function createCard(item, index = null, isBlog = false) {
         const div = document.createElement('div');
-        div.className = 'card';
+        div.className = 'project-card';
         
         const mediaHTML = item.videoId 
             ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe></div>`
-            : `<div class="project-image"><img src="${item.image}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x400?text=Image+Not+Found'"></div>`;
+            : `<div class="project-image"><img src="${item.image || 'https://via.placeholder.com/600x400'}" alt="${item.title}" loading="lazy"></div>`;
+
+        const editBtn = isBlog ? `<div class="edit-overlay" onclick="editBlog(event, ${index})">EDIT</div>` : '';
 
         div.innerHTML = `
+            ${editBtn}
             ${mediaHTML}
             <div class="project-content">
                 <h3 class="project-title">${item.title}</h3>
                 <p class="project-description">${item.description}</p>
                 ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="project-link">View Project →</a>` : ''}
-            </div>`;
+            </div>
+        `;
         return div;
     }
 
-    // Hàm tổng khởi chạy
+    // --- 3. RENDERING & CMS ---
     function renderAll() {
-        renderCompetencies();
+        // Projects
         const pGrid = document.getElementById('project-grid');
+        if (pGrid) {
+            pGrid.innerHTML = '';
+            projectData.forEach(item => pGrid.appendChild(createCard(item)));
+        }
+        
+        // Social
         const sGrid = document.getElementById('social-grid');
+        if (sGrid) {
+            sGrid.innerHTML = '';
+            socialData.forEach(item => sGrid.appendChild(createCard(item)));
+        }
 
-        if (pGrid) projectData.forEach(item => pGrid.appendChild(createCard(item)));
-        if (sGrid) socialData.forEach(item => sGrid.appendChild(createCard(item)));
+        // Blog (From LocalStorage)
+        const bGrid = document.getElementById('blog-grid');
+        if (bGrid) {
+            bGrid.innerHTML = '';
+            blogPosts.forEach((item, idx) => bGrid.appendChild(createCard(item, idx, true)));
+        }
     }
 
-    // Chạy khi trang load xong
-    window.onload = renderAll;
+    function initBlog() {
+        const saved = localStorage.getItem('portfolio_blog_data');
+        blogPosts = saved ? JSON.parse(saved) : defaultBlogPosts;
+        renderAll();
+    }
+
+    function publishPost() {
+        const postData = {
+            title: document.getElementById('cms-title').value,
+            link: document.getElementById('cms-link').value,
+            image: document.getElementById('cms-image').value,
+            videoId: document.getElementById('cms-video').value,
+            description: document.getElementById('cms-desc').value
+        };
+
+        if (editingIndex !== null) blogPosts[editingIndex] = postData;
+        else blogPosts.unshift(postData);
+
+        localStorage.setItem('portfolio_blog_data', JSON.stringify(blogPosts));
+        initBlog();
+        closeModal();
+    }
+
+    function editBlog(e, i) {
+        e.stopPropagation();
+        editingIndex = i;
+        const p = blogPosts[i];
+        document.getElementById('cms-title').value = p.title;
+        document.getElementById('cms-link').value = p.link || '';
+        document.getElementById('cms-image').value = p.image || '';
+        document.getElementById('cms-video').value = p.videoId || '';
+        document.getElementById('cms-desc').value = p.description;
+        openModal();
+    }
+
+    function openModal() { document.getElementById('cms-modal').classList.add('show'); }
+    function closeModal() { 
+        document.getElementById('cms-modal').classList.remove('show');
+        editingIndex = null;
+        document.querySelectorAll('#cms-modal input, #cms-modal textarea').forEach(i => i.value = '');
+    }
+
+    // Initialization
+    initBlog();
 </script>
 
 </body>
