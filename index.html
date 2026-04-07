@@ -184,7 +184,23 @@
         { title: "Agentic Workflows", description: "Building autonomous systems for departmental efficiency and task management.", videoId: "RXbkd8viWtg" },
         { title: "SEO Content Automation", description: "An n8n workflow using web scraping and OpenAI to generate SEO content.", videoId: "w-JB9sCkvkQ" }
     ];
-
+    
+    const serviceData = [
+    {
+        title: "01. Customer Ops",
+        description: "Redesigning touchpoints so collection happens faster. Includes Payment behavior mapping and Delay trigger analysis.",
+        link: "#", // Link to your specific service page or anchor
+        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600",
+        tag: "Behavior & Experience"
+    },
+    {
+        title: "02. Financial Ops",
+        description: "Turning messy financials into trackable systems. Cash gap diagnosis and automated monthly cashflow reporting.",
+        link: "#",
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600",
+        tag: "Debt Management"
+    },
+];
     const defaultBlogPosts = [
         { title: "KPMG Tax Case Study", link: "https://trangtaichinhketoan.substack.com/p/kpmg-tax-case-study", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600", description: "Phân tích tình huống thuế từ KPMG giúp nắm bắt xử lý nghiệp vụ phức tạp." },
         { title: "Ledger Logic", link: "https://trangtaichinhketoan.substack.com/p/ledger-logic", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600", description: "Khám phá bản chất ghi chép kép và tư duy định khoản." }
@@ -193,29 +209,35 @@
     let blogPosts = [];
     let editingIndex = null;
 
-    // --- 2. THE CARD CREATOR (Universal) ---
     function createCard(item, index = null, isBlog = false) {
-        const div = document.createElement('div');
-        div.className = 'project-card';
-        
-        const mediaHTML = item.videoId 
-            ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe></div>`
-            : `<div class="project-image"><img src="${item.image || 'https://via.placeholder.com/600x400'}" alt="${item.title}" loading="lazy"></div>`;
+    const div = document.createElement('div');
+    div.className = 'project-card';
+    
+    const mediaHTML = item.videoId 
+        ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe></div>`
+        : `<div class="project-image"><img src="${item.image || 'https://via.placeholder.com/600x400'}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x400?text=Image+Not+Found'"></div>`;
 
-        const editBtn = isBlog ? `<div class="edit-overlay" onclick="editBlog(event, ${index})">EDIT</div>` : '';
+    const editBtn = isBlog ? `<div class="edit-overlay" onclick="editBlog(event, ${index})">EDIT</div>` : '';
 
-        div.innerHTML = `
-            ${editBtn}
-            ${mediaHTML}
-            <div class="project-content">
-                <h3 class="project-title">${item.title}</h3>
-                <p class="project-description">${item.description}</p>
-                ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="project-link">View Project →</a>` : ''}
+    div.innerHTML = `
+        ${editBtn}
+        ${mediaHTML}
+        <div class="project-content">
+            <h3 class="project-title">${item.title}</h3>
+            <p class="project-description">${item.description}</p>
+            
+            <div class="project-tags" style="margin-top: auto; padding-bottom: 15px;">
+                <span style="font-size: 0.65rem; background: #f0f0f0; color: #666; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">
+                    ${item.tag || 'Engagement'}
+                </span>
             </div>
-        `;
-        return div;
-    }
 
+            ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="project-link">Learn more ↗</a>` : ''}
+        </div>
+    `;
+    return div;
+}
+    
     // --- 3. RENDERING & CMS ---
     function renderAll() {
         // Projects
