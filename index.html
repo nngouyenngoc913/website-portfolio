@@ -209,53 +209,50 @@
     let blogPosts = [];
     let editingIndex = null;
 
+// --- 2. CARD CREATOR ---
     function createCard(item, index = null, isBlog = false) {
-    const div = document.createElement('div');
-    div.className = 'project-card';
-    
-    const mediaHTML = item.videoId 
-        ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe></div>`
-        : `<div class="project-image"><img src="${item.image || 'https://via.placeholder.com/600x400'}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x400?text=Image+Not+Found'"></div>`;
+        const div = document.createElement('div');
+        div.className = 'project-card';
+        
+        const mediaHTML = item.videoId 
+            ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe></div>`
+            : `<div class="project-image"><img src="${item.image || 'https://via.placeholder.com/600x400'}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x400?text=Image+Not+Found'"></div>`;
 
-    const editBtn = isBlog ? `<div class="edit-overlay" onclick="editBlog(event, ${index})">EDIT</div>` : '';
+        const editBtn = isBlog ? `<div class="edit-overlay" onclick="editBlog(event, ${index})" style="position:absolute; top:10px; right:10px; background:rgba(255,255,255,0.9); padding:4px 8px; border-radius:4px; cursor:pointer; z-index:10; font-size:11px; border:1px solid #ccc;">EDIT</div>` : '';
 
-    div.innerHTML = `
-        ${editBtn}
-        ${mediaHTML}
-        <div class="project-content">
-            <h3 class="project-title">${item.title}</h3>
-            <p class="project-description">${item.description}</p>
-            
-            <div class="project-tags" style="margin-top: auto; padding-bottom: 15px;">
-                <span style="font-size: 0.65rem; background: #f0f0f0; color: #666; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">
-                    ${item.tag || 'Engagement'}
-                </span>
+        div.innerHTML = `
+            ${editBtn}
+            ${mediaHTML}
+            <div class="project-content">
+                <h3 class="project-title">${item.title}</h3>
+                <p class="project-description">${item.description}</p>
+                
+                <div class="project-tags" style="margin-top: auto; padding-bottom: 15px;">
+                    <span style="font-size: 0.65rem; background: #f0f0f0; color: #666; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">
+                        ${item.tag || 'Engagement'}
+                    </span>
+                </div>
+
+                ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="project-link">Learn more ↗</a>` : ''}
             </div>
+        `;
+        return div;
+    }
 
-            ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="project-link">Learn more ↗</a>` : ''}
-        </div>
-    `;
-    return div;
-}
-    
     // --- 3. RENDERING & CMS ---
     function renderAll() {
-        // Projects
         const pGrid = document.getElementById('project-grid');
+        const sGrid = document.getElementById('social-grid');
+        const bGrid = document.getElementById('blog-grid');
+
         if (pGrid) {
             pGrid.innerHTML = '';
             projectData.forEach(item => pGrid.appendChild(createCard(item)));
         }
-        
-        // Social
-        const sGrid = document.getElementById('social-grid');
         if (sGrid) {
             sGrid.innerHTML = '';
             socialData.forEach(item => sGrid.appendChild(createCard(item)));
         }
-
-        // Blog (From LocalStorage)
-        const bGrid = document.getElementById('blog-grid');
         if (bGrid) {
             bGrid.innerHTML = '';
             blogPosts.forEach((item, idx) => bGrid.appendChild(createCard(item, idx, true)));
@@ -269,13 +266,19 @@
     }
 
     function publishPost() {
+        // Capture existing tag if editing, otherwise default
+        const currentTag = editingIndex !== null ? blogPosts[editingIndex].tag : "Engagement";
+
         const postData = {
             title: document.getElementById('cms-title').value,
             link: document.getElementById('cms-link').value,
             image: document.getElementById('cms-image').value,
             videoId: document.getElementById('cms-video').value,
-            description: document.getElementById('cms-desc').value
+            description: document.getElementById('cms-desc').value,
+            tag: currentTag
         };
+
+        if (!postData.title) return alert("Title is required!");
 
         if (editingIndex !== null) blogPosts[editingIndex] = postData;
         else blogPosts.unshift(postData);
@@ -304,9 +307,6 @@
         document.querySelectorAll('#cms-modal input, #cms-modal textarea').forEach(i => i.value = '');
     }
 
-    // Initialization
+    // Launch everything
     initBlog();
 </script>
-
-</body>
-</html>
