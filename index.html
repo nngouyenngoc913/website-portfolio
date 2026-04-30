@@ -32,9 +32,10 @@
     .section-title:first-of-type { margin-top: 0; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
 
-    /* Interactive Frame Section */
-    .interactive-wrap { background: white; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; margin-bottom: 4rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-    .interactive-header { padding: 1rem 1.5rem; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; }
+    /* Interactive Section */
+    .interactive-container { background: white; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; margin-bottom: 4rem; transition: 0.3s; }
+    .interactive-container:hover { border-color: var(--accent); box-shadow: 0 8px 30px rgba(0,0,0,0.04); }
+    .interactive-bar { padding: 0.8rem 1.5rem; background: #f8f9fa; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; }
 
     /* Cards */
     .pcard { background: white; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; }
@@ -73,21 +74,29 @@
 </nav>
 
 <main class="main">
-  <!-- PHẦN INTERACTIVE (IFRS/VAS MINDMAP) -->
-  <h2 class="section-title">Interactive Reporting UI <span>Dynamic Mindmap</span></h2>
-  <div class="interactive-wrap">
-    <div class="interactive-header">
-      <span style="font-family:'DM Mono'; font-size:0.65rem; color:var(--accent); text-transform:uppercase; font-weight:600;">Drag & Drop Logic Canvas</span>
-      <span style="font-family:'DM Mono'; font-size:0.6rem; color:#aaa;">IFRS / VAS FRAMEWORK</span>
+  <!-- PHẦN INTERACTIVE (TRỌNG TÂM) -->
+  <h2 class="section-title">Interactive Reporting UI <span>IFRS/VAS Mindmap</span></h2>
+  <div class="interactive-container">
+    <div class="interactive-bar">
+      <span style="font-family:'DM Mono'; font-size:0.6rem; color:var(--accent); font-weight:600;">ACTIVE CANVAS: DYNAMIC RECONCILIATION</span>
+      <span style="font-family:'DM Mono'; font-size:0.55rem; color:#aaa;">CLAUDE ARTIFACT INTEGRATED</span>
     </div>
-    <iframe src="https://claude.site/public/artifacts/f612d772-47aa-46ce-ad3f-28873dce6401/embed" title="Interactive IFRS/VAS Financial Reporting Mindmap" width="100%" height="600" frameborder="0" allow="clipboard-write" allowfullscreen></iframe>
+    <iframe 
+      src="https://claude.site/public/artifacts/f612d772-47aa-46ce-ad3f-28873dce6401/embed" 
+      title="Interactive IFRS/VAS Financial Reporting Mindmap" 
+      width="100%" 
+      height="650" 
+      frameborder="0" 
+      allow="clipboard-write" 
+      allowfullscreen>
+    </iframe>
   </div>
 
-  <!-- PHẦN 1: CORE PROJECTS -->
+  <!-- PHẦN 1: CORE ARCHITECTURE -->
   <h2 class="section-title">Core Architecture</h2>
   <div class="grid" id="projectGrid"></div>
 
-  <!-- PHẦN 2: SME PILLARS -->
+  <!-- PHẦN 2: FINANCIAL OPS INSIGHTS -->
   <h2 class="section-title">Financial Ops Insights</h2>
   <div class="grid" id="blogGrid"></div>
 
@@ -104,20 +113,20 @@
 
 <script>
   const projectData = [
-    { title: "Company report - FMCG", description: "Dữ liệu hiệu suất cổ phiếu niêm yết với phân tích tỷ số tự động.", link: "https://vnmproject1.netlify.app/", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800", tag: "Analysis" },
-    { title: "Double-entry Logic", description: "Bản đồ hạch toán kế toán phức tạp tích hợp AI gợi ý phân loại.", link: "https://canva.link/41sfnm3pnld703v", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800", tag: "Systems" },
-    { title: "IFRS Hierarchy Explorer", description: "Khung tương tác các tiêu chuẩn báo cáo quốc tế cho người không chuyên[cite: 1].", link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800", tag: "IFRS" }
-  ];
-
-  const videoData = [
-    { title: "Agentic Workflows in Finance", description: "Hệ thống n8n tự trị vận hành quy trình AP, AR và báo cáo vòng lặp[cite: 1].", videoId: "RXbkd8viWtg", tag: "AI Ops" },
-    { title: "SEO Content Automation", description: "Luồng n8n kết hợp quét web, AI tạo bài viết và tự động đăng Facebook[cite: 1].", videoId: "w-JB9sCkvkQ", tag: "Automation" }
+    { title: "Company report - FMCG", description: "Hệ thống trực quan hóa dữ liệu hiệu suất cổ phiếu với DAX nâng cao.", link: "https://vnmproject1.netlify.app/", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800", tag: "Analysis" },
+    { title: "Double-entry Logic", description: "Visual mapping cho quy trình hạch toán tự động qua n8n.", link: "https://canva.link/41sfnm3pnld703v", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800", tag: "Systems" },
+    { title: "IFRS Hierarchy", description: "Khung tương tác chuẩn báo cáo tài chính quốc tế (IFRS).", link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800", tag: "IFRS" }
   ];
 
   const pillarData = [
-    { title: "01. Customer Ops", tag: "Behavior", description: "Tối ưu điểm chạm khách hàng để đẩy nhanh tốc độ thu hồi tiền mặt[cite: 1].", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800" },
-    { title: "02. Financial Ops", tag: "Debt Management", description: "Chẩn đoán khoảng cách tiền mặt và thiết lập hệ thống báo cáo theo dõi nợ[cite: 1].", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800" },
-    { title: "03. Negotiation Logic", tag: "Deal Structuring", description: "Đàm phán dựa trên số liệu thực tế để bảo vệ thời điểm nhận tiền[cite: 1].", image: "https://images.unsplash.com/photo-1573497620053-ea531f3942bf?w=800" }
+    { title: "01. Customer Ops", tag: "Behavior", description: "Tái cấu trúc điểm chạm khách hàng giúp đẩy nhanh tốc độ thu hồi tiền.", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800" },
+    { title: "02. Financial Ops", tag: "Debt Management", description: "Chẩn đoán khoảng cách tiền mặt và thiết lập hệ thống báo cáo tự động.", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800" },
+    { title: "03. Negotiation Logic", tag: "Deal Structuring", description: "Đàm phán dựa trên số liệu thực tế để bảo vệ thời điểm nhận tiền.", image: "https://images.unsplash.com/photo-1573497620053-ea531f3942bf?w=800" }
+  ];
+
+  const videoData = [
+    { title: "Agentic Workflows", description: "Hệ thống tự trị tối ưu hóa vận hành tài chính qua AI Ops.", videoId: "RXbkd8viWtg", tag: "AI Ops" },
+    { title: "SEO Automation", description: "Luồng n8n kết hợp Web Scraping và OpenAI.", videoId: "w-JB9sCkvkQ", tag: "Automation" }
   ];
 
   function init() {
