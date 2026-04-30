@@ -3,255 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accountancy Automation & AI Ops</title>
+  <title>Nancy Nguyen | AI-Native Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
-
-    :root {
-      --ink: #0f0e0d;
-      --paper: #faf9f6;
-      --accent: #1a3a5c;
-      --rule: rgba(15, 14, 13, 0.1);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Outfit', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6; }
-
-    /* Header & Branding */
-    .header { padding: 3.5rem 2.5rem; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: flex-end; }
-    .logo { font-family: 'DM Serif Display', serif; font-size: 2.4rem; letter-spacing: -0.5px; }
-    .logo span { color: var(--accent); font-style: italic; margin: 0 4px; }
-    .sub-logo { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 10px; color: #777; }
-
-    /* Sticky Navigation Flow */
-    .flow-nav { padding: 1.2rem 2.5rem; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); display: flex; gap: 1.5rem; overflow-x: auto; position: sticky; top: 0; z-index: 100; }
-    .flow-step { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #bbb; text-transform: uppercase; white-space: nowrap; transition: 0.3s; }
-    .flow-step.active { color: var(--accent); font-weight: 600; }
-
-    /* Main Content Layout */
-    .main { padding: 4rem 2.5rem; max-width: 1440px; margin: 0 auto; }
-    .section-title { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 3rem; display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
-    .section-title span { font-family: 'DM Mono', monospace; font-size: 0.7rem; font-weight: normal; color: #888; text-transform: uppercase; letter-spacing: 1px; }
-    
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2.5rem; margin-bottom: 6rem; }
-
-    /* Portfolio Cards */
-    .pcard { background: white; border: 1px solid var(--rule); border-radius: 2px; overflow: hidden; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); display: flex; flex-direction: column; }
-    .pcard:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
-    .pcard-img { width: 100%; height: 190px; object-fit: cover; filter: grayscale(20%); transition: 0.4s; }
-    .pcard:hover .pcard-img { filter: grayscale(0%); }
-    .pcard-body { padding: 1.75rem; flex-grow: 1; }
-    .pcard-tag { font-family: 'DM Mono', monospace; font-size: 0.6rem; text-transform: uppercase; color: var(--accent); letter-spacing: 1.5px; margin-bottom: 1rem; display: block; opacity: 0.8; }
-    .pcard-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.8rem; color: var(--ink); line-height: 1.3; }
-    .pcard-desc { font-size: 0.9rem; color: #555; margin-bottom: 1.8rem; height: 3.6em; overflow: hidden; }
-    .pcard-link { font-family: 'DM Mono', monospace; font-size: 0.75rem; text-decoration: none; color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 3px; transition: 0.3s; }
-    .pcard-link:hover { color: var(--accent); border-color: var(--accent); padding-left: 5px; }
-
-    /* Video & Automation Badges */
-    .vcard-container { position: relative; padding-bottom: 56.25%; height: 0; background: #000; }
-    .vcard-container iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-    .n8n-badge { display: inline-flex; align-items: center; background: #ff6d5a; color: white; padding: 6px 12px; border-radius: 4px; font-size: 0.65rem; text-decoration: none; margin-top: 15px; font-family: 'DM Mono', monospace; transition: 0.2s; }
-    .n8n-badge:hover { background: #e54a3a; transform: scale(1.05); }
-
-    /* Logic Disclaimer Section */
-    .footer-system { background: #f1f1ee; padding: 6rem 2.5rem; border-top: 1px solid var(--rule); }
-    .disclaimer-container { max-width: 1100px; margin: 0 auto; }
-    .disclaimer-title { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 4rem; text-align: center; color: var(--accent); }
-    
-    .logic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 5rem; }
-    .logic-item { border-top: 2px solid var(--accent); padding-top: 1.5rem; }
-    .logic-num { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); font-weight: 600; display: block; margin-bottom: 1rem; }
-    .logic-item h4 { font-size: 1rem; margin-bottom: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-    .logic-item p { font-size: 0.85rem; color: #555; line-height: 1.8; text-align: justify; }
-
-    .tech-footer { border-top: 1px solid rgba(0,0,0,0.08); padding-top: 3rem; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 3rem; }
-    .tech-note { flex: 1; min-width: 320px; font-size: 0.8rem; color: #666; font-family: 'DM Mono', monospace; line-height: 1.8; }
-    .vibecoding { font-style: italic; color: var(--accent); font-weight: 600; }
-
-    @media (max-width: 768px) {
-      .header { flex-direction: column; align-items: flex-start; gap: 2rem; padding: 2.5rem 1.5rem; }
-      .main { padding: 3rem 1.5rem; }
-      .logic-grid { grid-template-columns: 1fr; gap: 2rem; }
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=DM+Serif+Display&display=swap');
+    body { font-family: 'Outfit', sans-serif; background-color: #faf9f6; }
+    .serif { font-family: 'DM Serif Display', serif; }
   </style>
 </head>
-<body>
+<body class="text-slate-900">
 
-<header class="header">
-  <div>
-    <div class="logo">Nancy Nguyen<span>×</span>Creative Framework</div>
-    <div class="sub-logo">Accounting Ledger Console · AI Automation · VAS/IFRS</div>
-  </div>
-  <div style="text-align: right;">
-    <p style="font-size: 0.7rem; font-family: 'DM Mono'; opacity: 0.6;">SYSTEM STATUS: ONLINE</p>
-    <p style="font-size: 0.7rem; font-family: 'DM Mono'; color: var(--accent); font-weight: 500;">GITHUB DEPLOYED / VIBE CODING</p>
-  </div>
-</header>
+  <!-- Header -->
+  <header class="p-8 border-b border-slate-200 flex justify-between items-center bg-white">
+    <div>
+      <h1 class="serif text-3xl">Nancy Nguyen<span>.</span></h1>
+      <p class="text-[10px] tracking-[0.2em] uppercase text-slate-400 mt-1">AI Ops & Automation Strategy</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+      </span>
+      <span class="text-[10px] font-mono text-slate-500">n8n FLOW ACTIVE</span>
+    </div>
+  </header>
 
-<nav class="flow-nav">
-  <span class="flow-step active">Business Nature</span>
-  <span class="flow-step">→ Double Entry</span>
-  <span class="flow-step">→ Reconciliation</span>
-  <span class="flow-step">→ AR Aging</span>
-  <span class="flow-step">→ Compliance</span>
-</nav>
-
-<main class="main">
-  <!-- PHẦN 1: CORE PROJECTS (FIXED DATA)[cite: 1] -->
-  <h2 class="section-title">Core Architecture <span>Sổ cái & Hệ thống báo cáo</span></h2>
-  <div class="grid" id="projectGrid"></div>
-
-  <!-- PHẦN 2: DỮ LIỆU ĐỘNG (KETOAN.VN FEED + AIRTABLE)[cite: 3] -->
-  <h2 class="section-title">Knowledge Insights <span>Live Feed: Ketoan.vn & n8n Agent</span></h2>
-  <div class="grid" id="blogGrid">
-    <p style="font-family: 'DM Mono'; font-size: 0.8rem; color: #999;">Listening to Webhook signals...</p>
-  </div>
-
-  <!-- PHẦN 3: VIDEO CASE STUDIES[cite: 1] -->
-  <h2 class="section-title">Agentic Workflows <span>Automation Demos & Logic</span></h2>
-  <div class="grid" id="videoGrid"></div>
-</main>
-
-<!-- PHẦN 4: SYSTEM DISCLAIMER & LOGIC[cite: 1] -->
-<footer class="footer-system">
-  <div class="disclaimer-container">
-    <h2 class="disclaimer-title">Technical Governance & Logic Flow</h2>
-    
-    <div class="logic-grid">
-      <div class="logic-item">
-        <span class="logic-num">STAGE_01</span>
-        <h4>Business Nature</h4>
-        <p>Phân tích dòng tiền và mô hình SME để xác định cách thức hạch toán phù hợp, đảm bảo tính kinh tế của giao dịch[cite: 1].</p>
-      </div>
-      <div class="logic-item">
-        <span class="logic-num">STAGE_02</span>
-        <h4>Double Entry</h4>
-        <p>Thiết lập hệ thống tài khoản và logic bút toán tự động, tích hợp AI để phân loại giao dịch chính xác theo VAS/IFRS[cite: 1].</p>
-      </div>
-      <div class="logic-item">
-        <span class="logic-num">STAGE_03</span>
-        <h4>Reconciliation</h4>
-        <p>Sử dụng Power Query và n8n Webhook để khớp dữ liệu ngân hàng và sổ cái, loại bỏ sai sót thủ công[cite: 1].</p>
-      </div>
-      <div class="logic-item">
-        <span class="logic-num">STAGE_04</span>
-        <h4>AR Aging</h4>
-        <p>Tự động hóa báo cáo công nợ theo thời gian thực, cảnh báo rủi ro dòng tiền thông qua hệ thống Dashboard[cite: 1].</p>
-      </div>
-      <div class="logic-item">
-        <span class="logic-num">STAGE_05</span>
-        <h4>Compliance</h4>
-        <p>Đảm bảo mọi báo cáo tuân thủ thông tư TT200 và các chuẩn mực kế toán quốc tế IFRS hiện hành[cite: 1].</p>
-      </div>
+  <main class="max-w-6xl mx-auto py-16 px-6">
+    <div class="mb-12 border-b border-slate-200 pb-4 flex justify-between items-end">
+      <h2 class="serif text-2xl text-slate-800">Automated Insights</h2>
+      <span class="text-[10px] font-mono text-slate-400 uppercase">Refreshed via Webhook</span>
     </div>
 
-    <div class="tech-footer">
-      <div class="tech-note">
-        <p><strong>INTEGRATION STACK:</strong> Trang web sử dụng GitHub Pages làm môi trường hosting tĩnh. n8n đóng vai trò "cầu nối" (Webhook) trích xuất dữ liệu từ Airtable & Notebook LM[cite: 1].</p>
-        <p><strong>LIVE WORKFLOW:</strong> <a href="https://ai.n8n.vn/workflow/5LtMLP5zufTT5u1f" target="_blank" style="color: var(--accent); font-weight: 500;">Inspect n8n Blueprint ↗</a></p>
-        <p>Dữ liệu chuyên môn được cập nhật tự động từ RSS Feed của <strong>Ketoan.vn</strong>[cite: 3].</p>
-      </div>
-      <div class="tech-note" style="text-align: right;">
-        <p>INTERFACE DESIGN: <span class="vibecoding">Vibecoding from Gemini</span></p>
-        <p>© 2026 Nguyen Ngo Uyen Ngoc. All Rights Reserved.</p>
+    <!-- Blog Container -->
+    <div id="dynamic-content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Loading State -->
+      <div class="col-span-full py-20 text-center">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-slate-900 mb-4"></div>
+        <p class="font-mono text-xs text-slate-400 uppercase tracking-widest">Awaiting AI Response...</p>
       </div>
     </div>
-  </div>
-</footer>
+  </main>
 
-<script>
-  // DỮ LIỆU CỐ ĐỊNH (BẢO LƯU DI SẢN)[cite: 1]
-  const projectData = [
-    { title: "Company report - FMCG", description: "Data visualization for listed-stock performance.", link: "https://vnmproject1.netlify.app/", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800", tag: "Analysis" },
-    { title: "Double-entry Logic", description: "Visual mapping of complex accounting workflows.", link: "https://canva.link/41sfnm3pnld703v", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800", tag: "Systems" },
-    { title: "IFRS Hierarchy", description: "Interactive framework for International Standards.", link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800", tag: "IFRS" }
-  ];
+  <footer class="mt-20 p-12 bg-slate-100 border-t border-slate-200 text-center">
+    <p class="text-xs font-mono text-slate-400">
+      Data Source: <a href="https://ai.n8n.vn/workflow/5LtMLP5zufTT5u1f" class="underline hover:text-slate-600">n8n Workflow</a> 
+      | Deployed on GitHub Pages
+    </p>
+  </footer>
 
-  const socialData = [
-    { 
-      title: "Agentic Workflows", 
-      description: "Hệ thống tự trị tối ưu hóa vận hành phòng ban. Xem trực tiếp logic n8n qua link bên dưới.", 
-      videoId: "RXbkd8viWtg", 
-      tag: "AI Ops",
-      workflowLink: "https://ai.n8n.vn/workflow/5LtMLP5zufTT5u1f"
-    },
-    { 
-      title: "SEO Content Automation", 
-      description: "Quy trình n8n kết hợp Web Scraping và OpenAI để sản xuất nội dung tự động.", 
-      videoId: "w-JB9sCkvkQ", 
-      tag: "Automation" 
+  <script>
+    const WEBHOOK_URL = "https://ai.n8n.vn/webhook/d962c916-6369-431a-9d80-af6e6a50fdf5";
+
+    // Hàm đệ quy để render UI từ cấu trúc JSON Schema của OpenAI
+    function renderComponent(node) {
+      if (!node || typeof node !== 'object') return null;
+
+      // Tạo element dựa trên type (div, p, h1, etc.)
+      const el = document.createElement(node.type || 'div');
+
+      // Gán nội dung văn bản nếu có
+      if (node.label) {
+        el.textContent = node.label;
+      }
+
+      // Gán các thuộc tính (className, href, etc.)
+      if (node.attributes && Array.isArray(node.attributes)) {
+        node.attributes.forEach(attr => {
+          if (attr.name === 'className') {
+            el.className = attr.value;
+          } else {
+            el.setAttribute(attr.name, attr.value);
+          }
+        });
+      }
+
+      // Render các con (đệ quy)
+      if (node.children && Array.isArray(node.children)) {
+        node.children.forEach(child => {
+          const childEl = renderComponent(child);
+          if (childEl) el.appendChild(childEl);
+        });
+      }
+
+      return el;
     }
-  ];
 
-  // RENDER GIAO DIỆN CỐ ĐỊNH[cite: 1]
-  function init() {
-    const pGrid = document.getElementById('projectGrid');
-    pGrid.innerHTML = projectData.map(p => `
-      <div class="pcard">
-        <img src="${p.image}" class="pcard-img" alt="${p.title}">
-        <div class="pcard-body">
-          <span class="pcard-tag">${p.tag}</span>
-          <h3 class="pcard-title">${p.title}</h3>
-          <p class="pcard-desc">${p.description}</p>
-          <a href="${p.link}" target="_blank" class="pcard-link">Explore Framework ↗</a>
-        </div>
-      </div>
-    `).join('');
+    async function fetchAIContent() {
+      const container = document.getElementById('dynamic-content');
+      
+      try {
+        const response = await fetch(WEBHOOK_URL);
+        if (!response.ok) throw new Error('Webhook error');
+        
+        const data = await response.json();
+        
+        container.innerHTML = ''; // Xóa loader
 
-    const vGrid = document.getElementById('videoGrid');
-    vGrid.innerHTML = socialData.map(v => `
-      <div class="pcard">
-        <div class="vcard-container">
-          <iframe src="https://www.youtube.com/embed/${v.videoId}" allowfullscreen></iframe>
-        </div>
-        <div class="pcard-body">
-          <span class="pcard-tag">${v.tag}</span>
-          <h3 class="pcard-title">${v.title}</h3>
-          <p class="pcard-desc">${v.description}</p>
-          ${v.workflowLink ? `<a href="${v.workflowLink}" target="_blank" class="n8n-badge">View n8n Workflow ⚡</a>` : ''}
-        </div>
-      </div>
-    `).join('');
+        // Kiểm tra nếu dữ liệu là mảng hoặc object đơn lẻ
+        const items = Array.isArray(data) ? data : [data];
 
-    fetchDynamicNews();
-  }
+        items.forEach(item => {
+          // Nếu n8n trả về trực tiếp schema UI, ta render nó
+          const rendered = renderComponent(item);
+          if (rendered) {
+            container.appendChild(rendered);
+          }
+        });
 
-  // GỌI WEBHOOK N8N CHO TIN TỨC KẾ TOÁN[cite: 1, 3]
-  async function fetchDynamicNews() {
-    const bGrid = document.getElementById('blogGrid');
-    // THAY THẾ LINK WEBHOOK CỦA BẠN TẠI ĐÂY
-    const N8N_WEBHOOK_URL = "https://ai.n8n.vn/webhook/5LtMLP5zufTT5u1f"; 
-
-    try {
-      const response = await fetch(N8N_WEBHOOK_URL);
-      const data = await response.json();
-      renderBlog(data);
-    } catch (e) {
-      // DỮ LIỆU DỰ PHÒNG NẾU WEBHOOK CHƯA SẴN SÀNG[cite: 1, 3]
-      const fallback = [
-        { title: "Kế toán SME & Tự động hóa", tag: "Compliance", description: "Cách ứng dụng n8n để tối ưu hóa quyết toán thuế cho doanh nghiệp vừa và nhỏ[cite: 1]." },
-        { title: "Cập nhật Thông tư TT200", tag: "VAS", description: "Các điểm mới cần lưu ý trong báo cáo tài chính năm 2026[cite: 3]." }
-      ];
-      renderBlog(fallback);
+      } catch (error) {
+        console.error("Fetch error:", error);
+        container.innerHTML = `
+          <div class="col-span-full p-8 border border-red-100 bg-red-50 rounded-lg text-center">
+            <p class="text-red-500 text-sm font-mono uppercase tracking-tighter">Connection Failed</p>
+            <p class="text-xs text-red-400 mt-2 italic">Hãy đảm bảo n8n workflow đã bật 'Production' và URL webhook chính xác.</p>
+          </div>
+        `;
+      }
     }
-  }
 
-  function renderBlog(posts) {
-    const bGrid = document.getElementById('blogGrid');
-    bGrid.innerHTML = posts.map(post => `
-      <div class="pcard">
-        <div class="pcard-body">
-          <span class="pcard-tag">${post.tag || 'LATEST INSIGHT'}</span>
-          <h3 class="pcard-title">${post.title}</h3>
-          <p class="pcard-desc">${post.description || 'Đang cập nhật nội dung từ ketoan.vn...'}</p>
-          ${post.link ? `<a href="${post.link}" target="_blank" class="pcard-link">Read Full Post ↗</a>` : ''}
-        </div>
-      </div>
-    `).join('');
-  }
-
-  window.onload = init;
-</script>
-
+    window.onload = fetchAIContent;
+  </script>
 </body>
 </html>
