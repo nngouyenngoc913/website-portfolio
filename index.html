@@ -1,356 +1,256 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nancy Nguyen | Finance & Automation Portfolio</title>
-    <style>
-        :root {
-            --bg: #fdfdfd;
-            --text: #111;
-            --accent: #2563eb; /* Blue for Finance */
-            --primary: #ff6719; /* Orange for Blog/Action */
-            --border: #ececec;
-            --card-bg: #ffffff;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accountancy Automation & AI Ops</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            margin: 0;
-            padding: 40px 20px;
-        }
+    :root {
+      --ink: #0f0e0d;
+      --paper: #faf9f6;
+      --accent: #1a3a5c;
+      --rule: rgba(15, 14, 13, 0.1);
+    }
 
-        .container { max-width: 1000px; margin: 0 auto; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Outfit', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6; }
 
-        header { 
-            border-bottom: 1px solid var(--border); 
-            padding-bottom: 20px; 
-            margin-bottom: 40px; 
-        }
+    /* Header & Branding */
+    .header { padding: 3.5rem 2.5rem; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: flex-end; }
+    .logo { font-family: 'DM Serif Display', serif; font-size: 2.4rem; letter-spacing: -0.5px; }
+    .logo span { color: var(--accent); font-style: italic; margin: 0 4px; }
+    .sub-logo { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 10px; color: #777; }
 
-        h1 { font-size: 2rem; margin: 0; font-weight: 800; letter-spacing: -0.02em; }
-        h2 { font-size: 1.25rem; margin: 40px 0 20px; font-weight: 600; color: #333; }
+    /* Sticky Navigation Flow */
+    .flow-nav { padding: 1.2rem 2.5rem; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); display: flex; gap: 1.5rem; overflow-x: auto; position: sticky; top: 0; z-index: 100; }
+    .flow-step { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #bbb; text-transform: uppercase; white-space: nowrap; transition: 0.3s; }
+    .flow-step.active { color: var(--accent); font-weight: 600; }
 
-        /* Grid System */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
+    /* Main Content Layout */
+    .main { padding: 4rem 2.5rem; max-width: 1440px; margin: 0 auto; }
+    .section-title { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 3rem; display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
+    .section-title span { font-family: 'DM Mono', monospace; font-size: 0.7rem; font-weight: normal; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+    
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2.5rem; margin-bottom: 6rem; }
 
-        /* Card Styles */
-        .project-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
-            position: relative;
-            height: 100%;
-        }
+    /* Portfolio Cards */
+    .pcard { background: white; border: 1px solid var(--rule); border-radius: 2px; overflow: hidden; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); display: flex; flex-direction: column; }
+    .pcard:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
+    .pcard-img { width: 100%; height: 190px; object-fit: cover; filter: grayscale(20%); transition: 0.4s; }
+    .pcard:hover .pcard-img { filter: grayscale(0%); }
+    .pcard-body { padding: 1.75rem; flex-grow: 1; }
+    .pcard-tag { font-family: 'DM Mono', monospace; font-size: 0.6rem; text-transform: uppercase; color: var(--accent); letter-spacing: 1.5px; margin-bottom: 1rem; display: block; opacity: 0.8; }
+    .pcard-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.8rem; color: var(--ink); line-height: 1.3; }
+    .pcard-desc { font-size: 0.9rem; color: #555; margin-bottom: 1.8rem; height: 3.6em; overflow: hidden; }
+    .pcard-link { font-family: 'DM Mono', monospace; font-size: 0.75rem; text-decoration: none; color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 3px; transition: 0.3s; }
+    .pcard-link:hover { color: var(--accent); border-color: var(--accent); padding-left: 5px; }
 
-        .project-card:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
-        }
+    /* Video & Automation Badges */
+    .vcard-container { position: relative; padding-bottom: 56.25%; height: 0; background: #000; }
+    .vcard-container iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .n8n-badge { display: inline-flex; align-items: center; background: #ff6d5a; color: white; padding: 6px 12px; border-radius: 4px; font-size: 0.65rem; text-decoration: none; margin-top: 15px; font-family: 'DM Mono', monospace; transition: 0.2s; }
+    .n8n-badge:hover { background: #e54a3a; transform: scale(1.05); }
 
-        .project-image img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-        }
+    /* Logic Disclaimer Section */
+    .footer-system { background: #f1f1ee; padding: 6rem 2.5rem; border-top: 1px solid var(--rule); }
+    .disclaimer-container { max-width: 1100px; margin: 0 auto; }
+    .disclaimer-title { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 4rem; text-align: center; color: var(--accent); }
+    
+    .logic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 5rem; }
+    .logic-item { border-top: 2px solid var(--accent); padding-top: 1.5rem; }
+    .logic-num { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); font-weight: 600; display: block; margin-bottom: 1rem; }
+    .logic-item h4 { font-size: 1rem; margin-bottom: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .logic-item p { font-size: 0.85rem; color: #555; line-height: 1.8; text-align: justify; }
 
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            background: #000;
-        }
+    .tech-footer { border-top: 1px solid rgba(0,0,0,0.08); padding-top: 3rem; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 3rem; }
+    .tech-note { flex: 1; min-width: 320px; font-size: 0.8rem; color: #666; font-family: 'DM Mono', monospace; line-height: 1.8; }
+    .vibecoding { font-style: italic; color: var(--accent); font-weight: 600; }
 
-        .video-container iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border: 0;
-        }
-
-        .project-content {
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .project-title { font-size: 1.1rem; font-weight: 700; margin: 0 0 12px; }
-        .project-description { font-size: 0.9rem; color: #555; margin-bottom: 20px; flex-grow: 1; }
-
-        .project-tags { margin-bottom: 15px; }
-        .tag {
-            font-size: 0.65rem;
-            background: #f0f0f0;
-            color: #666;
-            padding: 4px 10px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 700;
-        }
-
-        .project-link { 
-            color: var(--accent); 
-            text-decoration: none; 
-            font-weight: 600; 
-            font-size: 0.85rem; 
-            display: inline-flex;
-            align-items: center;
-        }
-
-        /* CMS UI */
-        .cms-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cms-btn {
-            background: var(--text);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .edit-overlay {
-            position: absolute;
-            top: 12px; right: 12px;
-            background: rgba(255,255,255,0.9);
-            border: 1px solid #ddd;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 5;
-        }
-
-        /* Modal CMS */
-        .modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.7);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-            backdrop-filter: blur(4px);
-        }
-        .modal.show { display: flex; }
-        .modal-box {
-            background: white;
-            padding: 32px;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-        .modal-box input, .modal-box textarea {
-            width: 100%; margin-bottom: 15px; padding: 12px;
-            border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box;
-        }
-
-        /* Follow-up Section */
-        .follow-up-section {
-            background: #f8f9fa;
-            padding: 40px;
-            border-radius: 16px;
-            margin-top: 20px;
-        }
-    </style>
+    @media (max-width: 768px) {
+      .header { flex-direction: column; align-items: flex-start; gap: 2rem; padding: 2.5rem 1.5rem; }
+      .main { padding: 3rem 1.5rem; }
+      .logic-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>Portfolio</h1>
-        <p style="color: #666; margin-top: 10px;">Finance Expert & Automation Architect</p>
-    </header>
+<header class="header">
+  <div>
+    <div class="logo">Nancy Nguyen<span>×</span>Creative Framework</div>
+    <div class="sub-logo">Accounting Ledger Console · AI Automation · VAS/IFRS</div>
+  </div>
+  <div style="text-align: right;">
+    <p style="font-size: 0.7rem; font-family: 'DM Mono'; opacity: 0.6;">SYSTEM STATUS: ONLINE</p>
+    <p style="font-size: 0.7rem; font-family: 'DM Mono'; color: var(--accent); font-weight: 500;">GITHUB DEPLOYED / VIBE CODING</p>
+  </div>
+</header>
 
-    <section>
-        <div class="cms-header">
-            <h2>Three Ways I Work with SME Clients</h2>
-            <button class="cms-btn" onclick="openModal()">+ Add New Pilar</button>
-        </div>
-        <p style="color: #666; font-style: italic; margin-bottom: 30px; border-left: 3px solid var(--accent); padding-left: 15px;">
-            Each engagement is a working project — not a report handed over at the end. We move through your real numbers together.
-        </p>
-        <div id="blog-grid" class="grid-container"></div>
-    </section>
+<nav class="flow-nav">
+  <span class="flow-step active">Business Nature</span>
+  <span class="flow-step">→ Double Entry</span>
+  <span class="flow-step">→ Reconciliation</span>
+  <span class="flow-step">→ AR Aging</span>
+  <span class="flow-step">→ Compliance</span>
+</nav>
 
-    <section>
-        <h2>Strategic Projects</h2>
-        <div id="project-grid" class="grid-container"></div>
-    </section>
+<main class="main">
+  <!-- PHẦN 1: CORE PROJECTS (FIXED DATA)[cite: 1] -->
+  <h2 class="section-title">Core Architecture <span>Sổ cái & Hệ thống báo cáo</span></h2>
+  <div class="grid" id="projectGrid"></div>
 
-    <section>
-        <h2>Automation & AI Demos</h2>
-        <div id="social-grid" class="grid-container"></div>
-    </section>
+  <!-- PHẦN 2: DỮ LIỆU ĐỘNG (KETOAN.VN FEED + AIRTABLE)[cite: 3] -->
+  <h2 class="section-title">Knowledge Insights <span>Live Feed: Ketoan.vn & n8n Agent</span></h2>
+  <div class="grid" id="blogGrid">
+    <p style="font-family: 'DM Mono'; font-size: 0.8rem; color: #999;">Listening to Webhook signals...</p>
+  </div>
 
-    <section class="follow-up-section">
-        <h2 style="margin-top: 0;">Follow-up Services</h2>
-        <p style="color: #666; font-size: 0.95rem; margin-bottom: 30px;">Sau dự án đầu tiên, các dịch vụ này giúp hệ thống của bạn vận hành trơn tru hơn.</p>
-        <div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid var(--border);">
-                <strong style="display: block; margin-bottom: 8px; color: var(--accent);">Cashflow Clarity</strong>
-                <span style="font-size: 0.85rem; color: #555;">Theo dõi dòng tiền hàng tháng, cảnh báo rủi ro trước khi nó xảy ra.</span>
-            </div>
-            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid var(--border);">
-                <strong style="display: block; margin-bottom: 8px; color: var(--accent);">Mindset & Habits</strong>
-                <span style="font-size: 0.85rem; color: #555;">Xây dựng thói quen quản lý tài chính cho đội ngũ vận hành.</span>
-            </div>
-            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid var(--border);">
-                <strong style="display: block; margin-bottom: 8px; color: var(--accent);">Ops Support</strong>
-                <span style="font-size: 0.85rem; color: #555;">Hỗ trợ admin, đối soát công nợ và báo cáo định kỳ.</span>
-            </div>
-        </div>
-    </section>
-</div>
+  <!-- PHẦN 3: VIDEO CASE STUDIES[cite: 1] -->
+  <h2 class="section-title">Agentic Workflows <span>Automation Demos & Logic</span></h2>
+  <div class="grid" id="videoGrid"></div>
+</main>
 
-<div class="modal" id="cms-modal">
-    <div class="modal-box">
-        <h3 style="margin-top:0">Manage Service Pillar</h3>
-        <input id="cms-title" placeholder="Service Title (e.g. 01. Customer Ops)">
-        <input id="cms-tag" placeholder="Tag (e.g. Debt Management)">
-        <input id="cms-link" placeholder="External Link (Substack/Canva)">
-        <input id="cms-image" placeholder="Image URL">
-        <input id="cms-video" placeholder="YouTube Video ID (Optional)">
-        <textarea id="cms-desc" rows="4" placeholder="Short description of the impact..."></textarea>
-        
-        <div style="display:flex; gap:10px">
-            <button onclick="publishPost()" style="flex:2; background:var(--accent); color:white; border:none; padding:12px; border-radius:8px; cursor:pointer; font-weight:bold;">Save to Browser</button>
-            <button onclick="closeModal()" style="flex:1; background:#f0f0f0; border:none; padding:12px; border-radius:8px; cursor:pointer;">Cancel</button>
-        </div>
+<!-- PHẦN 4: SYSTEM DISCLAIMER & LOGIC[cite: 1] -->
+<footer class="footer-system">
+  <div class="disclaimer-container">
+    <h2 class="disclaimer-title">Technical Governance & Logic Flow</h2>
+    
+    <div class="logic-grid">
+      <div class="logic-item">
+        <span class="logic-num">STAGE_01</span>
+        <h4>Business Nature</h4>
+        <p>Phân tích dòng tiền và mô hình SME để xác định cách thức hạch toán phù hợp, đảm bảo tính kinh tế của giao dịch[cite: 1].</p>
+      </div>
+      <div class="logic-item">
+        <span class="logic-num">STAGE_02</span>
+        <h4>Double Entry</h4>
+        <p>Thiết lập hệ thống tài khoản và logic bút toán tự động, tích hợp AI để phân loại giao dịch chính xác theo VAS/IFRS[cite: 1].</p>
+      </div>
+      <div class="logic-item">
+        <span class="logic-num">STAGE_03</span>
+        <h4>Reconciliation</h4>
+        <p>Sử dụng Power Query và n8n Webhook để khớp dữ liệu ngân hàng và sổ cái, loại bỏ sai sót thủ công[cite: 1].</p>
+      </div>
+      <div class="logic-item">
+        <span class="logic-num">STAGE_04</span>
+        <h4>AR Aging</h4>
+        <p>Tự động hóa báo cáo công nợ theo thời gian thực, cảnh báo rủi ro dòng tiền thông qua hệ thống Dashboard[cite: 1].</p>
+      </div>
+      <div class="logic-item">
+        <span class="logic-num">STAGE_05</span>
+        <h4>Compliance</h4>
+        <p>Đảm bảo mọi báo cáo tuân thủ thông tư TT200 và các chuẩn mực kế toán quốc tế IFRS hiện hành[cite: 1].</p>
+      </div>
     </div>
-</div>
+
+    <div class="tech-footer">
+      <div class="tech-note">
+        <p><strong>INTEGRATION STACK:</strong> Trang web sử dụng GitHub Pages làm môi trường hosting tĩnh. n8n đóng vai trò "cầu nối" (Webhook) trích xuất dữ liệu từ Airtable & Notebook LM[cite: 1].</p>
+        <p><strong>LIVE WORKFLOW:</strong> <a href="https://ai.n8n.vn/workflow/5LtMLP5zufTT5u1f" target="_blank" style="color: var(--accent); font-weight: 500;">Inspect n8n Blueprint ↗</a></p>
+        <p>Dữ liệu chuyên môn được cập nhật tự động từ RSS Feed của <strong>Ketoan.vn</strong>[cite: 3].</p>
+      </div>
+      <div class="tech-note" style="text-align: right;">
+        <p>INTERFACE DESIGN: <span class="vibecoding">Vibecoding from Gemini</span></p>
+        <p>© 2026 Nguyen Ngo Uyen Ngoc. All Rights Reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script>
-    // --- DỮ LIỆU CỐ ĐỊNH ---
-    const projectData = [
-        { title: "Company report - FMCG", description: "Data visualization for listed-stock performance.", link: "https://vnmproject1.netlify.app/", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600", tag: "Analysis" },
-        { title: "Double-entry Logic", description: "Visual mapping of complex accounting workflows.", link: "https://canva.link/41sfnm3pnld703v", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600", tag: "Systems" },
-        { title: "IFRS Hierarchy", description: "Interactive framework for International Standards.", link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600", tag: "IFRS" }
-    ];
+  // DỮ LIỆU CỐ ĐỊNH (BẢO LƯU DI SẢN)[cite: 1]
+  const projectData = [
+    { title: "Company report - FMCG", description: "Data visualization for listed-stock performance.", link: "https://vnmproject1.netlify.app/", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800", tag: "Analysis" },
+    { title: "Double-entry Logic", description: "Visual mapping of complex accounting workflows.", link: "https://canva.link/41sfnm3pnld703v", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800", tag: "Systems" },
+    { title: "IFRS Hierarchy", description: "Interactive framework for International Standards.", link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800", tag: "IFRS" }
+  ];
 
-    const socialData = [
-        { title: "Agentic Workflows", description: "Autonomous systems for departmental efficiency.", videoId: "RXbkd8viWtg", tag: "AI Ops" },
-        { title: "SEO Content Automation", description: "n8n workflow using web scraping and OpenAI.", videoId: "w-JB9sCkvkQ", tag: "Automation" }
-    ];
-
-    // --- DỮ LIỆU CMS (SME PILLARS) ---
-    const defaultBlogPosts = [
-        { title: "01. Customer Ops", tag: "Behavior", description: "Understand why cash comes in late. Redesign touchpoints so collection happens faster.", link: "#", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600" },
-        { title: "02. Financial Ops", tag: "Debt Management", description: "Turn messy financials into trackable systems. Cash gap diagnosis and automated reporting.", link: "#", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" },
-        { title: "03. Negotiation", tag: "Deal Structuring", description: "Win-win terms that protect your cash timing. Know your numbers before every deal.", link: "#", image: "https://images.unsplash.com/photo-1573497620053-ea531f3942bf?w=600" }
-    ];
-
-    let blogPosts = [];
-    let editingIndex = null;
-
-    // --- HÀM TẠO CARD ---
-    function createCard(item, index = null, isBlog = false) {
-        const div = document.createElement('div');
-        div.className = 'project-card';
-        
-        const mediaHTML = item.videoId 
-            ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe></div>`
-            : `<div class="project-image"><img src="${item.image || 'https://via.placeholder.com/600x400'}" alt="${item.title}" loading="lazy"></div>`;
-
-        const editBtn = isBlog ? `<div class="edit-overlay" onclick="editBlog(event, ${index})">EDIT</div>` : '';
-
-        div.innerHTML = `
-            ${editBtn}
-            ${mediaHTML}
-            <div class="project-content">
-                <h3 class="project-title">${item.title}</h3>
-                <p class="project-description">${item.description}</p>
-                <div class="project-tags">
-                    <span class="tag">${item.tag || 'Service'}</span>
-                </div>
-                ${item.link && item.link !== "#" ? `<a href="${item.link}" target="_blank" class="project-link">Learn more ↗</a>` : '<span class="project-link">Consulting Project</span>'}
-            </div>
-        `;
-        return div;
+  const socialData = [
+    { 
+      title: "Agentic Workflows", 
+      description: "Hệ thống tự trị tối ưu hóa vận hành phòng ban. Xem trực tiếp logic n8n qua link bên dưới.", 
+      videoId: "RXbkd8viWtg", 
+      tag: "AI Ops",
+      workflowLink: "https://ai.n8n.vn/workflow/5LtMLP5zufTT5u1f"
+    },
+    { 
+      title: "SEO Content Automation", 
+      description: "Quy trình n8n kết hợp Web Scraping và OpenAI để sản xuất nội dung tự động.", 
+      videoId: "w-JB9sCkvkQ", 
+      tag: "Automation" 
     }
+  ];
 
-    // --- RENDER & CMS LOGIC ---
-    function renderAll() {
-        document.getElementById('project-grid').innerHTML = '';
-        projectData.forEach(item => document.getElementById('project-grid').appendChild(createCard(item)));
+  // RENDER GIAO DIỆN CỐ ĐỊNH[cite: 1]
+  function init() {
+    const pGrid = document.getElementById('projectGrid');
+    pGrid.innerHTML = projectData.map(p => `
+      <div class="pcard">
+        <img src="${p.image}" class="pcard-img" alt="${p.title}">
+        <div class="pcard-body">
+          <span class="pcard-tag">${p.tag}</span>
+          <h3 class="pcard-title">${p.title}</h3>
+          <p class="pcard-desc">${p.description}</p>
+          <a href="${p.link}" target="_blank" class="pcard-link">Explore Framework ↗</a>
+        </div>
+      </div>
+    `).join('');
 
-        document.getElementById('social-grid').innerHTML = '';
-        socialData.forEach(item => document.getElementById('social-grid').appendChild(createCard(item)));
+    const vGrid = document.getElementById('videoGrid');
+    vGrid.innerHTML = socialData.map(v => `
+      <div class="pcard">
+        <div class="vcard-container">
+          <iframe src="https://www.youtube.com/embed/${v.videoId}" allowfullscreen></iframe>
+        </div>
+        <div class="pcard-body">
+          <span class="pcard-tag">${v.tag}</span>
+          <h3 class="pcard-title">${v.title}</h3>
+          <p class="pcard-desc">${v.description}</p>
+          ${v.workflowLink ? `<a href="${v.workflowLink}" target="_blank" class="n8n-badge">View n8n Workflow ⚡</a>` : ''}
+        </div>
+      </div>
+    `).join('');
 
-        const bGrid = document.getElementById('blog-grid');
-        bGrid.innerHTML = '';
-        blogPosts.forEach((item, idx) => bGrid.appendChild(createCard(item, idx, true)));
+    fetchDynamicNews();
+  }
+
+  // GỌI WEBHOOK N8N CHO TIN TỨC KẾ TOÁN[cite: 1, 3]
+  async function fetchDynamicNews() {
+    const bGrid = document.getElementById('blogGrid');
+    // THAY THẾ LINK WEBHOOK CỦA BẠN TẠI ĐÂY
+    const N8N_WEBHOOK_URL = "https://ai.n8n.vn/webhook/5LtMLP5zufTT5u1f"; 
+
+    try {
+      const response = await fetch(N8N_WEBHOOK_URL);
+      const data = await response.json();
+      renderBlog(data);
+    } catch (e) {
+      // DỮ LIỆU DỰ PHÒNG NẾU WEBHOOK CHƯA SẴN SÀNG[cite: 1, 3]
+      const fallback = [
+        { title: "Kế toán SME & Tự động hóa", tag: "Compliance", description: "Cách ứng dụng n8n để tối ưu hóa quyết toán thuế cho doanh nghiệp vừa và nhỏ[cite: 1]." },
+        { title: "Cập nhật Thông tư TT200", tag: "VAS", description: "Các điểm mới cần lưu ý trong báo cáo tài chính năm 2026[cite: 3]." }
+      ];
+      renderBlog(fallback);
     }
+  }
 
-    function init() {
-        const saved = localStorage.getItem('portfolio_blog_data');
-        blogPosts = saved ? JSON.parse(saved) : defaultBlogPosts;
-        renderAll();
-    }
+  function renderBlog(posts) {
+    const bGrid = document.getElementById('blogGrid');
+    bGrid.innerHTML = posts.map(post => `
+      <div class="pcard">
+        <div class="pcard-body">
+          <span class="pcard-tag">${post.tag || 'LATEST INSIGHT'}</span>
+          <h3 class="pcard-title">${post.title}</h3>
+          <p class="pcard-desc">${post.description || 'Đang cập nhật nội dung từ ketoan.vn...'}</p>
+          ${post.link ? `<a href="${post.link}" target="_blank" class="pcard-link">Read Full Post ↗</a>` : ''}
+        </div>
+      </div>
+    `).join('');
+  }
 
-    function publishPost() {
-        const postData = {
-            title: document.getElementById('cms-title').value,
-            tag: document.getElementById('cms-tag').value || 'Service',
-            link: document.getElementById('cms-link').value,
-            image: document.getElementById('cms-image').value,
-            videoId: document.getElementById('cms-video').value,
-            description: document.getElementById('cms-desc').value
-        };
-
-        if (!postData.title) return alert("Please enter a title");
-
-        if (editingIndex !== null) blogPosts[editingIndex] = postData;
-        else blogPosts.unshift(postData);
-
-        localStorage.setItem('portfolio_blog_data', JSON.stringify(blogPosts));
-        init();
-        closeModal();
-    }
-
-    function editBlog(e, i) {
-        e.stopPropagation();
-        editingIndex = i;
-        const p = blogPosts[i];
-        document.getElementById('cms-title').value = p.title;
-        document.getElementById('cms-tag').value = p.tag;
-        document.getElementById('cms-link').value = p.link || '';
-        document.getElementById('cms-image').value = p.image || '';
-        document.getElementById('cms-video').value = p.videoId || '';
-        document.getElementById('cms-desc').value = p.description;
-        openModal();
-    }
-
-    function openModal() { document.getElementById('cms-modal').classList.add('show'); }
-    function closeModal() { 
-        document.getElementById('cms-modal').classList.remove('show');
-        editingIndex = null;
-        document.querySelectorAll('#cms-modal input, #cms-modal textarea').forEach(i => i.value = '');
-    }
-
-    init();
+  window.onload = init;
 </script>
 
 </body>
