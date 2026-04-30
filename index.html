@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Finance × Automation | Accounting Flow CMS</title>
+  <title>Nancy Nguyen | Accountancy Automation Portfolio</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
 
@@ -11,110 +11,159 @@
       --ink: #0f0e0d;
       --paper: #faf9f6;
       --accent: #1a3a5c;
-      --rule: rgba(15, 13, 13, 0.1);
-      --tag-bg: #f0ede6;
+      --rule: rgba(15, 14, 13, 0.1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Outfit', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6; }
+    body { font-family: 'Outfit', sans-serif; background: var(--paper); color: var(--ink); }
 
-    /* Header */
-    .header { padding: 3rem 2.5rem; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: flex-end; }
-    .logo { font-family: 'DM Serif Display', serif; font-size: 2.2rem; }
+    /* Header & Nav */
+    .header { padding: 2.5rem; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: flex-end; }
+    .logo { font-family: 'DM Serif Display', serif; font-size: 2rem; }
     .logo span { color: var(--accent); font-style: italic; }
-
-    /* Accounting Flow Stage */
-    .flow-container { padding: 2rem 2.5rem; background: #fff; border-bottom: 1px solid var(--rule); }
-    .flow-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
-    .flow-step { padding: 1rem; border: 1px solid var(--rule); border-radius: 8px; cursor: pointer; transition: 0.3s; }
-    .flow-step:hover { border-color: var(--accent); background: rgba(26, 58, 92, 0.02); }
-    .step-num { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #888; }
-    .step-title { font-weight: 600; font-size: 0.9rem; display: block; margin-top: 5px; }
-
-    /* CMS Content */
-    .main { padding: 2.5rem; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
-    .card { background: white; border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; transition: 0.3s; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-    .card-content { padding: 1.5rem; }
-    .tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; background: var(--tag-bg); padding: 2px 8px; border-radius: 4px; }
     
-    /* YouTube Integration */
-    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 1rem; }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .flow-nav { padding: 1.5rem 2.5rem; background: #fff; border-bottom: 1px solid var(--rule); display: flex; gap: 1.5rem; overflow-x: auto; }
+    .flow-step { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #888; text-transform: uppercase; white-space: nowrap; }
+    .flow-step.active { color: var(--accent); font-weight: 600; }
+
+    /* Layout */
+    .main { padding: 2.5rem; }
+    .section-title { font-family: 'DM Serif Display', serif; font-size: 1.6rem; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
+
+    /* Cards */
+    .pcard { background: white; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; }
+    .pcard:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .pcard-img { width: 100%; height: 160px; object-fit: cover; filter: grayscale(10%); }
+    .pcard-body { padding: 1.25rem; flex-grow: 1; }
+    .pcard-tag { font-family: 'DM Mono', monospace; font-size: 0.6rem; text-transform: uppercase; color: var(--accent); letter-spacing: 1px; }
+    .pcard-title { font-size: 1.1rem; font-weight: 600; margin: 0.5rem 0; }
+    .pcard-desc { font-size: 0.85rem; color: #555; margin-bottom: 1rem; line-height: 1.5; }
+    .pcard-link { font-family: 'DM Mono', monospace; font-size: 0.75rem; text-decoration: none; color: var(--ink); border-bottom: 1px solid var(--ink); }
+
+    /* Video Card */
+    .vcard { background: #000; position: relative; padding-bottom: 56.25%; height: 0; }
+    .vcard iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
   </style>
 </head>
 <body>
 
 <header class="header">
   <div>
-    <div class="logo">Accounting<span>Flow</span></div>
-    <p style="font-family:'DM Mono'; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;">Compliance × Automation × Insights</p>
+    <div class="logo">Nancy Nguyen<span>×</span>Automation</div>
+    <p style="font-family:'DM Mono'; font-size:0.65rem; letter-spacing:1px; margin-top:5px;">FINTECH · AI OPS · ACCOUNTING</p>
   </div>
 </header>
 
-<div class="flow-container">
-  <div class="flow-grid">
-    <div class="flow-step">
-      <span class="step-num">01</span>
-      <span class="step-title">Business Nature</span>
-    </div>
-    <div class="flow-step">
-      <span class="step-num">02</span>
-      <span class="step-title">Double Entry</span>
-    </div>
-    <div class="flow-step">
-      <span class="step-num">03</span>
-      <span class="step-title">Reconciliation</span>
-    </div>
-    <div class="flow-step">
-      <span class="step-num">04</span>
-      <span class="step-title">AR Aging</span>
-    </div>
-    <div class="flow-step">
-      <span class="step-num">05</span>
-      <span class="step-title">Compliance</span>
-    </div>
-  </div>
-</div>
+<nav class="flow-nav">
+  <span class="flow-step active">Business Nature</span>
+  <span class="flow-step">→ Double Entry</span>
+  <span class="flow-step">→ Reconciliation</span>
+  <span class="flow-step">→ AR Aging</span>
+  <span class="flow-step">→ Compliance</span>
+</nav>
 
 <main class="main">
-  <h2 style="font-family:'DM Serif Display'; margin-bottom: 2rem;">Latest Insights & Case Studies</h2>
-  
-  <div class="grid" id="blogGrid">
-    <!-- Bài viết về Case Study - Troubleshooting -->
-    <div class="card">
-      <div class="card-content">
-        <span class="tag">Case Study</span>
-        <h3 style="margin: 10px 0;">Troubleshooting: AR Reconciliation Gaps</h3>
-        <p style="font-size: 0.85rem; color: #555;">Phân tích các sai sót thường gặp khi đối chiếu công nợ và cách xử lý bằng Power Query.[cite: 1]</p>
-        <hr style="margin: 15px 0; border: 0; border-top: 1px solid var(--rule);">
-        <a href="#" style="font-size: 0.8rem; font-weight: 600; color: var(--accent); text-decoration: none;">View Detailed RCA →</a>
-      </div>
-    </div>
+  <!-- PHẦN 1: DỮ LIỆU CỐ ĐỊNH (PROJECTS) -->
+  <h2 class="section-title">Core Projects</h2>
+  <div class="grid" id="projectGrid"></div>
 
-    <!-- Bài viết n8n + NotebookLM -->
-    <div class="card">
-      <div class="card-content">
-        <span class="tag">Automation</span>
-        <h3 style="margin: 10px 0;">n8n × NotebookLM: News Capture</h3>
-        <p style="font-size: 0.85rem; color: #555;">Luồng tự động quét tin tức tài chính, đẩy vào NotebookLM để tạo podcast/tóm tắt kiến thức.</p>
-      </div>
-    </div>
+  <!-- PHẦN 2: DỮ LIỆU CMS (SME PILLARS) - Kết hợp n8n & Local -->
+  <h2 class="section-title">
+    Financial Ops Insights 
+    <span style="font-family:'DM Mono'; font-size:0.6rem; color:#888;">Live from Airtable</span>
+  </h2>
+  <div class="grid" id="blogGrid"></div>
 
-    <!-- Video Demo -->
-    <div class="card">
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/RXbkd8viWtg"></iframe>
-      </div>
-      <div class="card-content">
-        <span class="tag">Video Demo</span>
-        <h3 style="margin: 5px 0;">AI in Dept Ops</h3>
-        <p style="font-size: 0.85rem; color: #555;">Ứng dụng tác nhân AI trong việc xử lý hồ sơ ứng viên và vận hành phòng ban.</p>
-      </div>
-    </div>
-  </div>
+  <!-- PHẦN 3: VIDEO DEMOS -->
+  <h2 class="section-title">Video Case Studies</h2>
+  <div class="grid" id="videoGrid"></div>
 </main>
 
+<script>
+  // --- DỮ LIỆU TỪ FILE CŨ ---
+  const projectData = [
+    { title: "Company report - FMCG", description: "Data visualization for listed-stock performance.", link: "https://vnmproject1.netlify.app/", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600", tag: "Analysis" },
+    { title: "Double-entry Logic", description: "Visual mapping of complex accounting workflows.", link: "https://canva.link/41sfnm3pnld703v", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600", tag: "Systems" },
+    { title: "IFRS Hierarchy", description: "Interactive framework for International Standards.", link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600", tag: "IFRS" }
+  ];
+
+  const socialData = [
+    { title: "Agentic Workflows", description: "Autonomous systems for departmental efficiency.", videoId: "RXbkd8viWtg", tag: "AI Ops" },
+    { title: "SEO Content Automation", description: "n8n workflow using web scraping and OpenAI.", videoId: "w-JB9sCkvkQ", tag: "Automation" }
+  ];
+
+  const defaultBlogPosts = [
+    { title: "01. Customer Ops", tag: "Behavior", description: "Understand why cash comes in late. Redesign touchpoints so collection happens faster.", link: "#", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600" },
+    { title: "02. Financial Ops", tag: "Debt Management", description: "Turn messy financials into trackable systems. Cash gap diagnosis and automated reporting.", link: "#", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" },
+    { title: "03. Negotiation", tag: "Deal Structuring", description: "Win-win terms that protect your cash timing. Know your numbers before every deal.", link: "#", image: "https://images.unsplash.com/photo-1573497620053-ea531f3942bf?w=600" }
+  ];
+
+  // --- HÀM RENDER ---
+  function init() {
+    // Render Projects[cite: 1]
+    const pGrid = document.getElementById('projectGrid');
+    pGrid.innerHTML = projectData.map(p => `
+      <div class="pcard">
+        <img src="${p.image}" class="pcard-img">
+        <div class="pcard-body">
+          <div class="pcard-tag">${p.tag}</div>
+          <h3 class="pcard-title">${p.title}</h3>
+          <p class="pcard-desc">${p.description}</p>
+          <a href="${p.link}" target="_blank" class="pcard-link">View Project ↗</a>
+        </div>
+      </div>
+    `).join('');
+
+    // Render Videos[cite: 1]
+    const vGrid = document.getElementById('videoGrid');
+    vGrid.innerHTML = socialData.map(v => `
+      <div class="pcard">
+        <div class="vcard">
+          <iframe src="https://www.youtube.com/embed/${v.videoId}" allowfullscreen></iframe>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-tag">${v.tag}</div>
+          <h3 class="pcard-title">${v.title}</h3>
+          <p class="pcard-desc">${v.description}</p>
+        </div>
+      </div>
+    `).join('');
+
+    // Render Blog (Mix n8n + Default)[cite: 1]
+    renderBlog();
+  }
+
+  async function renderBlog() {
+    const bGrid = document.getElementById('blogGrid');
+    const N8N_URL = "YOUR_N8N_WEBHOOK_URL"; // Thay bằng URL thật khi trích xuất code n8n
+
+    try {
+      const response = await fetch(N8N_URL);
+      const dynamicData = await response.json();
+      displayBlog([...dynamicData, ...defaultBlogPosts]);
+    } catch (e) {
+      // Nếu lỗi n8n, hiển thị dữ liệu mặc định[cite: 1]
+      displayBlog(defaultBlogPosts);
+    }
+  }
+
+  function displayBlog(posts) {
+    const bGrid = document.getElementById('blogGrid');
+    bGrid.innerHTML = posts.map(post => `
+      <div class="pcard">
+        ${post.image ? `<img src="${post.image}" class="pcard-img">` : ''}
+        <div class="pcard-body">
+          <div class="pcard-tag">${post.tag}</div>
+          <h3 class="pcard-title">${post.title}</h3>
+          <p class="pcard-desc">${post.description}</p>
+          ${post.link !== '#' ? `<a href="${post.link}" target="_blank" class="pcard-link">Read Flow ↗</a>` : ''}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+</script>
 </body>
 </html>
