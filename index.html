@@ -3,125 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nancy Nguyen | AI-Native Blog</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Finance × Automation | Accounting Flow CMS</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=DM+Serif+Display&display=swap');
-    body { font-family: 'Outfit', sans-serif; background-color: #faf9f6; }
-    .serif { font-family: 'DM Serif Display', serif; }
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
+
+    :root {
+      --ink: #0f0e0d;
+      --paper: #faf9f6;
+      --accent: #1a3a5c;
+      --rule: rgba(15, 13, 13, 0.1);
+      --tag-bg: #f0ede6;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Outfit', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6; }
+
+    /* Header */
+    .header { padding: 3rem 2.5rem; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: flex-end; }
+    .logo { font-family: 'DM Serif Display', serif; font-size: 2.2rem; }
+    .logo span { color: var(--accent); font-style: italic; }
+
+    /* Accounting Flow Stage */
+    .flow-container { padding: 2rem 2.5rem; background: #fff; border-bottom: 1px solid var(--rule); }
+    .flow-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+    .flow-step { padding: 1rem; border: 1px solid var(--rule); border-radius: 8px; cursor: pointer; transition: 0.3s; }
+    .flow-step:hover { border-color: var(--accent); background: rgba(26, 58, 92, 0.02); }
+    .step-num { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #888; }
+    .step-title { font-weight: 600; font-size: 0.9rem; display: block; margin-top: 5px; }
+
+    /* CMS Content */
+    .main { padding: 2.5rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
+    .card { background: white; border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; transition: 0.3s; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    .card-content { padding: 1.5rem; }
+    .tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; background: var(--tag-bg); padding: 2px 8px; border-radius: 4px; }
+    
+    /* YouTube Integration */
+    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 1rem; }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
   </style>
 </head>
-<body class="text-slate-900">
+<body>
 
-  <!-- Header -->
-  <header class="p-8 border-b border-slate-200 flex justify-between items-center bg-white">
-    <div>
-      <h1 class="serif text-3xl">Nancy Nguyen<span>.</span></h1>
-      <p class="text-[10px] tracking-[0.2em] uppercase text-slate-400 mt-1">AI Ops & Automation Strategy</p>
-    </div>
-    <div class="flex items-center gap-2">
-      <span class="relative flex h-2 w-2">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-      </span>
-      <span class="text-[10px] font-mono text-slate-500">n8n FLOW ACTIVE</span>
-    </div>
-  </header>
+<header class="header">
+  <div>
+    <div class="logo">Accounting<span>Flow</span></div>
+    <p style="font-family:'DM Mono'; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;">Compliance × Automation × Insights</p>
+  </div>
+</header>
 
-  <main class="max-w-6xl mx-auto py-16 px-6">
-    <div class="mb-12 border-b border-slate-200 pb-4 flex justify-between items-end">
-      <h2 class="serif text-2xl text-slate-800">Automated Insights</h2>
-      <span class="text-[10px] font-mono text-slate-400 uppercase">Refreshed via Webhook</span>
+<div class="flow-container">
+  <div class="flow-grid">
+    <div class="flow-step">
+      <span class="step-num">01</span>
+      <span class="step-title">Business Nature</span>
     </div>
+    <div class="flow-step">
+      <span class="step-num">02</span>
+      <span class="step-title">Double Entry</span>
+    </div>
+    <div class="flow-step">
+      <span class="step-num">03</span>
+      <span class="step-title">Reconciliation</span>
+    </div>
+    <div class="flow-step">
+      <span class="step-num">04</span>
+      <span class="step-title">AR Aging</span>
+    </div>
+    <div class="flow-step">
+      <span class="step-num">05</span>
+      <span class="step-title">Compliance</span>
+    </div>
+  </div>
+</div>
 
-    <!-- Blog Container -->
-    <div id="dynamic-content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Loading State -->
-      <div class="col-span-full py-20 text-center">
-        <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-slate-900 mb-4"></div>
-        <p class="font-mono text-xs text-slate-400 uppercase tracking-widest">Awaiting AI Response...</p>
+<main class="main">
+  <h2 style="font-family:'DM Serif Display'; margin-bottom: 2rem;">Latest Insights & Case Studies</h2>
+  
+  <div class="grid" id="blogGrid">
+    <!-- Bài viết về Case Study - Troubleshooting -->
+    <div class="card">
+      <div class="card-content">
+        <span class="tag">Case Study</span>
+        <h3 style="margin: 10px 0;">Troubleshooting: AR Reconciliation Gaps</h3>
+        <p style="font-size: 0.85rem; color: #555;">Phân tích các sai sót thường gặp khi đối chiếu công nợ và cách xử lý bằng Power Query.[cite: 1]</p>
+        <hr style="margin: 15px 0; border: 0; border-top: 1px solid var(--rule);">
+        <a href="#" style="font-size: 0.8rem; font-weight: 600; color: var(--accent); text-decoration: none;">View Detailed RCA →</a>
       </div>
     </div>
-  </main>
 
-  <footer class="mt-20 p-12 bg-slate-100 border-t border-slate-200 text-center">
-    <p class="text-xs font-mono text-slate-400">
-      Data Source: <a href="https://ai.n8n.vn/workflow/5LtMLP5zufTT5u1f" class="underline hover:text-slate-600">n8n Workflow</a> 
-      | Deployed on GitHub Pages
-    </p>
-  </footer>
+    <!-- Bài viết n8n + NotebookLM -->
+    <div class="card">
+      <div class="card-content">
+        <span class="tag">Automation</span>
+        <h3 style="margin: 10px 0;">n8n × NotebookLM: News Capture</h3>
+        <p style="font-size: 0.85rem; color: #555;">Luồng tự động quét tin tức tài chính, đẩy vào NotebookLM để tạo podcast/tóm tắt kiến thức.</p>
+      </div>
+    </div>
 
-  <script>
-    const WEBHOOK_URL = "https://ai.n8n.vn/webhook/d962c916-6369-431a-9d80-af6e6a50fdf5";
+    <!-- Video Demo -->
+    <div class="card">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/RXbkd8viWtg"></iframe>
+      </div>
+      <div class="card-content">
+        <span class="tag">Video Demo</span>
+        <h3 style="margin: 5px 0;">AI in Dept Ops</h3>
+        <p style="font-size: 0.85rem; color: #555;">Ứng dụng tác nhân AI trong việc xử lý hồ sơ ứng viên và vận hành phòng ban.</p>
+      </div>
+    </div>
+  </div>
+</main>
 
-    // Hàm đệ quy để render UI từ cấu trúc JSON Schema của OpenAI
-    function renderComponent(node) {
-      if (!node || typeof node !== 'object') return null;
-
-      // Tạo element dựa trên type (div, p, h1, etc.)
-      const el = document.createElement(node.type || 'div');
-
-      // Gán nội dung văn bản nếu có
-      if (node.label) {
-        el.textContent = node.label;
-      }
-
-      // Gán các thuộc tính (className, href, etc.)
-      if (node.attributes && Array.isArray(node.attributes)) {
-        node.attributes.forEach(attr => {
-          if (attr.name === 'className') {
-            el.className = attr.value;
-          } else {
-            el.setAttribute(attr.name, attr.value);
-          }
-        });
-      }
-
-      // Render các con (đệ quy)
-      if (node.children && Array.isArray(node.children)) {
-        node.children.forEach(child => {
-          const childEl = renderComponent(child);
-          if (childEl) el.appendChild(childEl);
-        });
-      }
-
-      return el;
-    }
-
-    async function fetchAIContent() {
-      const container = document.getElementById('dynamic-content');
-      
-      try {
-        const response = await fetch(WEBHOOK_URL);
-        if (!response.ok) throw new Error('Webhook error');
-        
-        const data = await response.json();
-        
-        container.innerHTML = ''; // Xóa loader
-
-        // Kiểm tra nếu dữ liệu là mảng hoặc object đơn lẻ
-        const items = Array.isArray(data) ? data : [data];
-
-        items.forEach(item => {
-          // Nếu n8n trả về trực tiếp schema UI, ta render nó
-          const rendered = renderComponent(item);
-          if (rendered) {
-            container.appendChild(rendered);
-          }
-        });
-
-      } catch (error) {
-        console.error("Fetch error:", error);
-        container.innerHTML = `
-          <div class="col-span-full p-8 border border-red-100 bg-red-50 rounded-lg text-center">
-            <p class="text-red-500 text-sm font-mono uppercase tracking-tighter">Connection Failed</p>
-            <p class="text-xs text-red-400 mt-2 italic">Hãy đảm bảo n8n workflow đã bật 'Production' và URL webhook chính xác.</p>
-          </div>
-        `;
-      }
-    }
-
-    window.onload = fetchAIContent;
-  </script>
 </body>
 </html>
