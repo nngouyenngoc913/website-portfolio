@@ -21,7 +21,6 @@
     .serif { font-family: 'DM Serif Display', serif; }
     .mono { font-family: 'DM Mono', monospace; }
 
-    /* Custom Styles to match your vibe */
     .pcard { background: white; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; }
     .pcard:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 24px rgba(0,0,0,0.05); }
     .pcard-img { width: 100%; height: 170px; object-fit: cover; filter: grayscale(20%); transition: 0.5s; }
@@ -52,24 +51,27 @@
   
   <!-- PHẦN INTERACTIVE (TRỌNG TÂM) -->
   <h2 class="serif text-2xl mb-8 border-b border-black/10 pb-2">Interactive Reporting UI <span class="text-gray-400 font-light text-xl italic ml-2">IFRS/VAS Mindmap</span></h2>
-  <div class="bg-white border border-black/10 rounded-lg overflow-hidden mb-16 hover:border-accent transition-all hover:shadow-sm">
+  <div class="bg-white border border-black/10 rounded-lg overflow-hidden mb-16 hover:border-accent transition-all">
     <div class="p-3 px-6 bg-gray-50 border-b border-black/10 flex justify-between items-center">
-      <span class="mono text-[10px] text-accent font-bold">ACTIVE CANVAS: DYNAMIC RECONCILIATION</span>
-      <span class="mono text-[10px] text-gray-400">CLAUDE ARTIFACT INTEGRATED</span>
+      <span class="mono text-[10px] text-accent font-bold uppercase">Active Canvas: Dynamic Reconciliation</span>
+      <span class="mono text-[10px] text-gray-400 uppercase">Claude Artifact</span>
     </div>
-    <iframe src="https://claude.site/public/artifacts/f612d772-47aa-46ce-ad3f-28873dce6401/embed" width="100%" height="650" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://claude.site/public/artifacts/f612d772-47aa-46ce-ad3f-28873dce6401/embed" width="100%" height="600" frameborder="0" allowfullscreen></iframe>
   </div>
 
-  <!-- DYNAMIC SECTIONS LOADED VIA JS -->
-  <div id="dynamic-sections">
-    <!-- Content will be injected here -->
+  <!-- PHẦN NHÚNG CANVA PORTFOLIO MỚI -->
+  <h2 class="serif text-2xl mb-8 border-b border-black/10 pb-2">Visual Strategy <span class="text-gray-400 font-light text-xl italic ml-2">Canva Portfolio</span></h2>
+  <div class="mb-16">
+    <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); overflow: hidden; border-radius: 8px; will-change: transform;">
+      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
+        src="https://www.canva.com/design/DAG-W1QBFXQ/nsTIFpTSyEC1BwaAXxwHbw/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+      </iframe>
+    </div>
+    <p class="mono text-[10px] text-gray-400 mt-4 text-center italic">Portfolio by Nguyen Ngo Uyen Ngoc</p>
   </div>
 
-  <!-- PHẦN BLOG ĐỘNG (STRUCTURED OUTPUT) -->
-  <h2 class="serif text-2xl mb-8 border-b border-black/10 pb-2 mt-16">AI Agent Insights <span class="mono text-[10px] text-gray-400 ml-4 uppercase">Live Dynamic UI</span></h2>
-  <div id="ai-dynamic-blog" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-    <div class="mono text-[10px] text-gray-400 animate-pulse col-span-full text-center py-10">Awaiting AI Structured Output...</div>
-  </div>
+  <div id="dynamic-sections"></div>
+
 </main>
 
 <footer class="p-16 border-t border-black/10 text-center bg-white mt-16">
@@ -77,22 +79,21 @@
 </footer>
 
 <script>
-  // DỮ LIỆU ĐƯỢC CẤU TRÚC LẠI ĐỂ DỄ DÀNG ĐIỀU KHIỂN
   const siteData = {
     projects: {
       title: "Core Architecture",
       items: [
-        { title: "Company report - FMCG", description: "Hệ thống trực quan hóa dữ liệu hiệu suất cổ phiếu với DAX nâng cao.", link: "https://vnmproject1.netlify.app/", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800", tag: "Analysis" },
-        { title: "Double-entry Logic", description: "Visual mapping cho quy trình hạch toán tự động qua n8n.", link: "https://canva.link/41sfnm3pnld703v", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800", tag: "Systems" },
+        { title: "Company report - FMCG", description: "Trực quan hóa dữ liệu hiệu suất cổ phiếu niêm yết.", link: "https://vnmproject1.netlify.app/", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800", tag: "Analysis" },
+        { title: "Double-entry Logic", description: "Quy trình hạch toán tự động tích hợp AI gợi ý phân loại.", link: "https://canva.link/41sfnm3pnld703v", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800", tag: "Systems" },
         { title: "IFRS Hierarchy", description: "Khung tương tác chuẩn báo cáo tài chính quốc tế (IFRS).", link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800", tag: "IFRS" }
       ]
     },
     insights: {
       title: "Financial Ops Insights",
       items: [
-        { title: "01. Customer Ops", tag: "Behavior", description: "Tái cấu trúc điểm chạm khách hàng giúp đẩy nhanh tốc độ thu hồi tiền.", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800" },
-        { title: "02. Financial Ops", tag: "Debt Management", description: "Chẩn đoán khoảng cách tiền mặt và thiết lập hệ thống báo cáo tự động.", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800" },
-        { title: "03. Negotiation Logic", tag: "Deal Structuring", description: "Đàm phán dựa trên số liệu thực tế để bảo vệ thời điểm nhận tiền.", image: "https://images.unsplash.com/photo-1573497620053-ea531f3942bf?w=800" }
+        { title: "01. Customer Ops", tag: "Behavior", description: "Tái cấu trúc điểm chạm khách hàng giúp đẩy nhanh tốc độ thu hồi tiền mặt.", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800" },
+        { title: "02. Financial Ops", tag: "Debt Management", description: "Chẩn đoán khoảng cách tiền mặt và thiết lập báo cáo tự động.", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800" },
+        { title: "03. Negotiation Logic", tag: "Deal Structuring", description: "Đàm phán dựa trên số liệu thực tế để bảo vệ dòng tiền.", image: "https://images.unsplash.com/photo-1573497620053-ea531f3942bf?w=800" }
       ]
     },
     videos: {
@@ -104,35 +105,12 @@
     }
   };
 
-  // HÀM RENDER CÁC COMPONENT ĐỘNG TỪ SCHEMA CỦA BẠN (Dành cho AI Blog)
-  function renderDynamicComponent(node) {
-    if (!node || typeof node !== 'object') return null;
-    const el = document.createElement(node.type || 'div');
-    if (node.label) el.textContent = node.label;
-    if (node.attributes) {
-      node.attributes.forEach(attr => {
-        if (attr.name === 'className') el.className = attr.value;
-        else el.setAttribute(attr.name, attr.value);
-      });
-    }
-    if (node.children) {
-      node.children.forEach(child => {
-        const childEl = renderDynamicComponent(child);
-        if (childEl) el.appendChild(childEl);
-      });
-    }
-    return el;
-  }
-
-  // KHỞI TẠO WEBSITE
   function init() {
     const mainContainer = document.getElementById('dynamic-sections');
-    
-    // Render Projects & Insights (Grid System)
     [siteData.projects, siteData.insights].forEach(section => {
       const sectionHtml = `
         <h2 class="serif text-2xl mb-8 border-b border-black/10 pb-2 mt-16">${section.title}</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           ${section.items.map(item => `
             <div class="pcard">
               <img src="${item.image}" class="pcard-img">
@@ -140,7 +118,7 @@
                 <span class="mono text-[8px] text-accent font-bold uppercase tracking-widest mb-2">${item.tag}</span>
                 <h3 class="text-lg font-bold mb-3">${item.title}</h3>
                 <p class="text-xs text-gray-500 mb-6 flex-grow leading-relaxed">${item.description}</p>
-                ${item.link ? `<a href="${item.link}" target="_blank" class="mono text-[10px] border-b border-black self-start pb-1 hover:text-accent hover:border-accent">Explore Architecture ↗</a>` : '<span class="mono text-[10px] text-gray-300 italic">SME Pillar</span>'}
+                ${item.link ? `<a href="${item.link}" target="_blank" class="mono text-[10px] border-b border-black self-start pb-1 hover:text-accent hover:border-accent">Explore ↗</a>` : ''}
               </div>
             </div>
           `).join('')}
@@ -149,7 +127,6 @@
       mainContainer.insertAdjacentHTML('beforeend', sectionHtml);
     });
 
-    // Render Videos
     const videoSection = `
       <h2 class="serif text-2xl mb-8 border-b border-black/10 pb-2 mt-16">${siteData.videos.title}</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -168,36 +145,6 @@
       </div>
     `;
     mainContainer.insertAdjacentHTML('beforeend', videoSection);
-
-    // MÔ PHỎNG NHẬN DỮ LIỆU TỪ WEBHOOK N8N (STRUCTURED OUTPUT)
-    // Bạn sẽ thay thế phần này bằng việc fetch dữ liệu thực tế
-    setTimeout(() => {
-      const blogContainer = document.getElementById('ai-dynamic-blog');
-      blogContainer.innerHTML = '';
-      
-      // Giả sử AI trả về 1 bài blog theo đúng schema UI của bạn
-      const mockAISchema = {
-        type: "div",
-        label: "",
-        attributes: [{name: "className", value: "col-span-full p-8 bg-white border border-accent rounded-lg shadow-sm"}],
-        children: [
-          {
-            type: "h3",
-            label: "🚀 Tương lai của AI Ops trong Kế toán",
-            attributes: [{name: "className", value: "serif text-xl mb-4 text-accent"}],
-            children: []
-          },
-          {
-            type: "p",
-            label: "AI không thay thế kế toán viên, AI thay thế những kế toán viên không biết sử dụng AI. Việc tích hợp n8n vào quy trình hạch toán giúp giảm 80% thời gian xử lý chứng từ.",
-            attributes: [{name: "className", value: "text-sm text-gray-600 leading-relaxed"}],
-            children: []
-          }
-        ]
-      };
-      
-      blogContainer.appendChild(renderDynamicComponent(mockAISchema));
-    }, 2000);
   }
 
   document.addEventListener('DOMContentLoaded', init);
