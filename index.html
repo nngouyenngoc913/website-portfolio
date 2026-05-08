@@ -28,93 +28,6 @@
 
     .flow-nav::-webkit-scrollbar { display: none; }
     .flow-nav { -ms-overflow-style: none; scrollbar-width: none; }
-
-    /* ── ChatGPT Widget ── */
-    #gpt-bubble {
-      position: fixed; bottom: 28px; right: 28px;
-      width: 54px; height: 54px;
-      background: #10a37f; border: none; border-radius: 50%;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 20px rgba(16,163,127,0.45);
-      z-index: 9999; transition: transform 0.2s;
-    }
-    #gpt-bubble:hover { transform: scale(1.1); }
-
-    #gpt-panel {
-      display: none; position: fixed;
-      bottom: 96px; right: 28px; width: 350px;
-      background: #fff; border-radius: 16px;
-      border: 1px solid #e5e7eb;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.14);
-      z-index: 9999; overflow: hidden;
-      font-family: 'Outfit', sans-serif;
-    }
-
-    #gpt-header {
-      background: #10a37f; padding: 14px 18px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    #gpt-header-left { display: flex; align-items: center; gap: 10px; }
-    #gpt-avatar {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(255,255,255,0.2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
-    }
-    #gpt-header span { color: #fff; font-size: 14px; font-weight: 500; }
-    #gpt-close {
-      background: none; border: none;
-      color: rgba(255,255,255,0.8); font-size: 22px;
-      cursor: pointer; line-height: 1; padding: 0;
-    }
-    #gpt-close:hover { color: #fff; }
-
-    #gpt-messages {
-      padding: 16px; height: 300px;
-      overflow-y: auto; display: flex;
-      flex-direction: column; gap: 12px;
-      background: #fafafa;
-    }
-    #gpt-messages::-webkit-scrollbar { width: 4px; }
-    #gpt-messages::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
-
-    .gpt-msg-bot {
-      background: #fff; border: 1px solid #e5e7eb;
-      border-radius: 14px 14px 14px 3px;
-      padding: 10px 14px; font-size: 13px;
-      max-width: 90%; color: #111; line-height: 1.55;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-    .gpt-msg-user {
-      background: #10a37f; color: #fff;
-      border-radius: 14px 14px 3px 14px;
-      padding: 10px 14px; font-size: 13px;
-      max-width: 90%; align-self: flex-end;
-      line-height: 1.55;
-    }
-    .gpt-typing { font-size: 12px; color: #aaa; font-style: italic; padding: 2px 4px; }
-
-    #gpt-footer {
-      padding: 12px; border-top: 1px solid #f0f0f0;
-      display: flex; gap: 8px; background: #fff;
-    }
-    #gpt-input {
-      flex: 1; font-size: 13px; font-family: 'Outfit', sans-serif;
-      padding: 9px 14px; border: 1px solid #e5e7eb;
-      border-radius: 22px; outline: none; transition: border-color 0.2s;
-    }
-    #gpt-input:focus { border-color: #10a37f; }
-    #gpt-send {
-      background: #10a37f; border: none; border-radius: 50%;
-      width: 36px; height: 36px; cursor: pointer;
-      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s;
-    }
-    #gpt-send:hover { background: #0d8c6d; }
-    #gpt-powered {
-      text-align: center; font-size: 10px; color: #bbb;
-      padding: 6px 0 10px; background: #fff; letter-spacing: 0.3px;
-    }
   </style>
 </head>
 <body>
@@ -136,6 +49,7 @@
 
 <main class="p-10 max-w-[1300px] mx-auto">
 
+  <!-- PHẦN NHÚNG CANVA PORTFOLIO MỚI -->
   <h2 class="serif text-2xl mb-8 border-b border-black/10 pb-2">Visual Strategy <span class="text-gray-400 font-light text-xl italic ml-2">Canva Portfolio</span></h2>
   <div class="mb-16">
     <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); overflow: hidden; border-radius: 8px; will-change: transform;">
@@ -154,129 +68,6 @@
   <p class="mono text-[10px] text-gray-400 uppercase tracking-[4px]">Nancy Nguyen Creative Framework © 2026</p>
 </footer>
 
-
-<!-- ═══ ChatGPT Floating Widget ═══
-     🔑 Replace sk-YOUR_API_KEY_HERE
-     Get key: https://platform.openai.com/api-keys
-════════════════════════════════ -->
-<button id="gpt-bubble" aria-label="Open AI chat assistant">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-    <path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026c.462-.62.874-1.275 1.226-1.963a.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028z" fill="white"/>
-  </svg>
-</button>
-
-<div id="gpt-panel" role="dialog" aria-label="AI Chat Assistant">
-  <div id="gpt-header">
-    <div id="gpt-header-left">
-      <div id="gpt-avatar">🤖</div>
-      <span>Nancy's AI Assistant</span>
-    </div>
-    <button id="gpt-close" aria-label="Close chat">×</button>
-  </div>
-  <div id="gpt-messages">
-    <div class="gpt-msg-bot">Xin chào! Tôi là AI assistant của Nancy. Bạn có thể hỏi tôi về dự án, kỹ năng hoặc công việc của cô ấy. ✨</div>
-  </div>
-  <div id="gpt-footer">
-    <input id="gpt-input" type="text" placeholder="Nhắn tin..." aria-label="Chat message input" />
-    <button id="gpt-send" aria-label="Send message">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-        <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-  </div>
-  <div id="gpt-powered">Powered by ChatGPT · gpt-4o-mini</div>
-</div>
-
-<script>
-  const OPENAI_API_KEY = ""; // 🔑 REPLACE THIS
-
-  const SYSTEM_PROMPT = `You are a helpful AI assistant embedded on Nancy Nguyen's creative portfolio website.
-Nancy is a Vietnamese finance and technology professional specializing in:
-- Financial accounting automation (double-entry, AR aging, reconciliation, IFRS)
-- AI Ops and agentic workflow systems using n8n
-- Data visualization and FMCG company analysis
-- SEO automation using web scraping + OpenAI
-- RPA with Telegram bots for news aggregation
-- Canva visual design and presentation strategy
-
-Her notable projects include:
-- FMCG Company Report (vnmproject1.netlify.app)
-- IFRS Hierarchy interactive framework
-- Double-entry accounting AI system
-- YouTube case studies on Agentic Workflows, SEO Automation, RPA
-
-Answer in Vietnamese or English matching the user's language. Keep answers concise (2-4 sentences).`;
-
-  const history = [{ role: "system", content: SYSTEM_PROMPT }];
-
-  const bubble   = document.getElementById("gpt-bubble");
-  const panel    = document.getElementById("gpt-panel");
-  const closeBtn = document.getElementById("gpt-close");
-  const input    = document.getElementById("gpt-input");
-  const sendBtn  = document.getElementById("gpt-send");
-  const msgBox   = document.getElementById("gpt-messages");
-
-  bubble.addEventListener("click", () => {
-    const open = panel.style.display === "block";
-    panel.style.display = open ? "none" : "block";
-    if (!open) input.focus();
-  });
-  closeBtn.addEventListener("click", () => panel.style.display = "none");
-
-  function addMsg(text, role) {
-    const div = document.createElement("div");
-    div.className = role === "user" ? "gpt-msg-user" : "gpt-msg-bot";
-    div.textContent = text;
-    msgBox.appendChild(div);
-    msgBox.scrollTop = msgBox.scrollHeight;
-    return div;
-  }
-
-  async function send() {
-    const text = input.value.trim();
-    if (!text) return;
-    if (OPENAI_API_KEY === "sk-YOUR_API_KEY_HERE") {
-      addMsg("⚠️ Vui lòng thêm OpenAI API key vào code để kích hoạt chat.", "bot");
-      return;
-    }
-    input.value = "";
-    input.disabled = sendBtn.disabled = true;
-    addMsg(text, "user");
-    history.push({ role: "user", content: text });
-
-    const typing = document.createElement("div");
-    typing.className = "gpt-typing";
-    typing.textContent = "Đang trả lời...";
-    msgBox.appendChild(typing);
-    msgBox.scrollTop = msgBox.scrollHeight;
-
-    try {
-      const res  = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${OPENAI_API_KEY}` },
-        body: JSON.stringify({ model: "gpt-4o-mini", messages: history, max_tokens: 400, temperature: 0.7 })
-      });
-      const data = await res.json();
-      typing.remove();
-      if (data.error) throw new Error(data.error.message);
-      const reply = data.choices?.[0]?.message?.content || "Xin lỗi, tôi không thể phản hồi lúc này.";
-      history.push({ role: "assistant", content: reply });
-      addMsg(reply, "bot");
-    } catch (err) {
-      typing.remove();
-      addMsg("Lỗi kết nối. Vui lòng thử lại sau.", "bot");
-    } finally {
-      input.disabled = sendBtn.disabled = false;
-      input.focus();
-    }
-  }
-
-  sendBtn.addEventListener("click", send);
-  input.addEventListener("keydown", e => e.key === "Enter" && !e.shiftKey && send());
-</script>
-<!-- ═══ End ChatGPT Widget ═══ -->
-
-
 <script>
   const siteData = {
     projects: {
@@ -292,7 +83,7 @@ Answer in Vietnamese or English matching the user's language. Keep answers conci
       items: [
         { title: "Agentic Workflows", description: "Hệ thống tự trị tối ưu hóa vận hành tài chính qua AI Ops.", videoId: "RXbkd8viWtg", tag: "AI Ops" },
         { title: "SEO Automation", description: "Luồng n8n kết hợp Web Scraping và OpenAI.", videoId: "w-JB9sCkvkQ", tag: "Automation" },
-        { title: "RPA ứng dụng", description: "Luồng n8n kết hợp với Telegram để tổng hợp tin tức", videoId: "8PxQhfB6SXQ", tag: "automation" }
+        { title: "RPA ứng dụng", description: "Luồng n8n kết hợp với Telegram để tổng hợp tin tức", videoId:"8PxQhfB6SXQ", tag: "automation"}
       ]
     }
   };
@@ -306,4 +97,40 @@ Answer in Vietnamese or English matching the user's language. Keep answers conci
           ${section.items.map(item => `
             <div class="pcard">
               <img src="${item.image}" class="pcard-img">
-              <div cl
+              <div class="p-6 flex flex-col flex-grow">
+                <span class="mono text-[8px] text-accent font-bold uppercase tracking-widest mb-2">${item.tag}</span>
+                <h3 class="text-lg font-bold mb-3">${item.title}</h3>
+                <p class="text-xs text-gray-500 mb-6 flex-grow leading-relaxed">${item.description}</p>
+                ${item.link ? `<a href="${item.link}" target="_blank" class="mono text-[10px] border-b border-black self-start pb-1 hover:text-accent hover:border-accent">Explore ↗</a>` : ''}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      mainContainer.insertAdjacentHTML('beforeend', sectionHtml);
+    });
+
+    const videoSection = `
+      <h2 class="serif text-2xl mb-8 border-b border-black/10 pb-2 mt-16">${siteData.videos.title}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        ${siteData.videos.items.map(v => `
+          <div class="pcard">
+            <div class="relative pb-[56.25%] h-0 bg-black">
+              <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/${v.videoId}" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="p-6">
+              <span class="mono text-[8px] text-accent font-bold uppercase tracking-widest mb-2">${v.tag}</span>
+              <h3 class="text-lg font-bold mb-3">${v.title}</h3>
+              <p class="text-xs text-gray-500 leading-relaxed">${v.description}</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    mainContainer.insertAdjacentHTML('beforeend', videoSection);
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
