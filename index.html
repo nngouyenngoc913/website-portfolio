@@ -49,11 +49,6 @@
 
 <main class="p-10 max-w-[1300px] mx-auto">
 
-  <!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
-<script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-fb6ccbfc-6c8f-4fcf-8d07-0e67ad890088" data-elfsight-app-lazy></div>
-
-  <!-- PHẦN NHÚNG CANVA PORTFOLIO MỚI -->
   <h2 class="serif text-2xl mb-8 border-b border-black/10 pb-2">Visual Strategy <span class="text-gray-400 font-light text-xl italic ml-2">Canva Portfolio</span></h2>
   <div class="mb-16">
     <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); overflow: hidden; border-radius: 8px; will-change: transform;">
@@ -71,6 +66,10 @@
 <footer class="p-16 border-t border-black/10 text-center bg-white mt-16">
   <p class="mono text-[10px] text-gray-400 uppercase tracking-[4px]">Nancy Nguyen Creative Framework © 2026</p>
 </footer>
+
+<!-- Elfsight AI Chatbot Snippet -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-fb6ccbfc-6c8f-4fcf-8d07-0e67ad890088" data-elfsight-app-lazy></div>
 
 <script>
   const siteData = {
@@ -94,7 +93,10 @@
 
   function init() {
     const mainContainer = document.getElementById('dynamic-sections');
-    [siteData.projects, siteData.insights].forEach(section => {
+    
+    // Fixed: Loop only through existing project keys
+    if (siteData.projects) {
+      const section = siteData.projects;
       const sectionHtml = `
         <h2 class="serif text-2xl mb-8 border-b border-black/10 pb-2 mt-16">${section.title}</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -112,26 +114,28 @@
         </div>
       `;
       mainContainer.insertAdjacentHTML('beforeend', sectionHtml);
-    });
+    }
 
-    const videoSection = `
-      <h2 class="serif text-2xl mb-8 border-b border-black/10 pb-2 mt-16">${siteData.videos.title}</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        ${siteData.videos.items.map(v => `
-          <div class="pcard">
-            <div class="relative pb-[56.25%] h-0 bg-black">
-              <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/${v.videoId}" frameborder="0" allowfullscreen></iframe>
+    if (siteData.videos) {
+      const videoSection = `
+        <h2 class="serif text-2xl mb-8 border-b border-black/10 pb-2 mt-16">${siteData.videos.title}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          ${siteData.videos.items.map(v => `
+            <div class="pcard">
+              <div class="relative pb-[56.25%] h-0 bg-black">
+                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/${v.videoId}" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <div class="p-6">
+                <span class="mono text-[8px] text-accent font-bold uppercase tracking-widest mb-2">${v.tag}</span>
+                <h3 class="text-lg font-bold mb-3">${v.title}</h3>
+                <p class="text-xs text-gray-500 leading-relaxed">${v.description}</p>
+              </div>
             </div>
-            <div class="p-6">
-              <span class="mono text-[8px] text-accent font-bold uppercase tracking-widest mb-2">${v.tag}</span>
-              <h3 class="text-lg font-bold mb-3">${v.title}</h3>
-              <p class="text-xs text-gray-500 leading-relaxed">${v.description}</p>
-            </div>
-          </div>
-        `).join('')}
-      </div>
-    `;
-    mainContainer.insertAdjacentHTML('beforeend', videoSection);
+          `).join('')}
+        </div>
+      `;
+      mainContainer.insertAdjacentHTML('beforeend', videoSection);
+    }
   }
 
   document.addEventListener('DOMContentLoaded', init);
