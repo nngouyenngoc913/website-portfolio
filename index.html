@@ -1,50 +1,152 @@
-const siteData = {
-    projects: {
-        title: "Core Architecture",
-        items: [
-            { 
-                title: "Company report - FMCG", 
-                description: "Trực quan hóa dữ liệu hiệu suất cổ phiếu niêm yết.", 
-                link: "https://vnmproject1.netlify.app/", 
-                image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800", 
-                tag: "Analysis" 
-            },
-            { 
-                title: "Double-entry Logic", 
-                description: "Quy trình hạch toán tự động tích hợp AI gợi ý phân loại.", 
-                link: "https://canva.link/41sfnm3pnld703v", 
-                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800", 
-                tag: "Systems" 
-            },
-            { 
-                title: "IFRS Hierarchy", 
-                description: "Khung tương tác chuẩn báo cáo tài chính quốc tế (IFRS).", 
-                link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", 
-                image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800", 
-                tag: "IFRS" 
-            },
-            { 
-                title: "IFRS library", 
-                description: "Knowledge database : IFRS, VAS, thông tư, nghị định - Nguồn mở", 
-                link: "https://ifrs-vas.vercel.app/ifrs-16/", 
-                image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800", 
-                tag: "IFRS" 
-            } 
-        ]
-    },
-    videos: {
-        title: "Video Case Studies",
-        items: [
-            { title: "Agentic Workflows", description: "Hệ thống tự trị tối ưu hóa vận hành tài chính qua AI Ops.", videoId: "RXbkd8viWtg", tag: "AI Ops" },
-            { title: "SEO Automation", description: "Luồng n8n kết hợp Web Scraping và OpenAI.", videoId: "w-JB9sCkvkQ", tag: "Automation" },
-            { title: "RPA ứng dụng", description: "Luồng n8n kết hợp với Telegram để tổng hợp tin tức", videoId: "8PxQhfB6SXQ", tag: "Automation" }
-        ]
-    },
-    blog: {
-        title: "Blog & Insights",
-        items: [
-            { title: "Ứng dụng AI & Pattern Recognition trong Kế toán", description: "Tìm hiểu cách sử dụng mô hình cây quyết định và AI để tự động hóa định khoản, loại bỏ lối mòn tư duy.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800", tag: "AI & Data", file: "posts/md1.md" }, 
-            { title: "Bảng cân đối kế toán - Một số insights", description: "Tìm hiểu về nguồn gốc và cách đọc hiểu bảng cân đối kế toán mức độ cơ bản", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800", tag: "BCTC", file: "posts/md2.md" }
-        ]
-    }
-};
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounting Portfolio — Financial Case Studies</title>
+    <style>
+        /* Base Styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --highlight: #f59e0b;
+            --border: #334155;
+        }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 40px 24px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        header {
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Dynamic Grid Layout */
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .material-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .material-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--highlight);
+        }
+        .material-card h3 {
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+        .material-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .tag {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--highlight);
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Accounting Case Studies & Materials</h1>
+            <p class="subtitle">Clean financial data records compiled dynamically from local datasets.</p>
+        </header>
+
+        <!-- The grid container where JavaScript will inject your data -->
+        <main id="materials-container" class="materials-grid">
+            <!-- Loading fallback state -->
+            <p style="color: var(--text-muted);">Loading financial data materials...</p>
+        </main>
+    </div>
+
+    <!-- 1. Import your data array first -->
+    <script src="data.js"></script>
+
+    <!-- 2. Parse and render your items onto the page dynamically -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById("materials-container");
+            
+            // Expected data format from data.js: 
+            // window.portfolioMaterials = [{ title: "...", description: "...", tags: ["..."] }]
+            const materials = window.portfolioMaterials || [];
+
+            if (materials.length === 0) {
+                container.innerHTML = `<p style="color: var(--text-muted);">No asset materials found in data.js.</p>`;
+                return;
+            }
+
+            // Empty out loading indicator
+            container.innerHTML = "";
+
+            // Construct template strings cleanly
+            materials.forEach(item => {
+                const card = document.createElement("div");
+                card.className = "material-card";
+                
+                // Build inner tags string safely
+                const tagsHTML = Array.isArray(item.tags) 
+                    ? item.tags.map(t => `<span class="tag">${t}</span>`).join("") 
+                    : "";
+
+                card.innerHTML = `
+                    <div>
+                        <h3>${item.title || 'Untitled Financial Record'}</h3>
+                        <p>${item.description || 'No description provided.'}</p>
+                    </div>
+                    <div class="tags">
+                        ${tagsHTML}
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>
