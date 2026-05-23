@@ -64,7 +64,13 @@ const siteData = {
                 image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800", 
                 tag: "AI & Data",
                 file: "posts/md1.md"
-            }
+            }, 
+            {
+                title: "Bảng cân đối kế toán - Một số insights", 
+                description: "Tìm hiểu về nguồn gốc và cách đọc hiểu bảng cân đối kế toán mức độ cơ bản", 
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800", 
+                tag: "BCTC",
+                file: "posts/md2.md"
         ]
     }
 };
