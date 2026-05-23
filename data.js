@@ -48,5 +48,3 @@ const siteData = {
         ]
     }
 };
-
-// Phía dưới này giữ nguyên code giao diện (Component) cũ của bạn...
