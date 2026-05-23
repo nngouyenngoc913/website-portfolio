@@ -1,4 +1,3 @@
-// Khai báo trực tiếp trong file giao diện, không cần import nữa
 const siteData = {
     projects: {
         title: "Core Architecture",
