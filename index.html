@@ -115,13 +115,13 @@
 
   function renderSections() {
     if (typeof siteData === 'undefined') {
-        dynamicSections.innerHTML = '<p class="text-red-500 mono">Lỗi: Không tìm thấy file data.js. Hãy đảm bảo file này nằm cùng thư mục với index.html.</p>';
+        dynamicSections.innerHTML = '<p class="text-red-500 mono p-4 border border-red-200 bg-red-50 rounded">Hệ thống: Không tìm thấy file dữ liệu <b>data.js</b>. Hãy đảm bảo file này nằm chung thư mục cấu trúc.</p>';
         return;
     }
 
     dynamicSections.innerHTML = '';
 
-    // Render 1: Projects
+    // Phân khu 1: Projects (Core Architecture)
     if (siteData.projects) {
       const section = createSectionWrapper(siteData.projects.title);
       const grid = document.createElement('div');
@@ -132,9 +132,9 @@
           <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="pcard no-underline text-inherit">
             <img src="${item.image}" class="pcard-img" alt="${item.title}">
             <div class="p-6 flex flex-col flex-grow">
-              <span class="mono text-[9px] tracking-wider text-[#1a3a5c] font-bold uppercase mb-3">${item.tag}</span>
+              <span class="mono text-[9px] tracking-wider text-[#1a3a5c] font-bold uppercase mb-3 bg-slate-100 w-max px-2 py-0.5 rounded">${item.tag}</span>
               <h3 class="serif text-xl mb-2">${item.title}</h3>
-              <p class="text-sm text-gray-500 font-light">${item.description}</p>
+              <p class="text-sm text-gray-500 font-light flex-grow">${item.description}</p>
             </div>
           </a>
         `;
@@ -143,7 +143,7 @@
       dynamicSections.appendChild(section);
     }
 
-    // Render 2: Videos
+    // Phân khu 2: Videos (Video Case Studies)
     if (siteData.videos) {
       const section = createSectionWrapper(siteData.videos.title);
       const grid = document.createElement('div');
@@ -156,9 +156,9 @@
               <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe>
             </div>
             <div class="p-6 flex flex-col flex-grow">
-              <span class="mono text-[9px] tracking-wider text-gray-500 font-bold uppercase mb-3">${item.tag}</span>
+              <span class="mono text-[9px] tracking-wider text-gray-500 font-bold uppercase mb-3 bg-slate-100 w-max px-2 py-0.5 rounded">${item.tag}</span>
               <h3 class="serif text-xl mb-2">${item.title}</h3>
-              <p class="text-sm text-gray-500 font-light">${item.description}</p>
+              <p class="text-sm text-gray-500 font-light flex-grow">${item.description}</p>
             </div>
           </div>
         `;
@@ -167,7 +167,7 @@
       dynamicSections.appendChild(section);
     }
 
-    // Render 3: Blog
+    // Phân khu 3: Blog (Blog & Insights)
     if (siteData.blog) {
       const section = createSectionWrapper(siteData.blog.title);
       const grid = document.createElement('div');
@@ -182,7 +182,7 @@
           <div class="p-6 flex flex-col flex-grow">
             <span class="mono text-[9px] tracking-wider text-[#1a3a5c] font-bold uppercase mb-3 bg-slate-100 w-max px-2 py-1 rounded">${item.tag}</span>
             <h3 class="serif text-xl mb-2">${item.title}</h3>
-            <p class="text-sm text-gray-500 font-light">${item.description}</p>
+            <p class="text-sm text-gray-500 font-light flex-grow">${item.description}</p>
           </div>
         `;
         grid.appendChild(card);
@@ -202,6 +202,7 @@
     return wrapper;
   }
 
+  // Khởi tạo tiến trình tải bất đồng bộ tệp Markdown
   async function showArticle(index) {
     const article = siteData.blog.items[index];
     document.getElementById('article-title').textContent = article.title;
@@ -215,7 +216,13 @@
     window.scrollTo(0, 0);
 
     try {
-      const response = await fetch(article.file);
+      // Chuẩn hóa tiền tố đường dẫn tương đối để đảm bảo tương thích môi trường GitHub Pages
+      let targetFile = article.file;
+      if (!targetFile.startsWith('./') && !targetFile.startsWith('/')) {
+        targetFile = './' + targetFile;
+      }
+
+      const response = await fetch(targetFile);
       if (!response.ok) throw new Error("File not found");
       const markdownText = await response.text();
       
@@ -225,7 +232,15 @@
         window.MathJax.typesetPromise([bodyContainer]).catch(err => console.error(err));
       }
     } catch (error) {
-      bodyContainer.innerHTML = `<p class="text-red-500 mono text-sm">System Error: Cannot load markdown resource from <b>${article.file}</b>. Please check if the file exists.</p>`;
+      bodyContainer.innerHTML = `
+        <div class="p-4 border border-red-200 bg-red-50 rounded text-red-700 mono text-sm">
+          <p class="font-bold">System Error:</p>
+          <p>Không thể định tuyến tài nguyên bài viết tại: <b>${article.file}</b></p>
+          <ul class="list-disc pl-5 mt-2 text-xs text-gray-600">
+            <li>Hãy kiểm tra cấu trúc tên tệp tin trong thư mục tệp mục tiêu (Ví dụ: <code>posts/post-1.md</code>).</li>
+            <li>Khi chạy nghiệm thu cục bộ trên máy tính, bắt buộc sử dụng extension <b>Live Server</b> của VS Code để vượt qua chính sách CORS của trình duyệt.</li>
+          </ul>
+        </div>`;
     }
   }
 
@@ -237,6 +252,5 @@
 
   window.onload = renderSections;
 </script>
-
 </body>
 </html>
