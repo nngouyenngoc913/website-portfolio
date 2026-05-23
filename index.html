@@ -1,256 +1,50 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nancy Nguyen | Accountancy Automation Portfolio</title>
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script>
-      window.MathJax = {
-          tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true },
-          options: { ignoreHtmlClass: 'tex2jax_ignore', processHtmlClass: 'tex2jax_process' }
-      };
-  </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
-
-    :root {
-      --ink: #0f0e0d;
-      --paper: #faf9f6;
-      --accent: #1a3a5c;
-      --rule: rgba(15, 14, 13, 0.1);
+const siteData = {
+    projects: {
+        title: "Core Architecture",
+        items: [
+            { 
+                title: "Company report - FMCG", 
+                description: "Trực quan hóa dữ liệu hiệu suất cổ phiếu niêm yết.", 
+                link: "https://vnmproject1.netlify.app/", 
+                image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800", 
+                tag: "Analysis" 
+            },
+            { 
+                title: "Double-entry Logic", 
+                description: "Quy trình hạch toán tự động tích hợp AI gợi ý phân loại.", 
+                link: "https://canva.link/41sfnm3pnld703v", 
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800", 
+                tag: "Systems" 
+            },
+            { 
+                title: "IFRS Hierarchy", 
+                description: "Khung tương tác chuẩn báo cáo tài chính quốc tế (IFRS).", 
+                link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", 
+                image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800", 
+                tag: "IFRS" 
+            },
+            { 
+                title: "IFRS library", 
+                description: "Knowledge database : IFRS, VAS, thông tư, nghị định - Nguồn mở", 
+                link: "https://ifrs-vas.vercel.app/ifrs-16/", 
+                image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800", 
+                tag: "IFRS" 
+            } 
+        ]
+    },
+    videos: {
+        title: "Video Case Studies",
+        items: [
+            { title: "Agentic Workflows", description: "Hệ thống tự trị tối ưu hóa vận hành tài chính qua AI Ops.", videoId: "RXbkd8viWtg", tag: "AI Ops" },
+            { title: "SEO Automation", description: "Luồng n8n kết hợp Web Scraping và OpenAI.", videoId: "w-JB9sCkvkQ", tag: "Automation" },
+            { title: "RPA ứng dụng", description: "Luồng n8n kết hợp với Telegram để tổng hợp tin tức", videoId: "8PxQhfB6SXQ", tag: "Automation" }
+        ]
+    },
+    blog: {
+        title: "Blog & Insights",
+        items: [
+            { title: "Ứng dụng AI & Pattern Recognition trong Kế toán", description: "Tìm hiểu cách sử dụng mô hình cây quyết định và AI để tự động hóa định khoản, loại bỏ lối mòn tư duy.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800", tag: "AI & Data", file: "posts/md1.md" }, 
+            { title: "Bảng cân đối kế toán - Một số insights", description: "Tìm hiểu về nguồn gốc và cách đọc hiểu bảng cân đối kế toán mức độ cơ bản", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800", tag: "BCTC", file: "posts/md2.md" }
+        ]
     }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Outfit', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.5; }
-
-    .serif { font-family: 'DM Serif Display', serif; }
-    .mono { font-family: 'DM Mono', monospace; }
-
-    /* Custom Card Style */
-    .pcard { background: white; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; cursor: pointer; }
-    .pcard:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 24px rgba(0,0,0,0.05); }
-    .pcard-img { width: 100%; height: 190px; object-fit: cover; filter: grayscale(20%); transition: 0.5s; }
-    .pcard:hover .pcard-img { filter: grayscale(0%); }
-
-    /* Nav Scrollbar Hide */
-    .flow-nav::-webkit-scrollbar { display: none; }
-    .flow-nav { -ms-overflow-style: none; scrollbar-width: none; }
-
-    /* Article Styles (Markdown Render) */
-    .article-body h2 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem; }
-    .article-body h3 { color: var(--accent); margin-top: 1.5rem; margin-bottom: 0.5rem; font-weight: 500; font-size: 1.3rem; }
-    .article-body p { margin-bottom: 1rem; color: #4b5563; line-height: 1.7; }
-    .article-body blockquote { border-left: 3px solid var(--accent); background: #f3f4f6; padding: 1.5rem; font-style: italic; margin: 1.5rem 0; color: #374151; border-radius: 0 4px 4px 0; }
-    .article-body ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; color: #4b5563; }
-    .article-body li { margin-bottom: 0.5rem; }
-    .article-body code { font-family: 'DM Mono', monospace; background: #f1f5f9; padding: 0.2rem 0.4rem; font-size: 0.875rem; border-radius: 0.25rem; color: #be185d; }
-    .article-body .math.display { overflow-x: auto; padding: 1rem 0; }
-  </style>
-</head>
-<body>
-
-<header class="p-10 border-b border-black/10 flex justify-between items-end bg-white">
-  <div>
-    <div class="serif text-3xl">Nancy Nguyen<span class="text-[#1a3a5c] italic mx-1">×</span>Automation</div>
-    <p class="mono text-[10px] tracking-widest uppercase mt-2 opacity-50">FINTECH · AI OPS · ACCOUNTING</p>
-  </div>
-</header>
-
-<nav class="flow-nav p-6 px-10 bg-white border-b border-black/10 flex gap-6 overflow-x-auto sticky top-0 z-[100]">
-  <span class="flow-step active mono text-[10px] text-[#1a3a5c] font-bold uppercase whitespace-nowrap">Business Nature</span>
-  <span class="flow-step mono text-[10px] text-gray-400 uppercase whitespace-nowrap">→ Double Entry</span>
-  <span class="flow-step mono text-[10px] text-gray-400 uppercase whitespace-nowrap">→ Reconciliation</span>
-  <span class="flow-step mono text-[10px] text-gray-400 uppercase whitespace-nowrap">→ AR Aging</span>
-  <span class="flow-step mono text-[10px] text-gray-400 uppercase whitespace-nowrap">→ Compliance</span>
-</nav>
-
-<main class="p-10 max-w-[1300px] mx-auto min-h-screen">
-
-  <div id="home-view">
-    <h2 class="serif text-2xl mb-8 border-b border-black/10 pb-2">Visual Strategy <span class="text-gray-400 font-light text-xl italic ml-2">Canva Portfolio</span></h2>
-    <div class="mb-16">
-      <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); overflow: hidden; border-radius: 4px; border: 1px solid var(--rule);">
-        <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
-          src="https://www.canva.com/design/DAG-W1QBFXQ/nsTIFpTSyEC1BwaAXxwHbw/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-        </iframe>
-      </div>
-      <p class="mono text-[10px] text-gray-400 mt-4 text-center italic">Portfolio by Nguyen Ngo Uyen Ngoc</p>
-    </div>
-
-    <div id="dynamic-sections"></div>
-  </div>
-
-  <div id="article-view" class="hidden bg-white border border-black/10 p-10 md:p-16 rounded-sm max-w-[900px] mx-auto">
-    <button onclick="showHome()" class="mono text-[11px] uppercase tracking-wider text-gray-500 hover:text-[#1a3a5c] mb-8 transition-colors flex items-center gap-2">
-      ← Back to overview
-    </button>
-    <div class="mb-6">
-      <span id="article-tag" class="mono text-[10px] uppercase tracking-widest text-[#1a3a5c] bg-slate-100 px-3 py-1 rounded"></span>
-    </div>
-    <h1 id="article-title" class="serif text-4xl md:text-5xl text-[#0f0e0d] leading-tight mb-10"></h1>
-    <div id="article-body" class="article-body tex2jax_process"></div>
-  </div>
-
-</main>
-
-<footer class="p-16 border-t border-black/10 text-center bg-white mt-16">
-  <p class="mono text-[10px] text-gray-400 uppercase tracking-[4px]">Nancy Nguyen Creative Framework © 2026</p>
-</footer>
-
-<script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-fb6ccbfc-6c8f-4fcf-8d07-0e67ad890088" data-elfsight-app-lazy></div>
-
-<script src="data.js"></script>
-
-<script>
-  const dynamicSections = document.getElementById('dynamic-sections');
-  const homeView = document.getElementById('home-view');
-  const articleView = document.getElementById('article-view');
-
-  function renderSections() {
-    if (typeof siteData === 'undefined') {
-        dynamicSections.innerHTML = '<p class="text-red-500 mono p-4 border border-red-200 bg-red-50 rounded">Hệ thống: Không tìm thấy file dữ liệu <b>data.js</b>. Hãy đảm bảo file này nằm chung thư mục cấu trúc.</p>';
-        return;
-    }
-
-    dynamicSections.innerHTML = '';
-
-    // Phân khu 1: Projects (Core Architecture)
-    if (siteData.projects) {
-      const section = createSectionWrapper(siteData.projects.title);
-      const grid = document.createElement('div');
-      grid.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
-      
-      siteData.projects.items.forEach(item => {
-        grid.innerHTML += `
-          <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="pcard no-underline text-inherit">
-            <img src="${item.image}" class="pcard-img" alt="${item.title}">
-            <div class="p-6 flex flex-col flex-grow">
-              <span class="mono text-[9px] tracking-wider text-[#1a3a5c] font-bold uppercase mb-3 bg-slate-100 w-max px-2 py-0.5 rounded">${item.tag}</span>
-              <h3 class="serif text-xl mb-2">${item.title}</h3>
-              <p class="text-sm text-gray-500 font-light flex-grow">${item.description}</p>
-            </div>
-          </a>
-        `;
-      });
-      section.appendChild(grid);
-      dynamicSections.appendChild(section);
-    }
-
-    // Phân khu 2: Videos (Video Case Studies)
-    if (siteData.videos) {
-      const section = createSectionWrapper(siteData.videos.title);
-      const grid = document.createElement('div');
-      grid.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
-      
-      siteData.videos.items.forEach(item => {
-        grid.innerHTML += `
-          <div class="pcard cursor-default">
-            <div class="relative w-full pb-[56.25%] h-0 border-b border-black/10">
-              <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe>
-            </div>
-            <div class="p-6 flex flex-col flex-grow">
-              <span class="mono text-[9px] tracking-wider text-gray-500 font-bold uppercase mb-3 bg-slate-100 w-max px-2 py-0.5 rounded">${item.tag}</span>
-              <h3 class="serif text-xl mb-2">${item.title}</h3>
-              <p class="text-sm text-gray-500 font-light flex-grow">${item.description}</p>
-            </div>
-          </div>
-        `;
-      });
-      section.appendChild(grid);
-      dynamicSections.appendChild(section);
-    }
-
-    // Phân khu 3: Blog (Blog & Insights)
-    if (siteData.blog) {
-      const section = createSectionWrapper(siteData.blog.title);
-      const grid = document.createElement('div');
-      grid.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
-      
-      siteData.blog.items.forEach((item, index) => {
-        const card = document.createElement('div');
-        card.className = "pcard";
-        card.onclick = () => showArticle(index);
-        card.innerHTML = `
-          <img src="${item.image}" class="pcard-img" alt="${item.title}">
-          <div class="p-6 flex flex-col flex-grow">
-            <span class="mono text-[9px] tracking-wider text-[#1a3a5c] font-bold uppercase mb-3 bg-slate-100 w-max px-2 py-1 rounded">${item.tag}</span>
-            <h3 class="serif text-xl mb-2">${item.title}</h3>
-            <p class="text-sm text-gray-500 font-light flex-grow">${item.description}</p>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-      section.appendChild(grid);
-      dynamicSections.appendChild(section);
-    }
-  }
-
-  function createSectionWrapper(titleText) {
-    const wrapper = document.createElement('div');
-    wrapper.className = "mb-16";
-    const title = document.createElement('h2');
-    title.className = "serif text-2xl mb-8 border-b border-black/10 pb-2";
-    title.innerHTML = `${titleText} <span class="text-accent ml-1">.</span>`;
-    wrapper.appendChild(title);
-    return wrapper;
-  }
-
-  // Khởi tạo tiến trình tải bất đồng bộ tệp Markdown
-  async function showArticle(index) {
-    const article = siteData.blog.items[index];
-    document.getElementById('article-title').textContent = article.title;
-    document.getElementById('article-tag').textContent = article.tag;
-    const bodyContainer = document.getElementById('article-body');
-    
-    bodyContainer.innerHTML = '<p class="mono text-sm text-gray-400 italic">Fetching insight data...</p>';
-    
-    homeView.classList.add('hidden');
-    articleView.classList.remove('hidden');
-    window.scrollTo(0, 0);
-
-    try {
-      // Chuẩn hóa tiền tố đường dẫn tương đối để đảm bảo tương thích môi trường GitHub Pages
-      let targetFile = article.file;
-      if (!targetFile.startsWith('./') && !targetFile.startsWith('/')) {
-        targetFile = './' + targetFile;
-      }
-
-      const response = await fetch(targetFile);
-      if (!response.ok) throw new Error("File not found");
-      const markdownText = await response.text();
-      
-      bodyContainer.innerHTML = marked.parse(markdownText);
-      
-      if (window.MathJax) {
-        window.MathJax.typesetPromise([bodyContainer]).catch(err => console.error(err));
-      }
-    } catch (error) {
-      bodyContainer.innerHTML = `
-        <div class="p-4 border border-red-200 bg-red-50 rounded text-red-700 mono text-sm">
-          <p class="font-bold">System Error:</p>
-          <p>Không thể định tuyến tài nguyên bài viết tại: <b>${article.file}</b></p>
-          <ul class="list-disc pl-5 mt-2 text-xs text-gray-600">
-            <li>Hãy kiểm tra cấu trúc tên tệp tin trong thư mục tệp mục tiêu (Ví dụ: <code>posts/post-1.md</code>).</li>
-            <li>Khi chạy nghiệm thu cục bộ trên máy tính, bắt buộc sử dụng extension <b>Live Server</b> của VS Code để vượt qua chính sách CORS của trình duyệt.</li>
-          </ul>
-        </div>`;
-    }
-  }
-
-  function showHome() {
-    articleView.classList.add('hidden');
-    homeView.classList.remove('hidden');
-    window.scrollTo(0, 0);
-  }
-
-  window.onload = renderSections;
-</script>
-</body>
-</html>
+};
