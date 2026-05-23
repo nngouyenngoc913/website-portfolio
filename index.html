@@ -1,357 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nancy Nguyen | Finance & Automation Portfolio</title>
-    <style>
-        :root {
-            --bg: #fdfdfd;
-            --text: #111;
-            --accent: #2563eb; /* Blue for Finance */
-            --primary: #ff6719; /* Orange for Blog/Action */
-            --border: #ececec;
-            --card-bg: #ffffff;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nancy Nguyen | Accountancy Automation Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            margin: 0;
-            padding: 40px 20px;
-        }
+    :root {
+      --ink: #0f0e0d;
+      --paper: #faf9f6;
+      --accent: #1a3a5c;
+      --rule: rgba(15, 14, 13, 0.1);
+    }
 
-        .container { max-width: 1000px; margin: 0 auto; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Outfit', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.5; }
 
-        header { 
-            border-bottom: 1px solid var(--border); 
-            padding-bottom: 20px; 
-            margin-bottom: 40px; 
-        }
+    .serif { font-family: 'DM Serif Display', serif; }
+    .mono { font-family: 'DM Mono', monospace; }
 
-        h1 { font-size: 2rem; margin: 0; font-weight: 800; letter-spacing: -0.02em; }
-        h2 { font-size: 1.25rem; margin: 40px 0 20px; font-weight: 600; color: #333; }
+    .pcard { background: white; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; }
+    .pcard:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 24px rgba(0,0,0,0.05); }
+    .pcard-img { width: 100%; height: 170px; object-fit: cover; filter: grayscale(20%); transition: 0.5s; }
+    .pcard:hover .pcard-img { filter: grayscale(0%); }
 
-        /* Grid System */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        /* Card Styles */
-        .project-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
-            position: relative;
-            height: 100%;
-        }
-
-        .project-card:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            background: #000;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border: 0;
-        }
-
-        .project-content {
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .project-title { font-size: 1.1rem; font-weight: 700; margin: 0 0 12px; }
-        .project-description { font-size: 0.9rem; color: #555; margin-bottom: 20px; flex-grow: 1; }
-
-        .project-tags { margin-bottom: 15px; }
-        .tag {
-            font-size: 0.65rem;
-            background: #f0f0f0;
-            color: #666;
-            padding: 4px 10px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 700;
-        }
-
-        .project-link { 
-            color: var(--accent); 
-            text-decoration: none; 
-            font-weight: 600; 
-            font-size: 0.85rem; 
-            display: inline-flex;
-            align-items: center;
-        }
-
-        /* CMS UI */
-        .cms-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cms-btn {
-            background: var(--text);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .edit-overlay {
-            position: absolute;
-            top: 12px; right: 12px;
-            background: rgba(255,255,255,0.9);
-            border: 1px solid #ddd;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 5;
-        }
-
-        /* Modal CMS */
-        .modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.7);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-            backdrop-filter: blur(4px);
-        }
-        .modal.show { display: flex; }
-        .modal-box {
-            background: white;
-            padding: 32px;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-        .modal-box input, .modal-box textarea {
-            width: 100%; margin-bottom: 15px; padding: 12px;
-            border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box;
-        }
-
-        /* Follow-up Section */
-        .follow-up-section {
-            background: #f8f9fa;
-            padding: 40px;
-            border-radius: 16px;
-            margin-top: 20px;
-        }
-    </style>
+    .flow-nav::-webkit-scrollbar { display: none; }
+    .flow-nav { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>Portfolio</h1>
-        <p style="color: #666; margin-top: 10px;">Finance Expert & Automation Architect</p>
-    </header>
+<header class="p-10 border-b border-black/10 flex justify-between items-end bg-white">
+  <div>
+    <div class="serif text-3xl">Nancy Nguyen<span class="text-accent italic mx-1">×</span>Automation</div>
+    <p class="mono text-[10px] tracking-widest uppercase mt-2 opacity-50">FINTECH · AI OPS · ACCOUNTING</p>
+  </div>
+</header>
 
-    <section>
-        <div class="cms-header">
-            <h2>Three Ways I Work with SME Clients</h2>
-            <button class="cms-btn" onclick="openModal()">+ Add New Pilar</button>
-        </div>
-        <p style="color: #666; font-style: italic; margin-bottom: 30px; border-left: 3px solid var(--accent); padding-left: 15px;">
-            Each engagement is a working project — not a report handed over at the end. We move through your real numbers together.
-        </p>
-        <div id="blog-grid" class="grid-container"></div>
-    </section>
+<nav class="flow-nav p-6 px-10 bg-white border-b border-black/10 flex gap-6 overflow-x-auto sticky top-0 z-[100]">
+  <span class="flow-step active mono text-[10px] text-accent font-bold uppercase whitespace-nowrap">Business Nature</span>
+  <span class="flow-step mono text-[10px] text-gray-400 uppercase whitespace-nowrap">→ Double Entry</span>
+  <span class="flow-step mono text-[10px] text-gray-400 uppercase whitespace-nowrap">→ Reconciliation</span>
+  <span class="flow-step mono text-[10px] text-gray-400 uppercase whitespace-nowrap">→ AR Aging</span>
+  <span class="flow-step mono text-[10px] text-gray-400 uppercase whitespace-nowrap">→ Compliance</span>
+</nav>
 
-    <section>
-        <h2>Strategic Projects</h2>
-        <div id="project-grid" class="grid-container"></div>
-    </section>
+<main class="p-10 max-w-[1300px] mx-auto">
 
-    <section>
-        <h2>Automation & AI Demos</h2>
-        <div id="social-grid" class="grid-container"></div>
-    </section>
-
-    <section class="follow-up-section">
-        <h2 style="margin-top: 0;">Follow-up Services</h2>
-        <p style="color: #666; font-size: 0.95rem; margin-bottom: 30px;">Sau dự án đầu tiên, các dịch vụ này giúp hệ thống của bạn vận hành trơn tru hơn.</p>
-        <div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid var(--border);">
-                <strong style="display: block; margin-bottom: 8px; color: var(--accent);">Cashflow Clarity</strong>
-                <span style="font-size: 0.85rem; color: #555;">Theo dõi dòng tiền hàng tháng, cảnh báo rủi ro trước khi nó xảy ra.</span>
-            </div>
-            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid var(--border);">
-                <strong style="display: block; margin-bottom: 8px; color: var(--accent);">Mindset & Habits</strong>
-                <span style="font-size: 0.85rem; color: #555;">Xây dựng thói quen quản lý tài chính cho đội ngũ vận hành.</span>
-            </div>
-            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid var(--border);">
-                <strong style="display: block; margin-bottom: 8px; color: var(--accent);">Ops Support</strong>
-                <span style="font-size: 0.85rem; color: #555;">Hỗ trợ admin, đối soát công nợ và báo cáo định kỳ.</span>
-            </div>
-        </div>
-    </section>
-</div>
-
-<div class="modal" id="cms-modal">
-    <div class="modal-box">
-        <h3 style="margin-top:0">Manage Service Pillar</h3>
-        <input id="cms-title" placeholder="Service Title (e.g. 01. Customer Ops)">
-        <input id="cms-tag" placeholder="Tag (e.g. Debt Management)">
-        <input id="cms-link" placeholder="External Link (Substack/Canva)">
-        <input id="cms-image" placeholder="Image URL">
-        <input id="cms-video" placeholder="YouTube Video ID (Optional)">
-        <textarea id="cms-desc" rows="4" placeholder="Short description of the impact..."></textarea>
-        
-        <div style="display:flex; gap:10px">
-            <button onclick="publishPost()" style="flex:2; background:var(--accent); color:white; border:none; padding:12px; border-radius:8px; cursor:pointer; font-weight:bold;">Save to Browser</button>
-            <button onclick="closeModal()" style="flex:1; background:#f0f0f0; border:none; padding:12px; border-radius:8px; cursor:pointer;">Cancel</button>
-        </div>
+  <h2 class="serif text-2xl mb-8 border-b border-black/10 pb-2">Visual Strategy <span class="text-gray-400 font-light text-xl italic ml-2">Canva Portfolio</span></h2>
+  <div class="mb-16">
+    <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); overflow: hidden; border-radius: 8px; will-change: transform;">
+      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
+        src="https://www.canva.com/design/DAG-W1QBFXQ/nsTIFpTSyEC1BwaAXxwHbw/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+      </iframe>
     </div>
-</div>
+    <p class="mono text-[10px] text-gray-400 mt-4 text-center italic">Portfolio by Nguyen Ngo Uyen Ngoc</p>
+  </div>
+
+  <div id="dynamic-sections"></div>
+
+</main>
+
+<footer class="p-16 border-t border-black/10 text-center bg-white mt-16">
+  <p class="mono text-[10px] text-gray-400 uppercase tracking-[4px]">Nancy Nguyen Creative Framework © 2026</p>
+</footer>
+
+<!-- Elfsight AI Chatbot Snippet -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-fb6ccbfc-6c8f-4fcf-8d07-0e67ad890088" data-elfsight-app-lazy></div>
 
 <script>
-    // --- DỮ LIỆU CỐ ĐỊNH ---
-    const projectData = [
-        { title: "Company report - FMCG", description: "Data visualization for listed-stock performance.", link: "https://vnmproject1.netlify.app/", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600", tag: "Analysis" },
-        { title: "Double-entry Logic", description: "Visual mapping of complex accounting workflows.", link: "https://canva.link/41sfnm3pnld703v", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600", tag: "Systems" },
-        { title: "IFRS Hierarchy", description: "Interactive framework for International Standards.", link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600", tag: "IFRS" }
-    ];
+  const siteData = {
+    projects: {
+      title: "Core Architecture",
+      items: [
+        { title: "Company report - FMCG", description: "Trực quan hóa dữ liệu hiệu suất cổ phiếu niêm yết.", link: "https://vnmproject1.netlify.app/", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800", tag: "Analysis" },
+        { title: "Double-entry Logic", description: "Quy trình hạch toán tự động tích hợp AI gợi ý phân loại.", link: "https://canva.link/41sfnm3pnld703v", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800", tag: "Systems" },
+        { title: "IFRS Hierarchy", description: "Khung tương tác chuẩn báo cáo tài chính quốc tế (IFRS).", link: "https://nngouyenngoc913.github.io/ifrs-hierachy/", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800", tag: "IFRS" }
+      ]
+    },
+    videos: {
+      title: "Video Case Studies",
+      items: [
+        { title: "Agentic Workflows", description: "Hệ thống tự trị tối ưu hóa vận hành tài chính qua AI Ops.", videoId: "RXbkd8viWtg", tag: "AI Ops" },
+        { title: "SEO Automation", description: "Luồng n8n kết hợp Web Scraping và OpenAI.", videoId: "w-JB9sCkvkQ", tag: "Automation" },
+        { title: "RPA ứng dụng", description: "Luồng n8n kết hợp với Telegram để tổng hợp tin tức", videoId:"8PxQhfB6SXQ", tag: "automation"}
+      ]
+    }
+  };
 
-    const socialData = [
-        { title: "Agentic Workflows", description: "Autonomous systems for departmental efficiency.", videoId: "RXbkd8viWtg", tag: "AI Ops" },
-        { title: "SEO Content Automation", description: "n8n workflow using web scraping and OpenAI.", videoId: "w-JB9sCkvkQ", tag: "Automation" }
-    ];
-
-    // --- DỮ LIỆU CMS (SME PILLARS) ---
-    const defaultBlogPosts = [
-        { title: "01. Customer Ops", tag: "Behavior", description: "Understand why cash comes in late. Redesign touchpoints so collection happens faster.", link: "#", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600" },
-        { title: "02. Financial Ops", tag: "Debt Management", description: "Turn messy financials into trackable systems. Cash gap diagnosis and automated reporting.", link: "#", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" },
-        { title: "03. Negotiation", tag: "Deal Structuring", description: "Win-win terms that protect your cash timing. Know your numbers before every deal.", link: "#", image: "https://images.unsplash.com/photo-1573497620053-ea531f3942bf?w=600" }
-    ];
-
-    let blogPosts = [];
-    let editingIndex = null;
-
-    // --- HÀM TẠO CARD ---
-    function createCard(item, index = null, isBlog = false) {
-        const div = document.createElement('div');
-        div.className = 'project-card';
-        
-        const mediaHTML = item.videoId 
-            ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe></div>`
-            : `<div class="project-image"><img src="${item.image || 'https://via.placeholder.com/600x400'}" alt="${item.title}" loading="lazy"></div>`;
-
-        const editBtn = isBlog ? `<div class="edit-overlay" onclick="editBlog(event, ${index})">EDIT</div>` : '';
-
-        div.innerHTML = `
-            ${editBtn}
-            ${mediaHTML}
-            <div class="project-content">
-                <h3 class="project-title">${item.title}</h3>
-                <p class="project-description">${item.description}</p>
-                <div class="project-tags">
-                    <span class="tag">${item.tag || 'Service'}</span>
-                </div>
-                ${item.link && item.link !== "#" ? `<a href="${item.link}" target="_blank" class="project-link">Learn more ↗</a>` : '<span class="project-link">Consulting Project</span>'}
+  function init() {
+    const mainContainer = document.getElementById('dynamic-sections');
+    
+    // Fixed: Loop only through existing project keys
+    if (siteData.projects) {
+      const section = siteData.projects;
+      const sectionHtml = `
+        <h2 class="serif text-2xl mb-8 border-b border-black/10 pb-2 mt-16">${section.title}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          ${section.items.map(item => `
+            <div class="pcard">
+              <img src="${item.image}" class="pcard-img">
+              <div class="p-6 flex flex-col flex-grow">
+                <span class="mono text-[8px] text-accent font-bold uppercase tracking-widest mb-2">${item.tag}</span>
+                <h3 class="text-lg font-bold mb-3">${item.title}</h3>
+                <p class="text-xs text-gray-500 mb-6 flex-grow leading-relaxed">${item.description}</p>
+                ${item.link ? `<a href="${item.link}" target="_blank" class="mono text-[10px] border-b border-black self-start pb-1 hover:text-accent hover:border-accent">Explore ↗</a>` : ''}
+              </div>
             </div>
-        `;
-        return div;
+          `).join('')}
+        </div>
+      `;
+      mainContainer.insertAdjacentHTML('beforeend', sectionHtml);
     }
 
-    // --- RENDER & CMS LOGIC ---
-    function renderAll() {
-        document.getElementById('project-grid').innerHTML = '';
-        projectData.forEach(item => document.getElementById('project-grid').appendChild(createCard(item)));
-
-        document.getElementById('social-grid').innerHTML = '';
-        socialData.forEach(item => document.getElementById('social-grid').appendChild(createCard(item)));
-
-        const bGrid = document.getElementById('blog-grid');
-        bGrid.innerHTML = '';
-        blogPosts.forEach((item, idx) => bGrid.appendChild(createCard(item, idx, true)));
+    if (siteData.videos) {
+      const videoSection = `
+        <h2 class="serif text-2xl mb-8 border-b border-black/10 pb-2 mt-16">${siteData.videos.title}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          ${siteData.videos.items.map(v => `
+            <div class="pcard">
+              <div class="relative pb-[56.25%] h-0 bg-black">
+                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/${v.videoId}" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <div class="p-6">
+                <span class="mono text-[8px] text-accent font-bold uppercase tracking-widest mb-2">${v.tag}</span>
+                <h3 class="text-lg font-bold mb-3">${v.title}</h3>
+                <p class="text-xs text-gray-500 leading-relaxed">${v.description}</p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      mainContainer.insertAdjacentHTML('beforeend', videoSection);
     }
+  }
 
-    function init() {
-        const saved = localStorage.getItem('portfolio_blog_data');
-        blogPosts = saved ? JSON.parse(saved) : defaultBlogPosts;
-        renderAll();
-    }
-
-    function publishPost() {
-        const postData = {
-            title: document.getElementById('cms-title').value,
-            tag: document.getElementById('cms-tag').value || 'Service',
-            link: document.getElementById('cms-link').value,
-            image: document.getElementById('cms-image').value,
-            videoId: document.getElementById('cms-video').value,
-            description: document.getElementById('cms-desc').value
-        };
-
-        if (!postData.title) return alert("Please enter a title");
-
-        if (editingIndex !== null) blogPosts[editingIndex] = postData;
-        else blogPosts.unshift(postData);
-
-        localStorage.setItem('portfolio_blog_data', JSON.stringify(blogPosts));
-        init();
-        closeModal();
-    }
-
-    function editBlog(e, i) {
-        e.stopPropagation();
-        editingIndex = i;
-        const p = blogPosts[i];
-        document.getElementById('cms-title').value = p.title;
-        document.getElementById('cms-tag').value = p.tag;
-        document.getElementById('cms-link').value = p.link || '';
-        document.getElementById('cms-image').value = p.image || '';
-        document.getElementById('cms-video').value = p.videoId || '';
-        document.getElementById('cms-desc').value = p.description;
-        openModal();
-    }
-
-    function openModal() { document.getElementById('cms-modal').classList.add('show'); }
-    function closeModal() { 
-        document.getElementById('cms-modal').classList.remove('show');
-        editingIndex = null;
-        document.querySelectorAll('#cms-modal input, #cms-modal textarea').forEach(i => i.value = '');
-    }
-
-    init();
+  document.addEventListener('DOMContentLoaded', init);
 </script>
-
 </body>
 </html>
