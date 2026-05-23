@@ -1,4 +1,5 @@
-const siteData = {
+// data.js
+export const siteData = {
     projects: {
         title: "Core Architecture",
         items: [
@@ -51,7 +52,7 @@ const siteData = {
                 title: "RPA ứng dụng", 
                 description: "Luồng n8n kết hợp với Telegram để tổng hợp tin tức", 
                 videoId: "8PxQhfB6SXQ", 
-                tag: "Automation" // Chuẩn hóa viết hoa chữ cái đầu cho đồng bộ với các tag khác
+                tag: "Automation" 
             }
         ]
     },
@@ -71,7 +72,7 @@ const siteData = {
                 image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800", 
                 tag: "BCTC",
                 file: "posts/md2.md"
-            } // <-- Đã bổ sung dấu đóng object ở đây
+            }
         ]
     }
 };
