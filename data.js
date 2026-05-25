@@ -46,7 +46,7 @@ const siteData = {
             { title: "Ứng dụng AI & Pattern Recognition trong Kế toán", description: "Tìm hiểu cách sử dụng mô hình cây quyết định và AI để tự động hóa định khoản, loại bỏ lối mòn tư duy.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800", tag: "AI & Data", file: "posts/md1.md" }, 
             { title: "Bảng cân đối kế toán - Một số insights", description: "Tìm hiểu về nguồn gốc và cách đọc hiểu bảng cân đối kế toán mức độ cơ bản", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800", tag: "AI", file: "posts/md2.md" },
             { title: "Ứng dụng công cụ automate trong công việc", description: "Tìm hiểu về case study sử dụng N8N", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800", tag: "AI", file: "posts/md3.md" },
-            { title: "Ứng dụng AI trong công việc - Một số note", description: "Ghi chú cách sử dụng Ai sao cho vừa tiết kiệm, vừa hiệu quả", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800", tag: "AI", file: "posts/md4.md" }
+            { title: "Ứng dụng AI trong công việc - Một số note", description: "Ghi chú cách sử dụng Ai vừa tiết kiệm, vừa hiệu quả", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800", tag: "AI", file: "posts/md4.md" }
         ]
     }
 };
