@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ngoc Nguyen — Finance & Automation</title>
+<script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.44.1/index.js"></script>
+<link rel="stylesheet" href="https://gradio.s3-us-west-2.amazonaws.com/4.44.1/theme.css"> 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -367,8 +369,6 @@ footer {
 </style>
 </head>
 <body>
-
-<!-- NAV -->
 <nav>
   <div class="nav-inner">
     <div class="nav-logo">NN<span>.</span></div>
@@ -376,12 +376,12 @@ footer {
       <a href="#projects">Projects</a>
       <a href="#videos">Videos</a>
       <a href="#blog">Blog</a>
+      <a href="#operational-sop">SOP Map</a>
     </div>
     <div class="nav-live"><div class="nav-live-dot"></div>HCMC</div>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="container">
@@ -397,7 +397,6 @@ footer {
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section class="section" id="projects">
   <div class="container">
     <div class="sec-header">
@@ -408,7 +407,6 @@ footer {
   </div>
 </section>
 
-<!-- VIDEOS -->
 <section class="section" id="videos">
   <div class="container">
     <div class="sec-header">
@@ -419,7 +417,6 @@ footer {
   </div>
 </section>
 
-<!-- BLOG -->
 <section class="section" id="blog">
   <div class="container">
     <div class="sec-header">
@@ -430,7 +427,44 @@ footer {
   </div>
 </section>
 
-<!-- FOOTER -->
+<section class="section" id="operational-sop">
+  <div class="container">
+    <div class="sec-header">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">Operational SOP Map</h2>
+    </div>
+    
+    <div class="reveal" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--rl); padding: 2.5rem 2rem; text-align: center;">
+      <p style="font-family: var(--fm); font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2rem; text-align: left;">
+        // Sơ đồ trực quan luồng tối ưu hóa dữ liệu & khai thác thông tin hệ thống
+      </p>
+      
+      <div style="width: 100%; max-width: 950px; margin: 0 auto; border-radius: var(--r); overflow: hidden; border: 1px solid var(--border-mid); background: #000;">
+        <img src="sop-flowchart.png" alt="Nancy Nguyen Website Operation SOP Flowchart" style="width: 100%; height: auto; display: block; opacity: 0.88; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.88'">
+      </div>
+      
+      <div style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; text-align: left; border-top: 1px solid var(--border); padding-top: 1.5rem;">
+        <div>
+          <div style="font-family: var(--fm); font-size: 11px; color: var(--accent);">STEP 01 - 02</div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Truy cập đường dẫn URL và phân tích tổng quan cấu trúc bản đồ thông tin.</p>
+        </div>
+        <div>
+          <div style="font-family: var(--fm); font-size: 11px; color: var(--purple);">STEP 03 (BLOG)</div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Kích hoạt Reader Overlay bóc tách chiều sâu logic nghiệp vụ & tư duy RCA.</p>
+        </div>
+        <div>
+          <div style="font-family: var(--fm); font-size: 11px; color: var(--accent);">STEP 04 (LIBRARY)</div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Audit mã nguồn (Source Code) và luồng tự động hóa trực tiếp trên GitHub.</p>
+        </div>
+        <div>
+          <div style="font-family: var(--fm); font-size: 11px; color: var(--teal);">STEP 05 (YOUTUBE)</div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Xem video kiểm chứng kết quả vận hành (Proof of Work) trong thực tế.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-name">Ngoc Nguyen</div>
@@ -443,7 +477,6 @@ footer {
   </div>
 </footer>
 
-<!-- BLOG READER OVERLAY -->
 <div id="blog-reader">
   <div class="reader-inner">
     <button class="reader-back" id="reader-back"><span>←</span> Back</button>
@@ -453,10 +486,8 @@ footer {
   </div>
 </div>
 
-<!-- DATA -->
 <script src="data.js"></script>
 
-<!-- RENDER -->
 <script>
 (function () {
 
