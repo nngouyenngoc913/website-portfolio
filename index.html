@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ngoc Nguyen — Finance &amp; Automation</title>
+<title>Ngoc Nguyen — Finance & Automation</title>
 <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.44.1/index.js"></script>
 <link rel="stylesheet" href="https://gradio.s3-us-west-2.amazonaws.com/4.44.1/theme.css"> 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -249,70 +249,30 @@ h1.hero-title em { color: var(--accent); font-style: italic; }
   font-family: var(--fm); font-size:11px; color:var(--text-dim);
   margin-top:.85rem; transition:color .2s;
 }
-.bcard-read::after { content:'→'; }
+.bcard-read::after { content:''; }
 .bcard:hover .bcard-read { color:var(--purple); }
 
-/* ── FLOWCHART GRAPHIC CSS ── */
-.flowchart-container {
-  display: flex; flex-direction: column; align-items: center; gap: 2rem;
-  padding: 3rem 1.5rem; background: #080808; border-radius: var(--r);
-  border: 1px solid rgba(255,255,255,0.03); margin: 0 auto; max-width: 950px;
+/* ── APP GRADIO CONTAINER ── */
+.app-section {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--border);
 }
-.flow-row {
-  display: flex; justify-content: center; align-items: center;
-  gap: 3rem; width: 100%; position: relative;
+.app-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  padding: 2rem;
+  overflow: hidden;
 }
-.flow-node {
-  background: #111111; border: 1px solid var(--border-mid);
-  border-radius: var(--r); padding: 1.25rem 1.5rem; min-width: 240px; max-width: 280px;
-  text-align: left; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  transition: border-color 0.3s, transform 0.3s, background 0.3s;
+/* Tuỳ chỉnh nhỏ để Gradio-lite hợp nhất với UI dark-mode của bạn */
+gradio-app {
+  --body-background-fill: var(--surface) !important;
+  --block-background-fill: var(--surface2) !important;
+  --input-background-fill: var(--surface3) !important;
+  --button-secondary-background-fill: var(--surface3) !important;
+  --border-color-primary: var(--border) !important;
+  color-scheme: dark;
 }
-.flow-node:hover {
-  border-color: var(--accent); transform: translateY(-2px); background: #151515;
-}
-.node-step {
-  font-family: var(--fm); font-size: 10px; color: var(--text-dim);
-  letter-spacing: 0.1em; margin-bottom: 0.25rem;
-}
-.flow-node:hover .node-step { color: var(--accent); }
-.node-title {
-  font-family: var(--fd); font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;
-}
-.node-desc {
-  font-size: 12.5px; color: var(--text-muted); line-height: 1.5;
-}
-.flow-arrow-down {
-  width: 1px; height: 32px; background: linear-gradient(to bottom, var(--accent), transparent);
-  position: relative;
-}
-.flow-arrow-down::after {
-  content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-  border-left: 4px solid transparent; border-right: 4px solid transparent;
-  border-top: 6px solid rgba(201,184,122,0.4);
-}
-.flow-split-wrapper {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; width: 100%;
-  position: relative; padding-top: 1.5rem;
-}
-.flow-split-wrapper::before {
-  content: ''; position: absolute; top: -16px; left: 16.66%; right: 16.66%;
-  height: 1px; background: var(--border-mid);
-}
-.flow-split-wrapper::after {
-  content: ''; position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
-  width: 1px; height: 32px; background: var(--border-mid); z-index: 0;
-}
-.split-branch {
-  display: flex; flex-direction: column; align-items: center; position: relative;
-}
-.split-branch::before {
-  content: ''; position: absolute; top: -16px; width: 1px; height: 16px; background: var(--border-mid);
-}
-.node-purple { border-left: 3px solid var(--purple); }
-.node-purple:hover { border-color: var(--purple); }
-.node-teal { border-left: 3px solid var(--teal); }
-.node-teal:hover { border-color: var(--teal); }
 
 /* ── BLOG READER OVERLAY ── */
 #blog-reader {
@@ -421,16 +381,12 @@ footer {
 .reveal.visible { opacity:1; transform:translateY(0); }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 768px) {
+@media (max-width: 680px) {
   .pcard { flex-direction:column; }
   .pcard-img { width:100%; height:160px; }
   .nav-links { display:none; }
   .hero-stats { gap:2rem; }
   .vid-grid, .blog-grid { grid-template-columns: 1fr; }
-  .flow-row { flex-direction: column; gap: 1.5rem; }
-  .flow-split-wrapper { grid-template-columns: 1fr; padding-top: 0; gap: 1.5rem; }
-  .flow-split-wrapper::before, .flow-split-wrapper::after, .split-branch::before { display: none; }
-  .flow-node { max-width: 100%; width: 100%; }
 }
 </style>
 </head>
@@ -442,7 +398,7 @@ footer {
       <a href="#projects">Projects</a>
       <a href="#videos">Videos</a>
       <a href="#blog">Blog</a>
-      <a href="#operational-sop">SOP Map</a>
+      <a href="#interactive-app">Console</a>
     </div>
     <div class="nav-live"><div class="nav-live-dot"></div>HCMC</div>
   </div>
@@ -493,6 +449,198 @@ footer {
   </div>
 </section>
 
-<section class="section" id="operational-sop">
+<section class="app-section section" id="interactive-app">
   <div class="container">
-    <div class="sec-
+    <div class="sec-header">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">Interactive Console</h2>
+    </div>
+    <div class="app-container reveal">
+      <gradio-lite>
+      <template is="gradio">
+import gradio as gr
+
+def greet(name):
+    if not name.strip():
+        return "Hello Stranger! Type your name above."
+    return f"Hello {name}! Welcome to my web app."
+
+# Creating the Gradio interface
+demo = gr.Interface(
+    fn=greet, 
+    inputs=gr.Textbox(label="Enter your name", placeholder="John Doe"), 
+    outputs=gr.Textbox(label="Gradio Output"),
+    title="Browser-Powered Greeter App",
+    description="This UI component is running completely client-side via Pyodide."
+)
+
+demo.launch()
+      </template>
+      </gradio-lite>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-name">Ngoc Nguyen</div>
+    <div class="footer-links">
+      <a href="#projects">Projects</a>
+      <a href="#videos">Videos</a>
+      <a href="#blog">Blog</a>
+    </div>
+    <div class="footer-yr">© 2026 — Ho Chi Minh City</div>
+  </div>
+</footer>
+
+<div id="blog-reader">
+  <div class="reader-inner">
+    <button class="reader-back" id="reader-back"><span>←</span> Back</button>
+    <div id="reader-tag" class="reader-tag"></div>
+    <div id="reader-meta" class="reader-meta"></div>
+    <div id="reader-content"></div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+
+<script>
+(function () {
+
+  /* ── HERO chips & stats ── */
+  const chips = [
+    { label: 'Double-entry logic', cls: 'c-accent' },
+    { label: 'N8N Automation',     cls: 'c-teal'   },
+    { label: 'IFRS / TT200',       cls: 'c-purple' },
+    { label: 'AI Ops',             cls: ''         },
+    { label: 'Data viz',           cls: ''         },
+  ];
+  const chipsEl = document.getElementById('hero-chips');
+  chips.forEach(c => {
+    const s = document.createElement('span');
+    s.className = 'chip ' + c.cls;
+    s.textContent = c.label;
+    chipsEl.appendChild(s);
+  });
+
+  const statsEl = document.getElementById('hero-stats');
+  const counts = [
+    { n: siteData.projects.items.length, l: 'Projects'    },
+    { n: siteData.videos.items.length,   l: 'Video cases' },
+    { n: 4,                              l: 'Domains'     },
+  ];
+  counts.forEach(s => {
+    statsEl.innerHTML += `<div><div class="stat-n">${s.n}</div><div class="stat-l">${s.l}</div></div>`;
+  });
+
+  /* ── TAG → domain for project links ── */
+  function linkLabel(link) {
+    try { return new URL(link).hostname.replace('www.',''); } catch { return 'View'; }
+  }
+
+  /* ── PROJECTS ── */
+  const projList = document.getElementById('proj-list');
+  siteData.projects.items.forEach((p, i) => {
+    const idx = String(i + 1).padStart(2, '0');
+    projList.innerHTML += `
+      <a class="pcard" href="${p.link}" target="_blank" rel="noopener">
+        <div class="pcard-img"><img src="${p.image}" alt="${p.title}" loading="lazy"></div>
+        <div class="pcard-body">
+          <div>
+            <div class="pcard-tag">${p.tag}</div>
+            <div class="pcard-title">${p.title}</div>
+            <div class="pcard-desc">${p.description}</div>
+          </div>
+          <div class="pcard-link">${linkLabel(p.link)}</div>
+        </div>
+        <div class="pcard-idx">${idx}</div>
+      </a>`;
+  });
+
+  /* ── VIDEOS ── */
+  const vidGrid = document.getElementById('vid-grid');
+  siteData.videos.items.forEach(v => {
+    vidGrid.innerHTML += `
+      <div class="vcard">
+        <a class="vthumb" href="https://www.youtube.com/watch?v=${v.videoId}" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/${v.videoId}/mqdefault.jpg" alt="${v.title}" loading="lazy">
+          <div class="vplay"><div class="vplay-ring"><div class="vplay-tri"></div></div></div>
+        </a>
+        <div class="vcard-body">
+          <div class="vcard-tag">${v.tag}</div>
+          <div class="vcard-title">${v.title}</div>
+          <div class="vcard-desc">${v.description}</div>
+        </div>
+      </div>`;
+  });
+
+  /* ── BLOG CARDS ── */
+  const blogGrid = document.getElementById('blog-grid');
+  siteData.blog.items.forEach((b, i) => {
+    const card = document.createElement('div');
+    card.className = 'bcard';
+    card.innerHTML = `
+      <div class="bcard-img"><img src="${b.image}" alt="${b.title}" loading="lazy"></div>
+      <div class="bcard-body">
+        <div>
+          <div class="bcard-tag">${b.tag}</div>
+          <div class="bcard-title">${b.title}</div>
+          <div class="bcard-desc">${b.description}</div>
+        </div>
+        <div class="bcard-read">Read article</div>
+      </div>`;
+    card.addEventListener('click', () => openPost(b));
+    blogGrid.appendChild(card);
+  });
+
+  /* ── BLOG READER ── */
+  const reader    = document.getElementById('blog-reader');
+  const readerTag = document.getElementById('reader-tag');
+  const readerMeta= document.getElementById('reader-meta');
+  const readerContent = document.getElementById('reader-content');
+
+  function openPost(b) {
+    reader.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    readerTag.textContent = b.tag;
+    readerMeta.innerHTML  = `<span>Ngoc Nguyen</span><span>·</span><span>May 2026</span><span>·</span><span>8 min read</span>`;
+    readerContent.innerHTML = `<div class="reader-loading">Loading…</div>`;
+    reader.scrollTop = 0;
+
+    fetch(b.file)
+      .then(r => {
+        if (!r.ok) throw new Error('not found');
+        return r.text();
+      })
+      .then(md => {
+        readerContent.innerHTML = `<div class="md-body">${marked.parse(md)}</div>`;
+      })
+      .catch(() => {
+        readerContent.innerHTML = `<div class="md-body"><h1>${b.title}</h1><p style="color:var(--text-muted)">${b.description}</p></div>`;
+      });
+  }
+
+  document.getElementById('reader-back').addEventListener('click', () => {
+    reader.style.display = 'none';
+    document.body.style.overflow = '';
+  });
+
+  /* close on Escape */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && reader.style.display === 'block') {
+      reader.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
+
+  /* ── SCROLL REVEAL ── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  revealEls.forEach(el => io.observe(el));
+
+})();
+</script>
+</body>
+</html>
